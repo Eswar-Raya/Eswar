@@ -81,6 +81,24 @@ export const growthPoints: GrowthPoint[] = [
     role: "Sr. Analyst II – Cloud Engineering",
     skillGrowth: "Cross-client migration program leadership",
   },
+  {
+    id: "masters-2024",
+    stage: "Masters",
+    year: 2024,
+    scopeScore: 5.9,
+    company: "Stevens Institute of Technology",
+    role: "MS Information Systems",
+    skillGrowth: "Advanced TPM, analytics, and AI delivery strategy",
+  },
+  {
+    id: "savvy-2025",
+    stage: "Savvy GT",
+    year: 2025,
+    scopeScore: 6,
+    company: "Savvy Global Technologies",
+    role: "AI Project Manager",
+    skillGrowth: "AI-enabled delivery governance and execution leadership",
+  },
 ];
 
 export const competencyPoints: CompetencyPoint[] = [

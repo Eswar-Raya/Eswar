@@ -3,7 +3,7 @@ import VisualNav from "@/components/VisualNav";
 
 type PageContainerProps = {
   title: string;
-  subtitle: string;
+  subtitle?: string;
   eyebrow?: string;
   children: ReactNode;
 };
@@ -21,7 +21,7 @@ export default function PageContainer({
         <section className="page-banner panel">
           {eyebrow ? <span className="page-eyebrow">{eyebrow}</span> : null}
           <h1>{title}</h1>
-          <p>{subtitle}</p>
+          {subtitle ? <p>{subtitle}</p> : null}
         </section>
         {children}
       </div>

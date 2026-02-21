@@ -200,6 +200,18 @@ a {
   gap: var(--space-4);
 }
 
+.experience-story-shell {
+  padding: var(--space-5);
+  min-height: 140px;
+  display: grid;
+  align-items: center;
+}
+
+.experience-story-shell h2 {
+  margin: 0;
+  font-size: clamp(24px, 3vw, 36px);
+}
+
 .section-header {
   display: grid;
   gap: var(--space-1);
