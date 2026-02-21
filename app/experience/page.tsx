@@ -1,6 +1,7 @@
 import PageContainer from "@/components/PageContainer";
+import CareerStory from "@/components/CareerStory";
 import ExperienceTimeline from "@/components/ExperienceTimeline";
-import { experiences } from "@/data/experience";
+import { careerStory, experiences } from "@/data/experience";
 
 export default function ExperiencePage() {
   return (
@@ -8,9 +9,7 @@ export default function ExperiencePage() {
       eyebrow="Experience"
       title="Experience"
     >
-      <section className="panel experience-story-shell" aria-label="Career story section">
-        <h2>Career Story</h2>
-      </section>
+      <CareerStory items={careerStory} />
 
       <section className="visual-section">
         <div className="section-header">

@@ -5,14 +5,14 @@ import { useEffect, useMemo, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import IconBadge from "@/components/IconBadge";
 import type { ExperienceItem } from "@/data/experience";
-import { companyIconMap, toolIconMap } from "@/lib/iconMap";
+import { experienceIconMap, toolIconMap } from "@/lib/iconMap";
 
 type ExperienceTimelineProps = {
   items: ExperienceItem[];
 };
 
 export default function ExperienceTimeline({ items }: ExperienceTimelineProps) {
-  const timelineItems = useMemo(() => [...items].reverse(), [items]);
+  const timelineItems = useMemo(() => [...items], [items]);
   const [activeSlug, setActiveSlug] = useState(timelineItems[0]?.slug ?? "");
   const [supportsHover, setSupportsHover] = useState(true);
   const [mobilePreviewOpen, setMobilePreviewOpen] = useState(false);
@@ -42,12 +42,20 @@ export default function ExperienceTimeline({ items }: ExperienceTimelineProps) {
   }
 
   const isPreviewVisible = supportsHover || mobilePreviewOpen;
+  const activeIconTone =
+    activeItem.slug === "bachelors" || activeItem.slug === "masters"
+      ? "education"
+      : "company";
 
   return (
     <div className="experience-layout">
       <div className="experience-stack" role="listbox" aria-label="Experience timeline">
         {timelineItems.map((item) => {
           const isActive = item.slug === activeItem.slug;
+          const iconTone =
+            item.slug === "bachelors" || item.slug === "masters"
+              ? "education"
+              : "company";
           return (
             <motion.article
               key={item.slug}
@@ -80,9 +88,9 @@ export default function ExperienceTimeline({ items }: ExperienceTimelineProps) {
               >
                 <span className="exp-company-row">
                   <IconBadge
-                    icon={companyIconMap[item.iconKey]}
+                    icon={experienceIconMap[item.iconKey]}
                     label={item.company}
-                    tone="company"
+                    tone={iconTone}
                     size="md"
                   />
                   <strong>{item.company}</strong>
@@ -118,9 +126,9 @@ export default function ExperienceTimeline({ items }: ExperienceTimelineProps) {
       >
         <div className="exp-preview-head">
           <IconBadge
-            icon={companyIconMap[activeItem.iconKey]}
+            icon={experienceIconMap[activeItem.iconKey]}
             label={activeItem.company}
-            tone="company"
+            tone={activeIconTone}
             size="md"
           />
           <div>

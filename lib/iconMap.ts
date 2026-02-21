@@ -30,11 +30,23 @@ export const companyIconMap = {
   ericsson: Network,
   adecco: HardHat,
   dxc: Layers,
+  savvy: Brain,
 } satisfies Record<string, LucideIcon>;
 
 export const educationIconMap = {
   masters: GraduationCap,
   bachelors: School,
+} satisfies Record<string, LucideIcon>;
+
+export const experienceIconMap = {
+  bachelors: School,
+  tata: Wrench,
+  huawei: RadioTower,
+  ericsson: Network,
+  adecco: HardHat,
+  dxc: Layers,
+  masters: GraduationCap,
+  savvy: Brain,
 } satisfies Record<string, LucideIcon>;
 
 export const serviceIconMap = {
@@ -69,5 +81,6 @@ export const toolIconMap = {
 
 export type CompanyIconKey = keyof typeof companyIconMap;
 export type EducationIconKey = keyof typeof educationIconMap;
+export type ExperienceIconKey = keyof typeof experienceIconMap;
 export type ServiceIconKey = keyof typeof serviceIconMap;
 export type ToolIconKey = keyof typeof toolIconMap;

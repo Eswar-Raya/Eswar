@@ -2,17 +2,23 @@ import type { ServiceIconKey } from "@/lib/iconMap";
 
 export type GrowthPoint = {
   id: string;
+  stageIndex: number;
+  pointLabel: string;
   stage: string;
-  year: number;
-  scopeScore: number;
-  company: string;
   role: string;
-  skillGrowth: string;
+  dates: string;
+  scopeScore: number;
+  growthHighlight: string;
 };
 
 export type CompetencyPoint = {
   id: string;
-  category: "TPM Delivery" | "Cloud Migration" | "Linux" | "Stakeholders/Risk" | "Automation/AI";
+  category:
+    | "TPM Delivery"
+    | "Cloud Migration"
+    | "Linux Modernization"
+    | "Stakeholder & Risk"
+    | "AI Enablement";
   score: number;
   iconKey: ServiceIconKey;
 };
@@ -28,85 +34,94 @@ export type ServiceItem = {
 
 export const growthPoints: GrowthPoint[] = [
   {
-    id: "tata-2013",
+    id: "stage-bachelors",
+    stageIndex: 1,
+    pointLabel: "Bachelor",
+    stage: "Bachelor's Degree",
+    role: "Electronics and Communication Engineering",
+    dates: "Aug 2009 - May 2013",
+    scopeScore: 1.0,
+    growthHighlight: "Built core systems and analytical engineering foundation",
+  },
+  {
+    id: "stage-tata",
+    stageIndex: 2,
+    pointLabel: "Tata",
     stage: "Tata",
-    year: 2013,
-    scopeScore: 1.2,
-    company: "Tata",
     role: "Assistant Manager / Technical Engineer",
-    skillGrowth: "Operational execution and reliability discipline",
+    dates: "June 2013 - Oct 2016",
+    scopeScore: 2.0,
+    growthHighlight: "Developed operational reliability and runbook discipline",
   },
   {
-    id: "huawei-2016",
+    id: "stage-huawei",
+    stageIndex: 3,
+    pointLabel: "Huawei",
     stage: "Huawei",
-    year: 2016,
-    scopeScore: 2.1,
-    company: "Huawei",
     role: "Sr. Technical Engineer",
-    skillGrowth: "Release readiness and production control",
+    dates: "Oct 2016 - May 2017",
+    scopeScore: 3.0,
+    growthHighlight: "Strengthened release readiness and quality controls",
   },
   {
-    id: "ericsson-2017",
+    id: "stage-ericsson",
+    stageIndex: 4,
+    pointLabel: "Ericsson",
     stage: "Ericsson",
-    year: 2017,
-    scopeScore: 2.9,
-    company: "Ericsson",
     role: "Solution Integrator",
-    skillGrowth: "Integration sequencing and dependency governance",
+    dates: "June 2017 - Nov 2018",
+    scopeScore: 4.0,
+    growthHighlight: "Scaled dependency-led solution integration execution",
   },
   {
-    id: "adecco-2019",
+    id: "stage-adecco",
+    stageIndex: 5,
+    pointLabel: "Adecco",
     stage: "Adecco",
-    year: 2019,
-    scopeScore: 3.8,
-    company: "Adecco",
     role: "Sr. Linux Migration Engineer",
-    skillGrowth: "Migration runbook execution and stabilization",
+    dates: "May 2019 - Jan 2020",
+    scopeScore: 5.0,
+    growthHighlight: "Operationalized Linux migration and stabilization patterns",
   },
   {
-    id: "dxc-2020",
-    stage: "DXC",
-    year: 2020,
-    scopeScore: 5,
-    company: "DXC Technology",
+    id: "stage-dxc",
+    stageIndex: 6,
+    pointLabel: "DXC",
+    stage: "DXC Technology",
     role: "Sr. Analyst II – Cloud Engineering",
-    skillGrowth: "Technical PM governance and enterprise wave delivery",
+    dates: "Feb 2020 - Dec 2023",
+    scopeScore: 6.8,
+    growthHighlight:
+      "Executed as Technical PM / Project Manager with discovery and migration specialist tracks",
   },
   {
-    id: "dxc-2023",
-    stage: "DXC",
-    year: 2023,
-    scopeScore: 5.8,
-    company: "DXC Technology",
-    role: "Sr. Analyst II – Cloud Engineering",
-    skillGrowth: "Cross-client migration program leadership",
-  },
-  {
-    id: "masters-2024",
-    stage: "Masters",
-    year: 2024,
-    scopeScore: 5.9,
-    company: "Stevens Institute of Technology",
+    id: "stage-masters",
+    stageIndex: 7,
+    pointLabel: "Master's",
+    stage: "Stevens Institute of Technology",
     role: "MS Information Systems",
-    skillGrowth: "Advanced TPM, analytics, and AI delivery strategy",
+    dates: "Jan 2024 - May 2025",
+    scopeScore: 7.4,
+    growthHighlight: "Expanded strategy, analytics, and AI-delivery capability",
   },
   {
-    id: "savvy-2025",
-    stage: "Savvy GT",
-    year: 2025,
-    scopeScore: 6,
-    company: "Savvy Global Technologies",
+    id: "stage-savvy",
+    stageIndex: 8,
+    pointLabel: "Savvy",
+    stage: "Savvy Global Technologies",
     role: "AI Project Manager",
-    skillGrowth: "AI-enabled delivery governance and execution leadership",
+    dates: "July 2025 - Nov 2025",
+    scopeScore: 8.0,
+    growthHighlight: "Led AI delivery execution with structured governance controls",
   },
 ];
 
 export const competencyPoints: CompetencyPoint[] = [
-  { id: "tpm", category: "TPM Delivery", score: 5.8, iconKey: "tpm" },
-  { id: "cloud", category: "Cloud Migration", score: 5.6, iconKey: "cloudMigration" },
-  { id: "linux", category: "Linux", score: 5.4, iconKey: "linux" },
-  { id: "risk", category: "Stakeholders/Risk", score: 5.5, iconKey: "stakeholderRisk" },
-  { id: "ai", category: "Automation/AI", score: 4.9, iconKey: "aiDelivery" },
+  { id: "tpm", category: "TPM Delivery", score: 5.9, iconKey: "tpm" },
+  { id: "cloud", category: "Cloud Migration", score: 5.7, iconKey: "cloudMigration" },
+  { id: "linux", category: "Linux Modernization", score: 5.6, iconKey: "linux" },
+  { id: "risk", category: "Stakeholder & Risk", score: 5.6, iconKey: "stakeholderRisk" },
+  { id: "ai", category: "AI Enablement", score: 5.1, iconKey: "aiDelivery" },
 ];
 
 export const services: ServiceItem[] = [

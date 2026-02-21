@@ -4,7 +4,7 @@ import VisualNav from "@/components/VisualNav";
 import IconBadge from "@/components/IconBadge";
 import DetailSectionGrid from "@/components/DetailSectionGrid";
 import { experiences } from "@/data/experience";
-import { companyIconMap, toolIconMap } from "@/lib/iconMap";
+import { experienceIconMap, toolIconMap } from "@/lib/iconMap";
 
 type ExperienceDetailPageProps = {
   params: Promise<{ slug: string }>;
@@ -24,6 +24,11 @@ export default async function ExperienceDetailPage({
     notFound();
   }
 
+  const iconTone =
+    item.slug === "bachelors" || item.slug === "masters"
+      ? "education"
+      : "company";
+
   return (
     <main className="corp-page">
       <VisualNav />
@@ -34,9 +39,9 @@ export default async function ExperienceDetailPage({
           </Link>
           <span className="detail-company">
             <IconBadge
-              icon={companyIconMap[item.iconKey]}
+              icon={experienceIconMap[item.iconKey]}
               label={item.company}
-              tone="company"
+              tone={iconTone}
               size="md"
             />
             {item.company}

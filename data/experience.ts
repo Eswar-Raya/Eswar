@@ -1,4 +1,4 @@
-import type { CompanyIconKey, ToolIconKey } from "@/lib/iconMap";
+import type { ExperienceIconKey, ToolIconKey } from "@/lib/iconMap";
 
 export type ToolRef = {
   key: ToolIconKey;
@@ -17,9 +17,17 @@ export type ExperienceDetails = {
 
 export type ExperienceItem = {
   id: string;
-  slug: "tata" | "huawei" | "ericsson" | "adecco" | "dxc";
+  slug:
+    | "bachelors"
+    | "tata"
+    | "huawei"
+    | "ericsson"
+    | "adecco"
+    | "dxc"
+    | "masters"
+    | "savvy";
   company: string;
-  iconKey: CompanyIconKey;
+  iconKey: ExperienceIconKey;
   title: string;
   dates: string;
   note?: string;
@@ -28,7 +36,15 @@ export type ExperienceItem = {
   details: ExperienceDetails;
 };
 
-const commonTools = {
+export type CareerStoryBlock = {
+  id: string;
+  phase: string;
+  period: string;
+  headline: string;
+  narrative: string;
+};
+
+const t = {
   jira: { key: "jira" as const, label: "Jira" },
   linux: { key: "linux" as const, label: "Linux" },
   python: { key: "python" as const, label: "Python" },
@@ -53,6 +69,45 @@ const commonTools = {
 
 export const experiences: ExperienceItem[] = [
   {
+    id: "exp-bachelors",
+    slug: "bachelors",
+    company: "Aditya Engineering College / JNTUK",
+    iconKey: "bachelors",
+    title: "Bachelor's Degree — Electronics and Communication Engineering",
+    dates: "Aug 2009 - May 2013",
+    bullets: [
+      "Built core systems engineering and analytical problem-solving foundation.",
+      "Developed structured approach to troubleshooting and technical reasoning.",
+      "Created the academic base for later infrastructure and program delivery work.",
+    ],
+    tools: [t.python, t.sql, t.git],
+    details: {
+      overview:
+        "Established engineering fundamentals that later translated into structured technical execution and delivery discipline.",
+      scopeStakeholders: [
+        "Academic faculty and project mentors",
+        "Cross-functional student project teams",
+        "Lab and systems environments",
+      ],
+      responsibilities: [
+        "Completed engineering coursework in electronics and communication systems",
+        "Performed structured lab analysis and validation activities",
+        "Delivered team-based technical assignments with defined milestones",
+        "Applied analytical methods for diagnostics and root-cause thinking",
+      ],
+      tools: [t.python, t.sql, t.git],
+      programsClients: ["Academic program"],
+      outcomes: [
+        "Built foundation in systems thinking and technical decomposition",
+        "Strengthened analytical rigor used in later migration and PM roles",
+      ],
+      challengesResolutions: [
+        "Balancing theory and application -> adopted problem-first, hands-on learning loops",
+        "Complex technical topics -> used structured breakdown and iterative validation",
+      ],
+    },
+  },
+  {
     id: "exp-tata",
     slug: "tata",
     company: "Tata",
@@ -64,7 +119,7 @@ export const experiences: ExperienceItem[] = [
       "Improved incident response quality through repeatable runbook execution.",
       "Reduced manual operational load through scripting and checklists.",
     ],
-    tools: [commonTools.linux, commonTools.shell, commonTools.serviceNow],
+    tools: [t.linux, t.shell, t.serviceNow],
     details: {
       overview:
         "Built a technical operations base focused on reliability, support discipline, and execution consistency.",
@@ -80,7 +135,7 @@ export const experiences: ExperienceItem[] = [
         "Standardized recurring runbooks and operating checklists",
         "Supported service continuity during maintenance events",
       ],
-      tools: [commonTools.linux, commonTools.shell, commonTools.serviceNow],
+      tools: [t.linux, t.shell, t.serviceNow],
       programsClients: ["Client: confidential"],
       outcomes: [
         "Improved operational consistency across support cycles",
@@ -105,7 +160,7 @@ export const experiences: ExperienceItem[] = [
       "Strengthened engineering-operations coordination for production rollouts.",
       "Reduced avoidable deployment defects via validation checkpoints.",
     ],
-    tools: [commonTools.linux, commonTools.jira, commonTools.agile],
+    tools: [t.linux, t.jira, t.agile],
     details: {
       overview:
         "Supported platform reliability through release controls, environment validation, and coordinated technical execution.",
@@ -121,7 +176,7 @@ export const experiences: ExperienceItem[] = [
         "Maintained deployment quality controls across environments",
         "Supported stabilization during release windows",
       ],
-      tools: [commonTools.linux, commonTools.jira, commonTools.agile],
+      tools: [t.linux, t.jira, t.agile],
       programsClients: ["Client: confidential"],
       outcomes: [
         "Improved release predictability and execution quality",
@@ -145,7 +200,7 @@ export const experiences: ExperienceItem[] = [
       "Improved first-pass readiness for integrated release outcomes.",
       "Reduced downstream rework by resolving dependencies earlier.",
     ],
-    tools: [commonTools.linux, commonTools.jira, commonTools.agile],
+    tools: [t.linux, t.jira, t.agile],
     details: {
       overview:
         "Delivered integration-focused execution with emphasis on compatibility, sequencing, and stabilization.",
@@ -161,7 +216,7 @@ export const experiences: ExperienceItem[] = [
         "Supported go-live stabilization and defect triage",
         "Maintained integration documentation and evidence trails",
       ],
-      tools: [commonTools.linux, commonTools.jira, commonTools.agile],
+      tools: [t.linux, t.jira, t.agile],
       programsClients: ["Client: confidential"],
       outcomes: [
         "Improved first-pass release readiness for integrated solutions",
@@ -185,7 +240,7 @@ export const experiences: ExperienceItem[] = [
       "Improved migration repeatability using runbooks and validation gates.",
       "Reduced post-cutover defects via baseline checks and SOPs.",
     ],
-    tools: [commonTools.linux, commonTools.vmware, commonTools.shell],
+    tools: [t.linux, t.vmware, t.shell],
     details: {
       overview:
         "Led Linux migration execution with focus on reliability, change control, and handover readiness.",
@@ -201,7 +256,7 @@ export const experiences: ExperienceItem[] = [
         "Standardized migration SOPs and checklists",
         "Monitored post-cutover stabilization and issue burn-down",
       ],
-      tools: [commonTools.linux, commonTools.vmware, commonTools.shell],
+      tools: [t.linux, t.vmware, t.shell],
       programsClients: ["Client: confidential"],
       outcomes: [
         "Improved migration consistency across workload groups",
@@ -223,59 +278,58 @@ export const experiences: ExperienceItem[] = [
     note:
       "Worked across Technical PM / Project Manager, Discovery Tool Engineer, Discovery Data Specialist, and Linux Migration Engineer responsibilities.",
     bullets: [
-      "Primary execution role: Project Manager for migration programs and client workstreams.",
+      "Primary execution role: Technical PM / Project Manager for migration programs and client workstreams.",
       "Managed discovery-to-wave planning and migration cutover governance in enterprise environments.",
       "Delivered Linux server migrations from on-prem to AWS using CloudEndure.",
       "Improved stakeholder visibility through RAID discipline and dashboard reporting.",
     ],
     tools: [
-      commonTools.aws,
-      commonTools.azure,
-      commonTools.cloudendure,
-      commonTools.linux,
-      commonTools.jira,
-      commonTools.pmatt,
-      commonTools.powerbi,
-      commonTools.python,
-      commonTools.vmware,
-      commonTools.universalDiscovery,
+      t.aws,
+      t.azure,
+      t.cloudendure,
+      t.linux,
+      t.jira,
+      t.pmatt,
+      t.powerbi,
+      t.python,
+      t.vmware,
+      t.universalDiscovery,
     ],
     details: {
       overview:
-        "Led enterprise migration delivery as a project manager while executing technical discovery, data specialization, application contexting, and Linux migration responsibilities.",
+        "Led enterprise migration delivery under the Sr. Analyst II – Cloud Engineering title, with primary execution ownership as Technical PM / Project Manager across cloud and infrastructure programs.",
       scopeStakeholders: [
         "Client infrastructure, network, and security teams",
         "Application owners and service transition leads",
         "Program leadership, PMO, CAB, and operations stakeholders",
       ],
       responsibilities: [
-        "Owned program planning and cross-functional execution cadence",
-        "Ran weekly governance reviews across scope, risk, dependencies, and milestones",
-        "Used PMATT and Microsoft Project to maintain baseline schedule and tracking discipline",
-        "Applied Agile/Scrum/SAFe practices for delivery sequencing and stakeholder alignment",
-        "Managed RAID governance and escalation pathways",
-        "Directed discovery normalization and application context mapping for execution readiness",
-        "Led Linux migration cutover planning and stabilization review cycles",
+        "Technical PM / Project Manager: owned planning cadence, milestone control, RAID governance, and executive updates",
+        "Discovery Tool Engineer: ran discovery tooling operations and readiness assurance",
+        "Discovery Data Specialist: normalized discovery outputs for dependency and wave planning",
+        "Linux Migration Engineer: executed Linux migration planning, validation, and stabilization controls",
+        "Used PMATT and Microsoft Project to maintain baseline schedule integrity",
+        "Applied Agile/Scrum/SAFe for cross-functional execution alignment",
         "Prepared CAB-ready change packets, runbooks, and rollback criteria",
       ],
       tools: [
-        commonTools.pmatt,
-        commonTools.adept,
-        commonTools.agile,
-        commonTools.aws,
-        commonTools.azure,
-        commonTools.vmware,
-        commonTools.linux,
-        commonTools.universalDiscovery,
-        commonTools.python,
-        commonTools.sql,
-        commonTools.powerbi,
-        commonTools.shell,
-        commonTools.jira,
-        commonTools.confluence,
-        commonTools.git,
-        commonTools.serviceNow,
-        commonTools.cloudendure,
+        t.pmatt,
+        t.adept,
+        t.agile,
+        t.aws,
+        t.azure,
+        t.vmware,
+        t.linux,
+        t.universalDiscovery,
+        t.python,
+        t.sql,
+        t.powerbi,
+        t.shell,
+        t.jira,
+        t.confluence,
+        t.git,
+        t.serviceNow,
+        t.cloudendure,
       ],
       programsClients: [
         "Client: AT&T (delivered via DXC environment)",
@@ -297,5 +351,150 @@ export const experiences: ExperienceItem[] = [
         "Competing stakeholder priorities -> used decision logs and risk-based prioritization",
       ],
     },
+  },
+  {
+    id: "exp-masters",
+    slug: "masters",
+    company: "Stevens Institute of Technology",
+    iconKey: "masters",
+    title: "Master's — MS Information Systems",
+    dates: "Jan 2024 - May 2025",
+    bullets: [
+      "Strengthened project governance and data-driven decision frameworks.",
+      "Expanded AI, analytics, and IT strategy depth for enterprise delivery.",
+      "Connected academic methods to real TPM and migration leadership use cases.",
+    ],
+    tools: [t.python, t.sql, t.powerbi, t.agile],
+    details: {
+      overview:
+        "Advanced education phase focused on project management, analytics, IT strategy, and AI-relevant delivery methods.",
+      scopeStakeholders: [
+        "Faculty mentors and program advisors",
+        "Team-based course project stakeholders",
+        "Applied research and capstone collaborators",
+      ],
+      responsibilities: [
+        "Delivered structured project planning and governance assignments",
+        "Applied analytics and machine learning methods in coursework",
+        "Used Python for data workflows and technical assignments",
+        "Mapped IT strategy and digital innovation frameworks to delivery execution",
+      ],
+      tools: [t.python, t.sql, t.powerbi, t.agile],
+      programsClients: ["Graduate academic program"],
+      outcomes: [
+        "Improved strategic planning depth for enterprise TPM roles",
+        "Strengthened AI-enabled delivery and analytics capability",
+      ],
+      challengesResolutions: [
+        "Balancing academic rigor with practical delivery lens -> applied every module to real program scenarios",
+        "Multiple concurrent tracks -> used milestone planning and structured prioritization",
+      ],
+    },
+  },
+  {
+    id: "exp-savvy",
+    slug: "savvy",
+    company: "Savvy Global Technologies",
+    iconKey: "savvy",
+    title: "AI Project Manager",
+    dates: "July 2025 - Nov 2025",
+    bullets: [
+      "Drove structured planning and execution for AI delivery initiatives.",
+      "Introduced stakeholder-ready reporting and risk signal management.",
+      "Applied human-in-the-loop controls to keep AI outputs auditable.",
+    ],
+    tools: [t.python, t.jira, t.powerbi, t.agile, t.git],
+    details: {
+      overview:
+        "Led AI initiative execution with delivery governance, stakeholder alignment, and practical automation boundaries.",
+      scopeStakeholders: [
+        "Product and delivery leadership",
+        "Engineering and data execution teams",
+        "Program stakeholders and decision owners",
+      ],
+      responsibilities: [
+        "Defined AI initiative milestones, dependencies, and reporting cadence",
+        "Managed risk, issue, and escalation routing for delivery tracks",
+        "Coordinated planning and progress reviews with business stakeholders",
+        "Operationalized human-in-the-loop checks for AI-assisted outputs",
+      ],
+      tools: [t.python, t.jira, t.powerbi, t.agile, t.git],
+      programsClients: ["Client: confidential"],
+      outcomes: [
+        "Improved execution visibility across AI workstreams",
+        "Reduced reporting turnaround through structured delivery dashboards",
+      ],
+      challengesResolutions: [
+        "Unclear AI scope boundaries -> introduced outcome-based milestones and acceptance criteria",
+        "Signal quality variance in updates -> standardized reporting templates and review checkpoints",
+      ],
+    },
+  },
+];
+
+export const careerStory: CareerStoryBlock[] = [
+  {
+    id: "story-bachelors",
+    phase: "Academic Foundation",
+    period: "2009 - 2013",
+    headline: "Started with systems-first engineering discipline.",
+    narrative:
+      "Bachelor's training built analytical problem solving, technical decomposition, and execution structure.",
+  },
+  {
+    id: "story-tata",
+    phase: "Operations Grounding",
+    period: "2013 - 2016",
+    headline: "Built reliability through operational rigor.",
+    narrative:
+      "At Tata, I learned production discipline, repeatable runbooks, and incident-driven execution.",
+  },
+  {
+    id: "story-huawei",
+    phase: "Release Control",
+    period: "2016 - 2017",
+    headline: "Focused on readiness and quality in deployment windows.",
+    narrative:
+      "At Huawei, I improved release validation and coordination across engineering and operations.",
+  },
+  {
+    id: "story-ericsson",
+    phase: "Integration Discipline",
+    period: "2017 - 2018",
+    headline: "Reduced rework through dependency-first integration.",
+    narrative:
+      "At Ericsson, I aligned integration sequencing, testing checkpoints, and rollout stabilization.",
+  },
+  {
+    id: "story-adecco",
+    phase: "Migration Specialization",
+    period: "2019 - 2020",
+    headline: "Scaled Linux migration as a repeatable model.",
+    narrative:
+      "At Adecco, I enforced validation-led cutovers and stabilization governance for Linux transitions.",
+  },
+  {
+    id: "story-dxc",
+    phase: "Enterprise Program Leadership",
+    period: "2020 - 2023",
+    headline: "Shifted to Technical PM leadership at enterprise scale.",
+    narrative:
+      "At DXC, I executed as Technical PM / Project Manager while also covering discovery and migration specialist roles.",
+  },
+  {
+    id: "story-masters",
+    phase: "Strategic Expansion",
+    period: "2024 - 2025",
+    headline: "Strengthened TPM and AI strategy through graduate study.",
+    narrative:
+      "Master's work sharpened data-led planning, IT strategy, and AI-enabled decision frameworks.",
+  },
+  {
+    id: "story-savvy",
+    phase: "AI Delivery Execution",
+    period: "2025",
+    headline: "Applied AI governance in delivery operations.",
+    narrative:
+      "At Savvy Global Technologies, I focused on practical AI program execution with structured controls.",
   },
 ];
