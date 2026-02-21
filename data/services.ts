@@ -18,13 +18,17 @@ export type ServiceItem = {
   title: string;
   iconKey: ServiceIconKey;
   value: string;
-  filterCategory: "Enterprise Migration Programs" | "Linux Modernization" | "AI/Automation";
+  filterCategory:
+    | "Cloud & Infrastructure Strategy"
+    | "Service/Product Innovation"
+    | "AI Strategy & Governance"
+    | "Process Innovation (BPR)";
 };
 
 export const competencyPoints: CompetencyPoint[] = [
   { id: "tpm", category: "TPM Delivery", score: 5.9, iconKey: "tpm" },
   { id: "cloud", category: "Cloud Migration", score: 5.7, iconKey: "cloudMigration" },
-  { id: "linux", category: "Linux Modernization", score: 5.6, iconKey: "linux" },
+  { id: "linux", category: "Linux Modernization", score: 5.6, iconKey: "linuxModernization" },
   { id: "risk", category: "Stakeholder & Risk", score: 5.6, iconKey: "stakeholderRisk" },
   { id: "ai", category: "AI Enablement", score: 5.1, iconKey: "aiDelivery" },
 ];
@@ -36,7 +40,7 @@ export const services: ServiceItem[] = [
     title: "Cloud Migration Programs",
     iconKey: "cloudMigration",
     value: "Enterprise wave planning with cutover governance, rollback readiness, and stabilization control.",
-    filterCategory: "Enterprise Migration Programs",
+    filterCategory: "Cloud & Infrastructure Strategy",
   },
   {
     id: "svc-tpm",
@@ -44,15 +48,15 @@ export const services: ServiceItem[] = [
     title: "Technical Program Management",
     iconKey: "tpm",
     value: "Cross-functional delivery leadership across infra, application, network, and security stakeholders.",
-    filterCategory: "Enterprise Migration Programs",
+    filterCategory: "Process Innovation (BPR)",
   },
   {
     id: "svc-linux",
     slug: "linux-modernization",
     title: "Linux Migration & Modernization",
-    iconKey: "linux",
+    iconKey: "linuxModernization",
     value: "Factory-style Linux transition execution using baseline checks, runbooks, and post-cutover stabilization.",
-    filterCategory: "Linux Modernization",
+    filterCategory: "Cloud & Infrastructure Strategy",
   },
   {
     id: "svc-risk",
@@ -60,22 +64,22 @@ export const services: ServiceItem[] = [
     title: "Stakeholder & Risk Management",
     iconKey: "stakeholderRisk",
     value: "RAID governance, escalation routing, and decision cadence for complex enterprise delivery.",
-    filterCategory: "Enterprise Migration Programs",
+    filterCategory: "Process Innovation (BPR)",
   },
   {
     id: "svc-dash",
     slug: "delivery-intelligence-dashboards",
-    title: "Delivery Intelligence Dashboards",
+    title: "Delivery Dashboards & Reporting",
     iconKey: "dashboards",
     value: "Program visibility using KPI and risk signal dashboards for leadership-level execution tracking.",
-    filterCategory: "Enterprise Migration Programs",
+    filterCategory: "Service/Product Innovation",
   },
   {
     id: "svc-ai",
     slug: "ai-enabled-delivery-ops",
-    title: "AI-Enabled Delivery Ops",
+    title: "AI-Enabled Delivery Optimization",
     iconKey: "aiDelivery",
     value: "Human-in-the-loop AI workflows for planning, risk sensing, and reporting acceleration.",
-    filterCategory: "AI/Automation",
+    filterCategory: "AI Strategy & Governance",
   },
 ];

@@ -47,6 +47,10 @@ export default function ExperienceTimeline({ items }: ExperienceTimelineProps) {
   const isPreviewVisible = supportsHover || mobilePreviewOpen;
   const activeIconTone = activeItem.type === "education_phase" ? "education" : "company";
   const activeIcon = experienceIconMap[activeItem.iconKey as keyof typeof experienceIconMap];
+  const previewBullets =
+    activeItem.type === "education_phase" && activeItem.projectsDuringPhase?.length
+      ? activeItem.projectsDuringPhase
+      : activeItem.detailBullets;
 
   return (
     <div className="experience-layout">
@@ -80,11 +84,13 @@ export default function ExperienceTimeline({ items }: ExperienceTimelineProps) {
                 aria-selected={isActive}
                 onFocus={() => setActiveSlug(item.slug)}
                 onClick={(event) => {
-                  if (!supportsHover && !isActive) {
-                    event.preventDefault();
-                    setActiveSlug(item.slug);
-                    setMobilePreviewOpen(true);
-                    return;
+                  if (!supportsHover) {
+                    if (!mobilePreviewOpen || !isActive) {
+                      event.preventDefault();
+                      setActiveSlug(item.slug);
+                      setMobilePreviewOpen(true);
+                      return;
+                    }
                   }
                   setActiveSlug(item.slug);
                 }}
@@ -128,7 +134,7 @@ export default function ExperienceTimeline({ items }: ExperienceTimelineProps) {
       </div>
 
       <aside
-        className={`panel exp-preview ${!isPreviewVisible ? "is-hidden-mobile" : ""}`}
+        className={`panel exp-preview ${supportsHover ? "" : "exp-preview-mobile-hidden"} ${!isPreviewVisible ? "is-hidden-mobile" : ""}`}
         aria-live="polite"
       >
         <div className="exp-preview-head">
@@ -151,14 +157,9 @@ export default function ExperienceTimeline({ items }: ExperienceTimelineProps) {
         <div className="preview-block">
           <h4>{activeItem.type === "education_phase" ? "Projects During Stevens" : "Quick Preview"}</h4>
           <ul>
-            {(activeItem.type === "education_phase" && activeItem.projectsDuringPhase?.length
-              ? activeItem.projectsDuringPhase
-              : activeItem.detailBullets
-            )
-              .slice(0, 8)
-              .map((entry) => (
-                <li key={entry}>{entry}</li>
-              ))}
+            {previewBullets.slice(0, 8).map((entry) => (
+              <li key={entry}>{entry}</li>
+            ))}
           </ul>
         </div>
 
@@ -187,6 +188,72 @@ export default function ExperienceTimeline({ items }: ExperienceTimelineProps) {
           View Full Details
         </Link>
       </aside>
+
+      {!supportsHover && mobilePreviewOpen ? (
+        <div className="exp-mobile-modal-backdrop" onClick={() => setMobilePreviewOpen(false)}>
+          <aside
+            className="panel exp-mobile-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Experience quick preview"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <div className="exp-mobile-modal-head">
+              <h3>Quick Preview</h3>
+              <button
+                type="button"
+                className="project-tab"
+                onClick={() => setMobilePreviewOpen(false)}
+              >
+                Close
+              </button>
+            </div>
+            <div className="exp-preview-head">
+              <IconBadge
+                icon={activeIcon}
+                label={activeItem.label}
+                tone={activeIconTone}
+                size="md"
+              />
+              <div>
+                <h3>{activeItem.label}</h3>
+                <p>{activeItem.title}</p>
+                <span>{activeItem.periodLabel}</span>
+                {activeItem.type === "education_phase" ? (
+                  <span className="phase-badge">Education Phase</span>
+                ) : null}
+              </div>
+            </div>
+            <div className="preview-block">
+              <h4>{activeItem.type === "education_phase" ? "Projects During Stevens" : "Quick Preview"}</h4>
+              <ul>
+                {previewBullets.slice(0, 8).map((entry) => (
+                  <li key={entry}>{entry}</li>
+                ))}
+              </ul>
+            </div>
+            <div className="preview-block">
+              <h4>Tools/Tech</h4>
+              <div className="chip-list">
+                {activeItem.tools.map((tool) => (
+                  <span key={tool.label} className="chip with-icon">
+                    <IconBadge
+                      icon={toolIconMap[tool.key]}
+                      label={tool.label}
+                      tone="tool"
+                      size="sm"
+                    />
+                    {tool.label}
+                  </span>
+                ))}
+              </div>
+            </div>
+            <Link href={`/experience/${activeItem.slug}`} className="btn btn-primary" prefetch>
+              View Full Details
+            </Link>
+          </aside>
+        </div>
+      ) : null}
     </div>
   );
 }

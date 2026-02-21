@@ -17,7 +17,7 @@ export const education: EducationItem[] = [
     id: "edu-masters",
     slug: "stevens-msis",
     institution: "Stevens Institute of Technology",
-    iconKey: "masters",
+    iconKey: "stevens",
     degree: "Master's Degree",
     field: "MS Information Systems",
     dates: "Jan 2024 - May 2025",

@@ -17,14 +17,17 @@ function getCategoryFromQuery(value: string | null): ProjectCategory | null {
     return null;
   }
   const normalized = value.toLowerCase().trim();
-  if (normalized.includes("enterprise")) {
-    return "Enterprise Migration Programs";
+  if (normalized.includes("cloud")) {
+    return "Cloud & Infrastructure Strategy";
   }
-  if (normalized.includes("linux")) {
-    return "Linux Modernization";
+  if (normalized.includes("service")) {
+    return "Service/Product Innovation";
   }
   if (normalized.includes("ai")) {
-    return "AI/Automation";
+    return "AI Strategy & Governance";
+  }
+  if (normalized.includes("process") || normalized.includes("bpr")) {
+    return "Process Innovation (BPR)";
   }
   return null;
 }
@@ -35,7 +38,7 @@ export default function ProjectBoards({ items }: ProjectBoardsProps) {
   const [activeCategory, setActiveCategory] = useState<ProjectCategory | null>(null);
   const categoryFromQuery = getCategoryFromQuery(searchParams.get("category"));
   const selectedCategory =
-    activeCategory ?? categoryFromQuery ?? "Enterprise Migration Programs";
+    activeCategory ?? categoryFromQuery ?? "Cloud & Infrastructure Strategy";
 
   const filteredProjects = useMemo(
     () => items.filter((item) => item.category === selectedCategory),
@@ -45,7 +48,7 @@ export default function ProjectBoards({ items }: ProjectBoardsProps) {
   return (
     <section className="visual-section">
       <div className="section-header">
-        <h2>Programs / Client Work / Initiatives</h2>
+        <h2>Stevens Projects Portfolio</h2>
       </div>
 
       <div className="project-tab-row" role="tablist" aria-label="Project category filters">
@@ -75,11 +78,11 @@ export default function ProjectBoards({ items }: ProjectBoardsProps) {
               <span className="project-client-row">
                 <IconBadge
                   icon={serviceIconMap[project.iconKey]}
-                  label={project.clientProgram}
+                  label={project.context}
                   tone="service"
                   size="sm"
                 />
-                {project.clientProgram}
+                {project.context}
               </span>
               <h4>{project.title}</h4>
               <p className="project-role">My Role: {project.role}</p>

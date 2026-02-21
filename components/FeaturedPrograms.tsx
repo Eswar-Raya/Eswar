@@ -24,11 +24,11 @@ export default function FeaturedPrograms({ items }: FeaturedProgramsProps) {
             <p className="project-client-row">
               <IconBadge
                 icon={serviceIconMap[item.iconKey]}
-                label={item.clientProgram}
+                label={item.context}
                 tone="service"
                 size="sm"
               />
-              {item.clientProgram}
+              {item.context}
             </p>
             <ul>
               {item.bullets.slice(0, 2).map((highlight) => (

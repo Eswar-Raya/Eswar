@@ -7,8 +7,8 @@ export default function ProjectsPage() {
   return (
     <PageContainer
       eyebrow="Programs"
-      title="Programs / Client Work / Initiatives"
-      subtitle="Filter by Enterprise Migration Programs, Linux Modernization, or AI/Automation. Hover cards for case-study prompt and open full detail on click."
+      title="Case Studies"
+      subtitle="Filter by Cloud & Infrastructure Strategy, Service/Product Innovation, AI Strategy & Governance, or Process Innovation (BPR)."
     >
       <Suspense fallback={<section className="panel project-loading">Loading projects...</section>}>
         <ProjectBoards items={projects} />

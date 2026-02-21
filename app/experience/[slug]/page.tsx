@@ -85,7 +85,7 @@ export default async function ExperienceDetailPage({
                 items: item.scopeStakeholders,
               },
               {
-                title: "Responsibilities / Projects",
+                title: "Responsibilities / Contributions",
                 items: item.detailBullets,
               },
               {

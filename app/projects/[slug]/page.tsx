@@ -33,11 +33,11 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
           <span className="detail-company">
             <IconBadge
               icon={serviceIconMap[project.iconKey]}
-              label={project.clientProgram}
+              label={project.context}
               tone="service"
               size="md"
             />
-            {project.clientProgram}
+            {project.context}
           </span>
           <h1>{project.title}</h1>
           <p>{project.category}</p>
@@ -53,7 +53,7 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
         </section>
 
         <section className="panel overview-card">
-          <h2>Problem</h2>
+          <h2>Problem / Opportunity</h2>
           <p>{project.details.problem}</p>
         </section>
 
@@ -68,11 +68,15 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
               items: project.details.contribution,
             },
             {
+              title: "Deliverables",
+              items: project.details.deliverables,
+            },
+            {
               title: "Outcomes",
               items: project.details.outcomes,
             },
             {
-              title: "Diagram/Screenshot placeholders",
+              title: "Artifacts",
               items: project.details.artifacts,
             },
           ]}

@@ -867,6 +867,41 @@ a {
   display: none;
 }
 
+.exp-preview-mobile-hidden {
+  display: none;
+}
+
+.exp-mobile-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(4, 9, 18, 0.74);
+  display: grid;
+  place-items: end center;
+  padding: 24px;
+  z-index: 70;
+}
+
+.exp-mobile-modal {
+  width: min(760px, 100%);
+  max-height: 86vh;
+  overflow: auto;
+  padding: var(--space-5);
+  display: grid;
+  gap: var(--space-4);
+}
+
+.exp-mobile-modal-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.exp-mobile-modal-head h3 {
+  margin: 0;
+  font-size: 20px;
+}
+
 .exp-preview-head {
   display: grid;
   grid-template-columns: auto 1fr;
@@ -1334,6 +1369,10 @@ a {
 
   .exp-preview.is-hidden-mobile {
     display: none;
+  }
+
+  .exp-mobile-modal {
+    border-radius: var(--radius-md);
   }
 
   .story-grid {
