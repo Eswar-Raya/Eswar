@@ -2,20 +2,19 @@ import PageContainer from "@/components/PageContainer";
 import HomeHero from "@/components/HomeHero";
 import CareerGrowthChart from "@/components/CareerGrowthChart";
 import ServicesGrid from "@/components/ServicesGrid";
+import SkillsChart from "@/components/SkillsChart";
 import NavCards from "@/components/NavCards";
 import QuickMetrics from "@/components/QuickMetrics";
 import FeaturedPrograms from "@/components/FeaturedPrograms";
 import ContactPanel from "@/components/ContactPanel";
 import {
-  careerGrowth,
   contact,
-  featuredProjectSlugs,
   homeNavCards,
   metrics,
   profile,
-  projects,
-  services,
-} from "@/data/profile";
+} from "@/data/site";
+import { careerGrowth, competencies, services } from "@/data/skills";
+import { featuredProjectSlugs, projects } from "@/data/projects";
 
 const featuredProjects = projects.filter((item) =>
   featuredProjectSlugs.includes(item.slug),
@@ -37,6 +36,7 @@ export default function HomePage() {
       />
       <QuickMetrics items={metrics} />
       <CareerGrowthChart points={careerGrowth} />
+      <SkillsChart items={competencies} />
       <ServicesGrid items={services.slice(0, 6)} title="Core Services" />
       <FeaturedPrograms items={featuredProjects} />
       <NavCards items={homeNavCards} />

@@ -1,12 +1,14 @@
 import PageContainer from "@/components/PageContainer";
 import ServicesGrid from "@/components/ServicesGrid";
 import IconGlyph from "@/components/IconGlyph";
-import { experiences, projects, services } from "@/data/profile";
+import { experiences } from "@/data/experience";
+import { projects } from "@/data/projects";
+import { services } from "@/data/skills";
 
 const techStack = Array.from(
   new Set([
-    ...experiences.flatMap((item) => item.tech),
-    ...projects.flatMap((item) => item.tools),
+    ...experiences.flatMap((item) => item.techIcons),
+    ...projects.flatMap((item) => item.toolIcons),
   ]),
 ).sort();
 

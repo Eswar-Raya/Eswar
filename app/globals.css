@@ -360,6 +360,36 @@ a {
   padding: var(--space-5);
 }
 
+.chart-shell {
+  width: 100%;
+  min-height: 250px;
+}
+
+.chart-tooltip {
+  display: grid;
+  gap: 4px;
+  background: rgba(13, 28, 52, 0.94);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 10px 12px;
+  color: var(--text-0);
+  font-size: 12px;
+}
+
+.tooltip-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+}
+
+.skills-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: var(--space-3);
+}
+
 .card-head {
   display: flex;
   justify-content: space-between;
@@ -478,6 +508,14 @@ a {
   margin: 0;
   color: var(--text-1);
   font-size: 13px;
+}
+
+.project-client-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--text-2);
 }
 
 .featured-card ul {
@@ -609,12 +647,42 @@ a {
 .company-icon {
   width: 22px;
   height: 22px;
-  color: var(--accent-strong);
+  color: inherit;
 }
 
 .company-icon.large {
   width: 28px;
   height: 28px;
+}
+
+.entity-logo {
+  --logo-accent: #97a7c3;
+  --logo-surface: rgba(151, 167, 195, 0.18);
+  width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  background: var(--logo-surface);
+  border: 1px solid color-mix(in srgb, var(--logo-accent) 48%, #ffffff);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--logo-accent);
+  flex-shrink: 0;
+}
+
+.entity-logo.large {
+  width: 28px;
+  height: 28px;
+}
+
+.entity-logo-glyph {
+  width: 14px;
+  height: 14px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .exp-role-line,
@@ -725,9 +793,14 @@ a {
   gap: var(--space-3);
 }
 
+.project-grid-wide {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
 .project-card {
   padding: var(--space-4);
   border-left: 2px solid transparent;
+  position: relative;
 }
 
 .project-card.is-active {
@@ -735,12 +808,9 @@ a {
 }
 
 .project-trigger {
-  width: 100%;
+  width: fit-content;
   text-align: left;
-  background: none;
-  border: none;
   color: inherit;
-  cursor: pointer;
   padding: 0;
   display: grid;
   gap: var(--space-1);
@@ -775,6 +845,66 @@ a {
   display: grid;
   gap: 5px;
   font-size: 13px;
+}
+
+.project-card-link {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.project-hover-cta {
+  width: fit-content;
+  border: 1px solid rgba(184, 206, 238, 0.42);
+  border-radius: 999px;
+  padding: 7px 12px;
+  font-size: 12px;
+  color: var(--accent-strong);
+  opacity: 0;
+  transform: translateY(2px);
+  transition: opacity 0.16s ease, transform 0.16s ease;
+}
+
+.project-card:hover .project-hover-cta,
+.project-card:focus-within .project-hover-cta {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.project-tab-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.project-tab {
+  border: 1px solid var(--line);
+  background: rgba(23, 47, 81, 0.8);
+  color: var(--text-1);
+  border-radius: 999px;
+  padding: 8px 12px;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.16s ease, border-color 0.16s ease;
+}
+
+.project-tab:hover,
+.project-tab:focus-visible {
+  background: rgba(148, 181, 226, 0.12);
+  border-color: rgba(184, 206, 238, 0.42);
+  outline: none;
+}
+
+.project-tab.is-active {
+  background: rgba(148, 181, 226, 0.2);
+  border-color: rgba(184, 206, 238, 0.5);
+  color: var(--text-0);
+}
+
+.project-loading {
+  padding: var(--space-5);
+  color: var(--text-1);
 }
 
 .education-grid {
@@ -1014,7 +1144,8 @@ a {
   .metric-grid,
   .services-grid,
   .featured-grid,
-  .project-grid {
+  .project-grid,
+  .project-grid-wide {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -1061,6 +1192,7 @@ a {
   .services-grid,
   .featured-grid,
   .project-grid,
+  .project-grid-wide,
   .nav-card-grid,
   .work-grid {
     grid-template-columns: 1fr;

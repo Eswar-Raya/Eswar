@@ -1,13 +1,13 @@
 import PageContainer from "@/components/PageContainer";
 import ExperienceTimeline from "@/components/ExperienceTimeline";
-import { experiences } from "@/data/profile";
+import { experiences } from "@/data/experience";
 
 export default function ExperiencePage() {
   return (
     <PageContainer
       eyebrow="Experience"
       title="Career Timeline"
-      subtitle="Vertical role progression with company context, delivery outcomes, and technical stack."
+      subtitle="Vertical timeline with hover-driven quick preview and dedicated role detail pages."
     >
       <ExperienceTimeline items={experiences} />
     </PageContainer>

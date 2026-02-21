@@ -1,4 +1,4 @@
-import type { MetricItem } from "@/data/profile";
+import type { MetricItem } from "@/data/site";
 
 type QuickMetricsProps = {
   items: MetricItem[];

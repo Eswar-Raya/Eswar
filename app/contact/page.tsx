@@ -1,6 +1,6 @@
 import PageContainer from "@/components/PageContainer";
 import ContactPanel from "@/components/ContactPanel";
-import { contact } from "@/data/profile";
+import { contact } from "@/data/site";
 
 export default function ContactPage() {
   return (

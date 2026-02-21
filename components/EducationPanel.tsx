@@ -1,5 +1,5 @@
-import IconGlyph from "@/components/IconGlyph";
-import type { EducationItem } from "@/data/profile";
+import EntityLogo from "@/components/EntityLogo";
+import type { EducationItem } from "@/data/education";
 
 type EducationPanelProps = {
   items: EducationItem[];
@@ -17,8 +17,8 @@ export default function EducationPanel({ items }: EducationPanelProps) {
           <article key={item.slug} className="panel education-card">
             <div className="education-head">
               <span className="education-school">
-                <IconGlyph name={item.icon} className="company-icon" />
-                {item.school}
+                <EntityLogo logoKey={item.logoKey} className="company-icon" />
+                {item.institution}
               </span>
               <span className="education-date">{item.dates}</span>
             </div>

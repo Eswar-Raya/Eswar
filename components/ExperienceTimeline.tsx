@@ -4,19 +4,21 @@ import Link from "next/link";
 import { useMemo, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import IconGlyph from "@/components/IconGlyph";
-import type { ExperienceItem } from "@/data/profile";
+import EntityLogo from "@/components/EntityLogo";
+import type { ExperienceItem } from "@/data/experience";
 
 type ExperienceTimelineProps = {
   items: ExperienceItem[];
 };
 
 export default function ExperienceTimeline({ items }: ExperienceTimelineProps) {
-  const [activeSlug, setActiveSlug] = useState(items[0]?.slug ?? "");
+  const timelineItems = useMemo(() => [...items].reverse(), [items]);
+  const [activeSlug, setActiveSlug] = useState(timelineItems[0]?.slug ?? "");
   const reduceMotion = useReducedMotion();
 
   const activeItem = useMemo(
-    () => items.find((item) => item.slug === activeSlug) ?? items[0],
-    [activeSlug, items],
+    () => timelineItems.find((item) => item.slug === activeSlug) ?? timelineItems[0],
+    [activeSlug, timelineItems],
   );
 
   if (!activeItem) {
@@ -27,12 +29,12 @@ export default function ExperienceTimeline({ items }: ExperienceTimelineProps) {
     <section className="visual-section">
       <div className="section-header">
         <h2>Career Timeline</h2>
-        <p>Vertical timeline with role progression, outcomes, and technical scope.</p>
+        <p>Hover any company card for quick preview. Click a card to open the full role brief.</p>
       </div>
 
       <div className="experience-layout">
         <div className="experience-stack" aria-label="Experience timeline">
-          {items.map((item) => {
+          {timelineItems.map((item) => {
             const isActive = item.slug === activeItem.slug;
             return (
               <motion.article
@@ -51,7 +53,7 @@ export default function ExperienceTimeline({ items }: ExperienceTimelineProps) {
                   prefetch
                 >
                   <span className="exp-company-row">
-                    <IconGlyph name={item.icon} className="company-icon" />
+                    <EntityLogo logoKey={item.logoKey} className="company-icon" />
                     <strong>{item.company}</strong>
                   </span>
                   <span className="exp-role-line">{item.title}</span>
@@ -65,7 +67,7 @@ export default function ExperienceTimeline({ items }: ExperienceTimelineProps) {
                 </ul>
 
                 <div className="chip-list">
-                  {item.tech.map((tech) => (
+                  {item.techIcons.map((tech) => (
                     <span key={tech} className="chip with-icon" title={tech}>
                       <IconGlyph name={tech} className="chip-icon" />
                       {tech}
@@ -73,7 +75,7 @@ export default function ExperienceTimeline({ items }: ExperienceTimelineProps) {
                   ))}
                 </div>
 
-                <span className="detail-link">Open details</span>
+                <span className="detail-link">View role case study</span>
               </motion.article>
             );
           })}
@@ -81,7 +83,7 @@ export default function ExperienceTimeline({ items }: ExperienceTimelineProps) {
 
         <aside className="panel exp-preview" aria-live="polite">
           <div className="exp-preview-head">
-            <IconGlyph name={activeItem.icon} className="company-icon large" />
+            <EntityLogo logoKey={activeItem.logoKey} className="company-icon large" />
             <div>
               <h3>{activeItem.company}</h3>
               <p>{activeItem.title}</p>
@@ -90,31 +92,37 @@ export default function ExperienceTimeline({ items }: ExperienceTimelineProps) {
           </div>
 
           <div className="preview-block">
-            <h4>More details</h4>
-            <p>{activeItem.details.overview}</p>
+            <h4>Quick Preview</h4>
+            <ul>
+              {activeItem.details.responsibilities.slice(0, 6).map((entry) => (
+                <li key={entry}>{entry}</li>
+              ))}
+            </ul>
           </div>
 
-          <div className="preview-mini-grid">
-            <div>
-              <h5>Scope & Stakeholders</h5>
-              <ul>
-                {activeItem.details.scopeStakeholders.slice(0, 3).map((entry) => (
-                  <li key={entry}>{entry}</li>
-                ))}
-              </ul>
+          <div className="preview-block">
+            <h4>Tools/Tech</h4>
+            <div className="chip-list">
+              {activeItem.techIcons.map((tool) => (
+                <span key={tool} className="chip with-icon">
+                  <IconGlyph name={tool} className="chip-icon" />
+                  {tool}
+                </span>
+              ))}
             </div>
-            <div>
-              <h5>Key Deliverables</h5>
-              <ul>
-                {activeItem.details.deliverables.slice(0, 3).map((entry) => (
-                  <li key={entry}>{entry}</li>
-                ))}
-              </ul>
-            </div>
+          </div>
+
+          <div className="preview-block">
+            <h4>Outcomes</h4>
+            <ul>
+              {activeItem.details.outcomes.slice(0, 3).map((entry) => (
+                <li key={entry}>{entry}</li>
+              ))}
+            </ul>
           </div>
 
           <Link href={`/experience/${activeItem.slug}`} className="btn btn-primary" prefetch>
-            View Full Role Detail
+            Open Full Role Detail
           </Link>
         </aside>
       </div>

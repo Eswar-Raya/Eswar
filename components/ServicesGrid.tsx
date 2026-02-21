@@ -1,5 +1,6 @@
 import IconGlyph from "@/components/IconGlyph";
-import type { ServiceItem } from "@/data/profile";
+import Link from "next/link";
+import type { ServiceItem } from "@/data/skills";
 
 type ServicesGridProps = {
   items: ServiceItem[];
@@ -21,6 +22,13 @@ export default function ServicesGrid({
             <IconGlyph name={item.icon} className="service-icon" />
             <h3>{item.title}</h3>
             <p>{item.summary}</p>
+            <Link
+              href={`/projects?category=${encodeURIComponent(item.projectFilter)}`}
+              className="detail-link"
+              prefetch
+            >
+              See relevant programs
+            </Link>
           </article>
         ))}
       </div>

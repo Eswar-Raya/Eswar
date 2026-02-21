@@ -2,8 +2,9 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import VisualNav from "@/components/VisualNav";
 import IconGlyph from "@/components/IconGlyph";
+import EntityLogo from "@/components/EntityLogo";
 import DetailSectionGrid from "@/components/DetailSectionGrid";
-import { projects } from "@/data/profile";
+import { projects } from "@/data/projects";
 
 type ProjectDetailPageProps = {
   params: Promise<{ slug: string }>;
@@ -29,12 +30,15 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
           <Link href="/projects" className="detail-back">
             Back to Projects
           </Link>
-          <span className="detail-company">{project.category}</span>
-          <h1>{project.name}</h1>
-          <p>{project.clientContext}</p>
+          <span className="detail-company">
+            <EntityLogo logoKey={project.logoKey} className="company-icon" />
+            {project.clientProgram}
+          </span>
+          <h1>{project.title}</h1>
+          <p>{project.category}</p>
           <span className="detail-role">{project.role}</span>
           <div className="chip-list">
-            {project.tools.map((tool) => (
+            {project.toolIcons.map((tool) => (
               <span key={tool} className="chip with-icon">
                 <IconGlyph name={tool} className="chip-icon" />
                 {tool}

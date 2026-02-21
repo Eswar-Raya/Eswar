@@ -1,52 +1,72 @@
-import type { GrowthPoint } from "@/data/profile";
+"use client";
+
+import {
+  CartesianGrid,
+  Line,
+  LineChart,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from "recharts";
+import type { GrowthPoint } from "@/data/skills";
 
 type CareerGrowthChartProps = {
   points: GrowthPoint[];
 };
 
+type TooltipPayload = {
+  payload?: GrowthPoint;
+};
+
+function GrowthTooltip({ active, payload }: { active?: boolean; payload?: TooltipPayload[] }) {
+  if (!active || !payload?.length || !payload[0]?.payload) {
+    return null;
+  }
+
+  const point = payload[0].payload;
+
+  return (
+    <div className="chart-tooltip">
+      <strong>{point.year}</strong>
+      <span>{point.company}</span>
+      <span>{point.role}</span>
+      <span>Scope Score: {point.score.toFixed(1)} / 6</span>
+    </div>
+  );
+}
+
 export default function CareerGrowthChart({ points }: CareerGrowthChartProps) {
-  const width = 760;
-  const height = 280;
-  const padX = 56;
-  const padY = 34;
-  const maxLevel = 10;
-
-  const mapped = points.map((point, index) => {
-    const x =
-      padX + (index * (width - padX * 2)) / Math.max(points.length - 1, 1);
-    const y =
-      height - padY - (point.level / maxLevel) * (height - padY * 2);
-    return { ...point, x, y };
-  });
-
-  const path = mapped
-    .map((point, index) =>
-      `${index === 0 ? "M" : "L"}${point.x.toFixed(1)},${point.y.toFixed(1)}`,
-    )
-    .join(" ");
-
   return (
     <article className="panel graph-card">
       <div className="card-head">
         <h2>Career Growth</h2>
-        <p>Years vs Responsibility</p>
+        <p>Year vs Responsibility Scope</p>
       </div>
-      <svg viewBox={`0 0 ${width} ${height}`} className="growth-chart" role="img" aria-label="Career growth chart">
-        <line x1={padX} y1={height - padY} x2={width - padX} y2={height - padY} className="axis-line" />
-        <line x1={padX} y1={padY} x2={padX} y2={height - padY} className="axis-line" />
-        <path d={path} className="chart-line" />
-        {mapped.map((point) => (
-          <g key={`${point.year}-${point.label}`}>
-            <circle cx={point.x} cy={point.y} r="5" className="chart-point" />
-            <text x={point.x} y={height - 10} textAnchor="middle" className="chart-year">
-              {point.year}
-            </text>
-            <text x={point.x} y={point.y - 12} textAnchor="middle" className="chart-label">
-              {point.label}
-            </text>
-          </g>
-        ))}
-      </svg>
+      <div className="chart-shell">
+        <ResponsiveContainer width="100%" height={290}>
+          <LineChart data={points} margin={{ top: 12, right: 24, left: 8, bottom: 12 }}>
+            <CartesianGrid stroke="rgba(173, 190, 218, 0.18)" strokeDasharray="4 4" />
+            <XAxis dataKey="year" tick={{ fill: "#9fb2cf", fontSize: 11 }} axisLine={false} tickLine={false} />
+            <YAxis
+              domain={[1, 6]}
+              ticks={[1, 2, 3, 4, 5, 6]}
+              tick={{ fill: "#9fb2cf", fontSize: 11 }}
+              axisLine={false}
+              tickLine={false}
+            />
+            <Tooltip content={<GrowthTooltip />} />
+            <Line
+              type="monotone"
+              dataKey="score"
+              stroke="#b8ceee"
+              strokeWidth={2.8}
+              dot={{ r: 4.2, stroke: "#4f76a6", strokeWidth: 1.2, fill: "#d9e8ff" }}
+              activeDot={{ r: 6 }}
+            />
+          </LineChart>
+        </ResponsiveContainer>
+      </div>
     </article>
   );
 }
