@@ -1,4 +1,4 @@
-import type { ServiceIconKey } from "@/lib/iconMap";
+import type { ServiceIconKey, ToolIconKey } from "@/lib/iconMap";
 
 export type CompetencyPoint = {
   id: string;
@@ -7,9 +7,18 @@ export type CompetencyPoint = {
     | "Cloud Migration"
     | "Linux Modernization"
     | "Stakeholder & Risk"
-    | "AI Enablement";
+    | "AI Enablement"
+    | "LLM / RAG Delivery"
+    | "ML & Analytics";
   score: number;
   iconKey: ServiceIconKey;
+};
+
+export type AiMlSkill = {
+  id: string;
+  title: string;
+  summary: string;
+  toolKey: ToolIconKey;
 };
 
 export type ServiceItem = {
@@ -30,7 +39,9 @@ export const competencyPoints: CompetencyPoint[] = [
   { id: "cloud", category: "Cloud Migration", score: 5.7, iconKey: "cloudMigration" },
   { id: "linux", category: "Linux Modernization", score: 5.6, iconKey: "linuxModernization" },
   { id: "risk", category: "Stakeholder & Risk", score: 5.6, iconKey: "stakeholderRisk" },
-  { id: "ai", category: "AI Enablement", score: 5.1, iconKey: "aiDelivery" },
+  { id: "ai", category: "AI Enablement", score: 5.4, iconKey: "aiDelivery" },
+  { id: "llm-rag", category: "LLM / RAG Delivery", score: 5.0, iconKey: "aiDelivery" },
+  { id: "ml-analytics", category: "ML & Analytics", score: 5.2, iconKey: "dashboards" },
 ];
 
 export const services: ServiceItem[] = [
@@ -81,5 +92,43 @@ export const services: ServiceItem[] = [
     iconKey: "aiDelivery",
     value: "Human-in-the-loop AI workflows for planning, risk sensing, and reporting acceleration.",
     filterCategory: "AI Strategy & Governance",
+  },
+];
+
+export const aiMlSkills: AiMlSkill[] = [
+  {
+    id: "aiml-rag",
+    title: "RAG Workflow Design",
+    summary:
+      "Built local-first retrieval workflows using chunking, vector indexing, and source-grounded response patterns.",
+    toolKey: "chroma",
+  },
+  {
+    id: "aiml-llm-orchestration",
+    title: "LLM Orchestration",
+    summary:
+      "Structured local model execution with Ollama and LlamaIndex for planning, synthesis, and controlled automation.",
+    toolKey: "ollama",
+  },
+  {
+    id: "aiml-prompt-governance",
+    title: "Prompt & Output Governance",
+    summary:
+      "Applied human-in-the-loop validation, traceable prompts, and quality checkpoints for delivery-facing AI outputs.",
+    toolKey: "prompting",
+  },
+  {
+    id: "aiml-analytics",
+    title: "ML-Driven Delivery Insights",
+    summary:
+      "Used analytics and ML coursework outcomes to identify delivery trends, risks, and execution bottlenecks.",
+    toolKey: "ml",
+  },
+  {
+    id: "aiml-python-fastapi",
+    title: "Python + FastAPI Integration",
+    summary:
+      "Integrated Python automation and FastAPI services for local AI-enabled portfolio and reporting use cases.",
+    toolKey: "fastapi",
   },
 ];

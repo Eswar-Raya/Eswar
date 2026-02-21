@@ -3,7 +3,7 @@ import ServicesGrid from "@/components/ServicesGrid";
 import IconBadge from "@/components/IconBadge";
 import { experiences } from "@/data/experience";
 import { projects } from "@/data/projects";
-import { services } from "@/data/services";
+import { aiMlSkills, services } from "@/data/services";
 import { toolIconMap } from "@/lib/iconMap";
 
 const techStack = Array.from(
@@ -22,6 +22,30 @@ export default function ServicesPage() {
       subtitle="Structured capabilities for cloud migration programs, infrastructure modernization, and AI-enabled operations."
     >
       <ServicesGrid items={services} title="Service Portfolio" />
+
+      <section className="visual-section">
+        <div className="section-header">
+          <h2>AI / ML Skills</h2>
+        </div>
+        <article className="panel ai-skill-panel">
+          <div className="ai-skill-grid">
+            {aiMlSkills.map((skill) => (
+              <article key={skill.id} className="ai-skill-card">
+                <IconBadge
+                  icon={toolIconMap[skill.toolKey]}
+                  label={skill.title}
+                  tone="tool"
+                  size="md"
+                />
+                <div>
+                  <h3>{skill.title}</h3>
+                  <p>{skill.summary}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </article>
+      </section>
 
       <section className="visual-section">
         <div className="section-header">

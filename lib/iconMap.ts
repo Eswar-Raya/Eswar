@@ -79,6 +79,12 @@ export const toolIconMap = {
   serviceNow: BriefcaseBusiness,
   shell: Terminal,
   agile: KanbanSquare,
+  ollama: Brain,
+  llamaindex: FileCode2,
+  chroma: Database,
+  fastapi: FileCode2,
+  prompting: Brain,
+  ml: LineChart,
 } satisfies Record<string, LucideIcon>;
 
 export type CompanyIconKey = keyof typeof companyIconMap;

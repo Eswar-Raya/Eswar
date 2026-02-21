@@ -79,6 +79,12 @@ const t = {
   confluence: { key: "confluence" as const, label: "Confluence" },
   azure: { key: "azure" as const, label: "Azure" },
   agile: { key: "agile" as const, label: "Agile/Scrum/SAFe" },
+  ollama: { key: "ollama" as const, label: "Ollama" },
+  llamaindex: { key: "llamaindex" as const, label: "LlamaIndex" },
+  chroma: { key: "chroma" as const, label: "ChromaDB" },
+  fastapi: { key: "fastapi" as const, label: "FastAPI" },
+  prompting: { key: "prompting" as const, label: "Prompt Engineering" },
+  ml: { key: "ml" as const, label: "Machine Learning" },
 };
 
 export const experiences: ExperienceItem[] = [
@@ -101,14 +107,28 @@ export const experiences: ExperienceItem[] = [
       "Drove planning and execution for AI delivery initiatives.",
       "Introduced stakeholder-ready reporting and risk signal management.",
       "Applied human-in-the-loop controls to keep AI outputs auditable.",
+      "Operationalized local LLM workflows for delivery planning and status synthesis.",
     ],
     detailBullets: [
       "Defined AI initiative milestones, dependencies, and reporting cadence.",
       "Managed risk, issue, and escalation routing for delivery tracks.",
       "Coordinated planning and progress reviews with business stakeholders.",
       "Operationalized human-in-the-loop checks for AI-assisted outputs.",
+      "Implemented RAG-style retrieval patterns for source-grounded delivery summaries.",
+      "Established prompt and response quality controls for repeatable output accuracy.",
     ],
-    tools: [t.python, t.jira, t.powerbi, t.agile, t.git],
+    tools: [
+      t.python,
+      t.ollama,
+      t.llamaindex,
+      t.chroma,
+      t.fastapi,
+      t.prompting,
+      t.powerbi,
+      t.jira,
+      t.agile,
+      t.git,
+    ],
     scopeStakeholders: [
       "Product and delivery leadership",
       "Engineering and data execution teams",
@@ -118,6 +138,7 @@ export const experiences: ExperienceItem[] = [
     outcomes: [
       "Improved execution visibility across AI workstreams.",
       "Reduced reporting turnaround through structured delivery dashboards.",
+      "Improved traceability of AI-assisted outputs with review and source-check controls.",
     ],
     challengesResolutions: [
       "Unclear AI scope boundaries -> introduced outcome-based milestones and acceptance criteria.",
@@ -144,12 +165,14 @@ export const experiences: ExperienceItem[] = [
       "Built project planning models tied to technical delivery outcomes.",
       "Executed analytics and ML coursework in applied scenarios.",
       "Developed Python-based data workflows for delivery decision support.",
+      "Evaluated enterprise AI adoption patterns for governance and delivery fit.",
     ],
     detailBullets: [
       "Structured project planning and milestone control across course initiatives.",
       "Applied analytics and ML methods to practical problem scenarios.",
       "Delivered Python-backed analysis and reporting artifacts.",
       "Mapped IT strategy and digital innovation frameworks to enterprise execution use cases.",
+      "Built AI strategy analysis across SLLM governance, privacy, and deployment controls.",
     ],
     projectsDuringPhase: [
       "Project governance framework mapping schedule, risk, and stakeholder checkpoints.",
@@ -157,8 +180,19 @@ export const experiences: ExperienceItem[] = [
       "Python pipeline prototypes for structured reporting and analysis.",
       "IT strategy casework focused on enterprise transformation planning.",
       "Cross-course synthesis connecting TPM methods to AI-enabled delivery.",
+      "SLLM strategy case defining AI governance controls for privacy-sensitive enterprise workflows.",
     ],
-    tools: [t.python, t.sql, t.powerbi, t.agile, t.jira],
+    tools: [
+      t.python,
+      t.ml,
+      t.sql,
+      t.powerbi,
+      t.prompting,
+      t.ollama,
+      t.llamaindex,
+      t.agile,
+      t.jira,
+    ],
     scopeStakeholders: [
       "Faculty mentors and academic advisors",
       "Team-based project collaborators",

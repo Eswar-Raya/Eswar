@@ -50,6 +50,12 @@ const t = {
   docker: { key: "docker" as const, label: "Cloud/Platform Packaging" },
   git: { key: "git" as const, label: "Git" },
   cloudendure: { key: "cloudendure" as const, label: "Migration Simulation Controls" },
+  ollama: { key: "ollama" as const, label: "Ollama" },
+  llamaindex: { key: "llamaindex" as const, label: "LlamaIndex" },
+  chroma: { key: "chroma" as const, label: "ChromaDB" },
+  fastapi: { key: "fastapi" as const, label: "FastAPI" },
+  prompting: { key: "prompting" as const, label: "Prompt Engineering" },
+  ml: { key: "ml" as const, label: "Machine Learning" },
 };
 
 export const projects: ProjectItem[] = [
@@ -152,7 +158,7 @@ export const projects: ProjectItem[] = [
       "Compared LLM vs SLLM tradeoffs for cost, scalability, and privacy.",
       "Mapped governance controls for responsible AI operations in business contexts.",
     ],
-    tools: [t.security, t.analytics, t.python, t.git],
+    tools: [t.security, t.analytics, t.ml, t.python, t.ollama, t.llamaindex, t.chroma, t.git],
     details: {
       problem:
         "Businesses want AI automation but face cost, infrastructure, and privacy constraints with large-scale LLM deployments.",
@@ -171,7 +177,7 @@ export const projects: ProjectItem[] = [
         "Security & compliance considerations",
         "Deployment architecture + data integration guidance",
       ],
-      tools: [t.security, t.analytics, t.python, t.git],
+      tools: [t.security, t.analytics, t.ml, t.python, t.ollama, t.llamaindex, t.chroma, t.git],
       outcomes: [
         "Provides a practical adoption strategy for secure, task-focused AI inside enterprise workflows.",
       ],
@@ -194,7 +200,7 @@ export const projects: ProjectItem[] = [
       "Defined scalable cloud architecture and integration model for services and donations.",
       "Outlined monetization model with inclusive remote participation capabilities.",
     ],
-    tools: [t.aws, t.analytics, t.security, t.python],
+    tools: [t.aws, t.analytics, t.ml, t.security, t.python, t.fastapi, t.prompting],
     details: {
       problem:
         "Families face information overload, disconnected tools, limited personalization, and low accessibility for distant relatives during memorial planning.",
@@ -213,7 +219,7 @@ export const projects: ProjectItem[] = [
         "Feature set + monetization model",
         "Architecture/diagrams placeholders (sequence/structure)",
       ],
-      tools: [t.aws, t.analytics, t.security, t.python],
+      tools: [t.aws, t.analytics, t.ml, t.security, t.python, t.fastapi, t.prompting],
       outcomes: [
         "Centralizes planning, increases inclusion, and scales memorial experiences globally.",
       ],

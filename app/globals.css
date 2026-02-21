@@ -1175,6 +1175,38 @@ a {
   padding: var(--space-5);
 }
 
+.ai-skill-panel {
+  padding: var(--space-5);
+}
+
+.ai-skill-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-3);
+}
+
+.ai-skill-card {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--surface-soft);
+  padding: var(--space-3);
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--space-3);
+  align-items: start;
+}
+
+.ai-skill-card h3 {
+  margin: 0 0 6px;
+  font-size: 15px;
+}
+
+.ai-skill-card p {
+  margin: 0;
+  color: var(--text-1);
+  font-size: 12px;
+}
+
 .contact-card {
   padding: var(--space-5);
   display: grid;
@@ -1342,7 +1374,8 @@ a {
   .services-grid,
   .featured-grid,
   .project-grid,
-  .project-grid-wide {
+  .project-grid-wide,
+  .ai-skill-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -1402,6 +1435,7 @@ a {
   .featured-grid,
   .project-grid,
   .project-grid-wide,
+  .ai-skill-grid,
   .nav-card-grid,
   .work-grid {
     grid-template-columns: 1fr;

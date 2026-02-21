@@ -2,9 +2,9 @@ import os
 from pathlib import Path
 
 import chromadb
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, Header, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from dotenv import load_dotenv
 
 from llama_index.core import Settings, SimpleDirectoryReader, StorageContext
@@ -18,9 +18,24 @@ DATA_DIR = BASE_DIR / "data"
 
 load_dotenv(BASE_DIR / ".env")
 
+MAX_CHAT_CHARS = int(os.getenv("CHAT_MAX_CHARS", "2000"))
+ENVIRONMENT = os.getenv("ENVIRONMENT", "development").strip().lower()
+INGEST_TOKEN = os.getenv("INGEST_TOKEN", "").strip()
+
+
+def parse_allowed_origins(raw_origins: str | None) -> list[str]:
+    if not raw_origins:
+        return ["http://localhost:3000"]
+
+    allowed = [origin.strip() for origin in raw_origins.split(",") if origin.strip()]
+    return allowed or ["http://localhost:3000"]
+
+
+ALLOWED_ORIGINS = parse_allowed_origins(os.getenv("ALLOWED_ORIGINS"))
+
 
 class ChatRequest(BaseModel):
-    question: str
+    question: str = Field(..., min_length=1, max_length=MAX_CHAT_CHARS)
 
 
 class ChatResponse(BaseModel):
@@ -32,7 +47,7 @@ index: VectorStoreIndex | None = None
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],
+    allow_origins=ALLOWED_ORIGINS,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -73,13 +88,26 @@ def chat(request: ChatRequest) -> ChatResponse:
     if not index:
         raise HTTPException(status_code=503, detail="Index not ready.")
 
+    question = request.question.strip()
+    if not question:
+        raise HTTPException(status_code=400, detail="Question is required.")
+    if len(question) > MAX_CHAT_CHARS:
+        raise HTTPException(status_code=400, detail="Question is too long.")
+
     query_engine = index.as_query_engine(similarity_top_k=4)
-    response = query_engine.query(request.question)
+    response = query_engine.query(question)
     return ChatResponse(answer=str(response))
 
 
 @app.post("/ingest")
-def ingest() -> dict:
+def ingest(x_ingest_token: str | None = Header(default=None)) -> dict:
     global index
+
+    # In production, ingest should be explicitly token-gated.
+    if ENVIRONMENT == "production" and not INGEST_TOKEN:
+        raise HTTPException(status_code=503, detail="Ingest endpoint disabled.")
+    if INGEST_TOKEN and x_ingest_token != INGEST_TOKEN:
+        raise HTTPException(status_code=401, detail="Unauthorized.")
+
     index = build_index()
     return {"status": "ok"}

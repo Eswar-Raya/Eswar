@@ -20,6 +20,23 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## Environment Setup
+
+Copy environment templates before starting:
+
+```bash
+cp .env.example .env.local
+cp backend/.env.example backend/.env
+```
+
+Key security-related values:
+
+- `CHAT_RATE_LIMIT_MAX_REQUESTS`, `CHAT_RATE_LIMIT_WINDOW_MS`: request throttling for `/api/chat`.
+- `CHAT_BACKEND_TIMEOUT_MS`: backend timeout for proxy calls.
+- `ALLOWED_ORIGINS`: comma-separated CORS origins for FastAPI.
+- `INGEST_TOKEN`: required for `/ingest` when set (and strongly recommended in production).
+- `ENVIRONMENT`: set to `production` to disable open ingest behavior when token is missing.
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
