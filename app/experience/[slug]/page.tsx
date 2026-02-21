@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import VisualNav from "@/components/VisualNav";
 import IconBadge from "@/components/IconBadge";
 import DetailSectionGrid from "@/components/DetailSectionGrid";
-import { experiences } from "@/data/experience";
+import { experiences, type ExperienceItem } from "@/data/experience";
 import { experienceIconMap, toolIconMap } from "@/lib/iconMap";
 
 type ExperienceDetailPageProps = {
@@ -18,16 +18,15 @@ export default async function ExperienceDetailPage({
   params,
 }: ExperienceDetailPageProps) {
   const { slug } = await params;
-  const item = experiences.find((entry) => entry.slug === slug);
+  const item = experiences.find((entry) => entry.slug === slug) as ExperienceItem | undefined;
 
   if (!item) {
     notFound();
   }
 
-  const iconTone =
-    item.slug === "bachelors" || item.slug === "masters"
-      ? "education"
-      : "company";
+  const iconTone = item.type === "education_phase" ? "education" : "company";
+  const isEducationPhase = item.type === "education_phase";
+  const icon = experienceIconMap[item.iconKey as keyof typeof experienceIconMap];
 
   return (
     <main className="corp-page">
@@ -39,52 +38,76 @@ export default async function ExperienceDetailPage({
           </Link>
           <span className="detail-company">
             <IconBadge
-              icon={experienceIconMap[item.iconKey]}
-              label={item.company}
+              icon={icon}
+              label={item.label}
               tone={iconTone}
               size="md"
             />
-            {item.company}
+            {item.label}
           </span>
           <h1>{item.title}</h1>
-          <p>{item.dates}</p>
+          <p>{item.periodLabel}</p>
+          {isEducationPhase ? <span className="phase-badge">Education Phase</span> : null}
           {item.note ? <p className="detail-note">{item.note}</p> : null}
         </section>
 
         <section className="panel overview-card">
-          <h2>Overview</h2>
-          <p>{item.details.overview}</p>
+          <h2>{isEducationPhase ? "Overview (Graduate Program Career Phase)" : "Overview"}</h2>
+          <p>{item.growthHighlight}</p>
         </section>
 
-        <DetailSectionGrid
-          sections={[
-            {
-              title: "Scope & Stakeholders",
-              items: item.details.scopeStakeholders,
-            },
-            {
-              title: "Responsibilities",
-              items: item.details.responsibilities,
-            },
-            {
-              title: "Programs/Clients",
-              items: item.details.programsClients,
-            },
-            {
-              title: "Outcomes / Metrics",
-              items: item.details.outcomes,
-            },
-            {
-              title: "Challenges + How resolved",
-              items: item.details.challengesResolutions,
-            },
-          ]}
-        />
+        {isEducationPhase ? (
+          <DetailSectionGrid
+            sections={[
+              {
+                title: "Key Projects During Stevens",
+                items: item.projectsDuringPhase ?? item.detailBullets,
+              },
+              {
+                title: "Skills/Tools Strengthened",
+                items: item.tools.map((tool) => tool.label),
+              },
+              {
+                title: "Outcomes",
+                items: item.outcomes,
+              },
+              {
+                title: "Challenges + How resolved",
+                items: item.challengesResolutions,
+              },
+            ]}
+          />
+        ) : (
+          <DetailSectionGrid
+            sections={[
+              {
+                title: "Scope & Stakeholders",
+                items: item.scopeStakeholders,
+              },
+              {
+                title: "Responsibilities / Projects",
+                items: item.detailBullets,
+              },
+              {
+                title: "Programs/Clients",
+                items: item.programsClients,
+              },
+              {
+                title: "Outcomes / Metrics",
+                items: item.outcomes,
+              },
+              {
+                title: "Challenges + How resolved",
+                items: item.challengesResolutions,
+              },
+            ]}
+          />
+        )}
 
         <section className="panel detail-card detail-tools-card">
-          <h2>Tools/Tech</h2>
+          <h2>{isEducationPhase ? "Skills/Tools Strengthened" : "Tools/Tech"}</h2>
           <div className="chip-list">
-            {item.details.tools.map((tool) => (
+            {item.tools.map((tool) => (
               <span key={tool.label} className="chip with-icon">
                 <IconBadge icon={toolIconMap[tool.key]} label={tool.label} tone="tool" size="sm" />
                 {tool.label}

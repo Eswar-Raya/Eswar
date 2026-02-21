@@ -1,8 +1,8 @@
 "use client";
 
+import { useMemo } from "react";
 import {
   CartesianGrid,
-  LabelList,
   Line,
   LineChart,
   ResponsiveContainer,
@@ -10,14 +10,14 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import type { GrowthPoint } from "@/data/services";
+import type { GrowthChartPoint } from "@/data/experience";
 
 type CareerGrowthChartProps = {
-  points: GrowthPoint[];
+  points: GrowthChartPoint[];
 };
 
 type TooltipPayload = {
-  payload?: GrowthPoint;
+  payload?: GrowthChartPoint;
 };
 
 function GrowthTooltip({ active, payload }: { active?: boolean; payload?: TooltipPayload[] }) {
@@ -29,16 +29,21 @@ function GrowthTooltip({ active, payload }: { active?: boolean; payload?: Toolti
 
   return (
     <div className="chart-tooltip">
-      <strong>{point.stage}</strong>
-      <span>{point.role}</span>
-      <span>{point.dates}</span>
+      <strong>{point.stageLabel}</strong>
+      <span>{point.roleOrPhase}</span>
+      <span>{point.periodLabel}</span>
       <span>{point.growthHighlight}</span>
-      <span>Scope Score: {point.scopeScore.toFixed(1)} / 8</span>
+      <span>Scope Score: {point.growthScore.toFixed(1)} / 7</span>
     </div>
   );
 }
 
 export default function CareerGrowthChart({ points }: CareerGrowthChartProps) {
+  const orderedPoints = useMemo(
+    () => [...points].sort((a, b) => a.chartOrder - b.chartOrder),
+    [points],
+  );
+
   return (
     <article className="panel graph-card">
       <div className="card-head">
@@ -47,15 +52,15 @@ export default function CareerGrowthChart({ points }: CareerGrowthChartProps) {
       </div>
       <div className="chart-shell">
         <ResponsiveContainer width="100%" height={290}>
-          <LineChart data={points} margin={{ top: 12, right: 24, left: 8, bottom: 12 }}>
+          <LineChart data={orderedPoints} margin={{ top: 12, right: 24, left: 8, bottom: 12 }}>
             <CartesianGrid stroke="rgba(173, 190, 218, 0.18)" strokeDasharray="4 4" />
             <XAxis
-              dataKey="stageIndex"
+              dataKey="stageLabel"
               tick={{ fill: "#9fb2cf", fontSize: 11 }}
               axisLine={false}
               tickLine={false}
               label={{
-                value: "Career Stage (1-8)",
+                value: "Career Stages (Oldest -> Newest)",
                 position: "insideBottom",
                 offset: -4,
                 fill: "#9fb2cf",
@@ -63,8 +68,8 @@ export default function CareerGrowthChart({ points }: CareerGrowthChartProps) {
               }}
             />
             <YAxis
-              domain={[1, 8]}
-              ticks={[1, 2, 3, 4, 5, 6, 7, 8]}
+              domain={[1, 7]}
+              ticks={[1, 2, 3, 4, 5, 6, 7]}
               tick={{ fill: "#9fb2cf", fontSize: 11 }}
               axisLine={false}
               tickLine={false}
@@ -80,20 +85,12 @@ export default function CareerGrowthChart({ points }: CareerGrowthChartProps) {
             <Tooltip content={<GrowthTooltip />} />
             <Line
               type="monotone"
-              dataKey="scopeScore"
+              dataKey="growthScore"
               stroke="#b8ceee"
               strokeWidth={2.8}
               dot={{ r: 4.2, stroke: "#4f76a6", strokeWidth: 1.2, fill: "#d9e8ff" }}
               activeDot={{ r: 6 }}
-            >
-              <LabelList
-                dataKey="pointLabel"
-                position="top"
-                offset={10}
-                fill="#d7e1f4"
-                fontSize={10}
-              />
-            </Line>
+            />
           </LineChart>
         </ResponsiveContainer>
       </div>

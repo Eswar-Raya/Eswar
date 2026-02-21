@@ -1,7 +1,7 @@
 import PageContainer from "@/components/PageContainer";
 import CareerStory from "@/components/CareerStory";
 import ExperienceTimeline from "@/components/ExperienceTimeline";
-import { careerStory, experiences } from "@/data/experience";
+import { careerStory, timelineExperiences } from "@/data/experience";
 
 export default function ExperiencePage() {
   return (
@@ -15,7 +15,7 @@ export default function ExperiencePage() {
         <div className="section-header">
           <h2>Career Timeline</h2>
         </div>
-        <ExperienceTimeline items={experiences} />
+        <ExperienceTimeline items={timelineExperiences} />
       </section>
     </PageContainer>
   );

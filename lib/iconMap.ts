@@ -39,13 +39,12 @@ export const educationIconMap = {
 } satisfies Record<string, LucideIcon>;
 
 export const experienceIconMap = {
-  bachelors: School,
   tata: Wrench,
   huawei: RadioTower,
   ericsson: Network,
   adecco: HardHat,
   dxc: Layers,
-  masters: GraduationCap,
+  stevens: GraduationCap,
   savvy: Brain,
 } satisfies Record<string, LucideIcon>;
 

@@ -843,6 +843,17 @@ a {
   display: inline-block;
 }
 
+.phase-badge {
+  width: fit-content;
+  border: 1px solid rgba(164, 197, 243, 0.42);
+  border-radius: 999px;
+  padding: 4px 10px;
+  color: #c4d8f7;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
 .exp-preview,
 .project-preview {
   padding: var(--space-5);
