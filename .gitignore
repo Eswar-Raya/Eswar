@@ -39,3 +39,17 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# local dev artifacts
+.venv/
+.vscode/
+__pycache__/
+*.pyc
+
+# local vector DB artifacts
+backend/chroma/
+
+# local source docs
+resume_extracted.txt
+Presentation - Transformation.pdf
+Eswar_Rayavarapu_Technical_Project_Manager.pdf
