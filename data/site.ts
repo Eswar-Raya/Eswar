@@ -64,6 +64,6 @@ export const homeNavCards = [
 
 export const contact = {
   email: "eswar.rayavarapu23@gmail.com",
-  linkedin: "https://www.linkedin.com/in/eswarrayavarapu/",
+  linkedin: "https://www.linkedin.com/in/eswar-ravi-teja-rayavarapu/",
   resume: "/Eswar_Raviteja_Rayavarapu_Technical_Project_Manager.pdf",
 };

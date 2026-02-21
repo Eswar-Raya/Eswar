@@ -9,15 +9,16 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import IconGlyph from "@/components/IconGlyph";
-import type { CompetencyItem } from "@/data/skills";
+import IconBadge from "@/components/IconBadge";
+import { serviceIconMap } from "@/lib/iconMap";
+import type { CompetencyPoint } from "@/data/services";
 
 type SkillsChartProps = {
-  items: CompetencyItem[];
+  items: CompetencyPoint[];
 };
 
 type TooltipPayload = {
-  payload?: CompetencyItem;
+  payload?: CompetencyPoint;
   value?: number;
 };
 
@@ -38,8 +39,13 @@ function CompetencyTooltip({
   return (
     <div className="chart-tooltip">
       <span className="tooltip-title">
-        <IconGlyph name={row.icon} className="chip-icon" />
-        {row.label}
+        <IconBadge
+          icon={serviceIconMap[row.iconKey]}
+          label={row.category}
+          tone="service"
+          size="sm"
+        />
+        {row.category}
       </span>
       <span>Capability Score: {Number(value).toFixed(1)} / 6</span>
     </div>
@@ -56,9 +62,14 @@ export default function SkillsChart({ items }: SkillsChartProps) {
 
       <div className="skills-legend">
         {items.map((item) => (
-          <span key={item.slug} className="chip with-icon">
-            <IconGlyph name={item.icon} className="chip-icon" />
-            {item.label}
+          <span key={item.id} className="chip with-icon">
+            <IconBadge
+              icon={serviceIconMap[item.iconKey]}
+              label={item.category}
+              tone="service"
+              size="sm"
+            />
+            {item.category}
           </span>
         ))}
       </div>
@@ -76,12 +87,12 @@ export default function SkillsChart({ items }: SkillsChartProps) {
               tickLine={false}
             />
             <YAxis
-              dataKey="label"
+              dataKey="category"
               type="category"
               tick={{ fill: "#d7e1f4", fontSize: 12 }}
               axisLine={false}
               tickLine={false}
-              width={162}
+              width={172}
             />
             <Tooltip content={<CompetencyTooltip />} />
             <Bar dataKey="score" fill="#8fb3e2" radius={[8, 8, 8, 8]} />

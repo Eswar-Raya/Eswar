@@ -1,12 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { motion, useReducedMotion } from "framer-motion";
-import IconGlyph from "@/components/IconGlyph";
-import EntityLogo from "@/components/EntityLogo";
+import IconBadge from "@/components/IconBadge";
 import { projectCategories, type ProjectCategory, type ProjectItem } from "@/data/projects";
+import { serviceIconMap, toolIconMap } from "@/lib/iconMap";
 
 type ProjectBoardsProps = {
   items: ProjectItem[];
@@ -18,7 +18,7 @@ function getCategoryFromQuery(value: string | null): ProjectCategory | null {
   }
   const normalized = value.toLowerCase().trim();
   if (normalized.includes("enterprise")) {
-    return "Enterprise Migration";
+    return "Enterprise Migration Programs";
   }
   if (normalized.includes("linux")) {
     return "Linux Modernization";
@@ -32,18 +32,14 @@ function getCategoryFromQuery(value: string | null): ProjectCategory | null {
 export default function ProjectBoards({ items }: ProjectBoardsProps) {
   const searchParams = useSearchParams();
   const reduceMotion = useReducedMotion();
-  const [activeCategory, setActiveCategory] = useState<ProjectCategory>("Enterprise Migration");
-
-  useEffect(() => {
-    const fromQuery = getCategoryFromQuery(searchParams.get("category"));
-    if (fromQuery) {
-      setActiveCategory(fromQuery);
-    }
-  }, [searchParams]);
+  const [activeCategory, setActiveCategory] = useState<ProjectCategory | null>(null);
+  const categoryFromQuery = getCategoryFromQuery(searchParams.get("category"));
+  const selectedCategory =
+    activeCategory ?? categoryFromQuery ?? "Enterprise Migration Programs";
 
   const filteredProjects = useMemo(
-    () => items.filter((item) => item.category === activeCategory),
-    [activeCategory, items],
+    () => items.filter((item) => item.category === selectedCategory),
+    [selectedCategory, items],
   );
 
   return (
@@ -57,10 +53,10 @@ export default function ProjectBoards({ items }: ProjectBoardsProps) {
           <button
             key={category}
             type="button"
-            className={`project-tab ${activeCategory === category ? "is-active" : ""}`}
+            className={`project-tab ${selectedCategory === category ? "is-active" : ""}`}
             onClick={() => setActiveCategory(category)}
             role="tab"
-            aria-selected={activeCategory === category}
+            aria-selected={selectedCategory === category}
           >
             {category}
           </button>
@@ -69,15 +65,20 @@ export default function ProjectBoards({ items }: ProjectBoardsProps) {
 
       <div className="project-grid project-grid-wide">
         {filteredProjects.map((project) => (
-          <motion.div
+          <motion.article
             key={project.slug}
             className="panel project-card"
             whileHover={reduceMotion ? undefined : { y: -2 }}
-            transition={{ duration: 0.16, ease: "easeOut" }}
+            transition={{ duration: 0.18, ease: "easeOut" }}
           >
             <Link href={`/projects/${project.slug}`} className="project-card-link" prefetch>
               <span className="project-client-row">
-                <EntityLogo logoKey={project.logoKey} className="company-icon" />
+                <IconBadge
+                  icon={serviceIconMap[project.iconKey]}
+                  label={project.clientProgram}
+                  tone="service"
+                  size="sm"
+                />
                 {project.clientProgram}
               </span>
               <h4>{project.title}</h4>
@@ -88,16 +89,16 @@ export default function ProjectBoards({ items }: ProjectBoardsProps) {
                 ))}
               </ul>
               <div className="chip-list">
-                {project.toolIcons.map((tool) => (
-                  <span key={tool} className="chip with-icon" title={tool}>
-                    <IconGlyph name={tool} className="chip-icon" />
-                    {tool}
+                {project.tools.map((tool) => (
+                  <span key={tool.label} className="chip with-icon" title={tool.label}>
+                    <IconBadge icon={toolIconMap[tool.key]} label={tool.label} tone="tool" size="sm" />
+                    {tool.label}
                   </span>
                 ))}
               </div>
               <span className="project-hover-cta">View case study</span>
             </Link>
-          </motion.div>
+          </motion.article>
         ))}
       </div>
     </section>

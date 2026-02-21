@@ -7,7 +7,7 @@ export default function ExperiencePage() {
     <PageContainer
       eyebrow="Experience"
       title="Career Timeline"
-      subtitle="Vertical timeline with hover-driven quick preview and dedicated role detail pages."
+      subtitle="Vertical timeline with desktop hover preview, mobile tap preview, and dedicated role detail pages."
     >
       <ExperienceTimeline items={experiences} />
     </PageContainer>

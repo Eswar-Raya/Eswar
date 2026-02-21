@@ -1,11 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
-import IconGlyph from "@/components/IconGlyph";
-import EntityLogo from "@/components/EntityLogo";
+import IconBadge from "@/components/IconBadge";
 import type { ExperienceItem } from "@/data/experience";
+import { companyIconMap, toolIconMap } from "@/lib/iconMap";
 
 type ExperienceTimelineProps = {
   items: ExperienceItem[];
@@ -14,7 +14,23 @@ type ExperienceTimelineProps = {
 export default function ExperienceTimeline({ items }: ExperienceTimelineProps) {
   const timelineItems = useMemo(() => [...items].reverse(), [items]);
   const [activeSlug, setActiveSlug] = useState(timelineItems[0]?.slug ?? "");
+  const [supportsHover, setSupportsHover] = useState(true);
+  const [mobilePreviewOpen, setMobilePreviewOpen] = useState(false);
   const reduceMotion = useReducedMotion();
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(hover: hover) and (pointer: fine)");
+    const updateValue = () => {
+      const canHover = mediaQuery.matches;
+      setSupportsHover(canHover);
+      setMobilePreviewOpen(canHover);
+    };
+
+    updateValue();
+    mediaQuery.addEventListener("change", updateValue);
+
+    return () => mediaQuery.removeEventListener("change", updateValue);
+  }, []);
 
   const activeItem = useMemo(
     () => timelineItems.find((item) => item.slug === activeSlug) ?? timelineItems[0],
@@ -25,35 +41,59 @@ export default function ExperienceTimeline({ items }: ExperienceTimelineProps) {
     return null;
   }
 
+  const isPreviewVisible = supportsHover || mobilePreviewOpen;
+
   return (
     <section className="visual-section">
       <div className="section-header">
         <h2>Career Timeline</h2>
-        <p>Hover any company card for quick preview. Click a card to open the full role brief.</p>
+        <p>
+          Desktop: hover for quick preview. Mobile: tap a company card to open preview,
+          then tap again to open the full role detail.
+        </p>
       </div>
 
       <div className="experience-layout">
-        <div className="experience-stack" aria-label="Experience timeline">
+        <div className="experience-stack" role="listbox" aria-label="Experience timeline">
           {timelineItems.map((item) => {
             const isActive = item.slug === activeItem.slug;
             return (
               <motion.article
                 key={item.slug}
                 className={`panel exp-item ${isActive ? "is-active" : ""}`}
-                onMouseEnter={() => setActiveSlug(item.slug)}
+                onMouseEnter={() => {
+                  if (supportsHover) {
+                    setActiveSlug(item.slug);
+                  }
+                }}
                 initial={false}
                 whileHover={reduceMotion ? undefined : { y: -2 }}
-                transition={{ duration: 0.16, ease: "easeOut" }}
+                transition={{ duration: 0.18, ease: "easeOut" }}
               >
                 <Link
                   href={`/experience/${item.slug}`}
                   className="exp-trigger"
-                  data-selected={isActive ? "true" : "false"}
+                  role="option"
+                  aria-selected={isActive}
                   onFocus={() => setActiveSlug(item.slug)}
+                  onClick={(event) => {
+                    if (!supportsHover && !isActive) {
+                      event.preventDefault();
+                      setActiveSlug(item.slug);
+                      setMobilePreviewOpen(true);
+                      return;
+                    }
+                    setActiveSlug(item.slug);
+                  }}
                   prefetch
                 >
                   <span className="exp-company-row">
-                    <EntityLogo logoKey={item.logoKey} className="company-icon" />
+                    <IconBadge
+                      icon={companyIconMap[item.iconKey]}
+                      label={item.company}
+                      tone="company"
+                      size="md"
+                    />
                     <strong>{item.company}</strong>
                   </span>
                   <span className="exp-role-line">{item.title}</span>
@@ -61,16 +101,16 @@ export default function ExperienceTimeline({ items }: ExperienceTimelineProps) {
                 </Link>
 
                 <ul className="exp-highlight-list">
-                  {item.highlights.slice(0, 3).map((point) => (
+                  {item.bullets.slice(0, 4).map((point) => (
                     <li key={point}>{point}</li>
                   ))}
                 </ul>
 
                 <div className="chip-list">
-                  {item.techIcons.map((tech) => (
-                    <span key={tech} className="chip with-icon" title={tech}>
-                      <IconGlyph name={tech} className="chip-icon" />
-                      {tech}
+                  {item.tools.slice(0, 6).map((tool) => (
+                    <span key={tool.label} className="chip with-icon" title={tool.label}>
+                      <IconBadge icon={toolIconMap[tool.key]} label={tool.label} tone="tool" size="sm" />
+                      {tool.label}
                     </span>
                   ))}
                 </div>
@@ -81,9 +121,17 @@ export default function ExperienceTimeline({ items }: ExperienceTimelineProps) {
           })}
         </div>
 
-        <aside className="panel exp-preview" aria-live="polite">
+        <aside
+          className={`panel exp-preview ${!isPreviewVisible ? "is-hidden-mobile" : ""}`}
+          aria-live="polite"
+        >
           <div className="exp-preview-head">
-            <EntityLogo logoKey={activeItem.logoKey} className="company-icon large" />
+            <IconBadge
+              icon={companyIconMap[activeItem.iconKey]}
+              label={activeItem.company}
+              tone="company"
+              size="md"
+            />
             <div>
               <h3>{activeItem.company}</h3>
               <p>{activeItem.title}</p>
@@ -94,7 +142,7 @@ export default function ExperienceTimeline({ items }: ExperienceTimelineProps) {
           <div className="preview-block">
             <h4>Quick Preview</h4>
             <ul>
-              {activeItem.details.responsibilities.slice(0, 6).map((entry) => (
+              {activeItem.details.responsibilities.slice(0, 8).map((entry) => (
                 <li key={entry}>{entry}</li>
               ))}
             </ul>
@@ -103,10 +151,10 @@ export default function ExperienceTimeline({ items }: ExperienceTimelineProps) {
           <div className="preview-block">
             <h4>Tools/Tech</h4>
             <div className="chip-list">
-              {activeItem.techIcons.map((tool) => (
-                <span key={tool} className="chip with-icon">
-                  <IconGlyph name={tool} className="chip-icon" />
-                  {tool}
+              {activeItem.details.tools.map((tool) => (
+                <span key={tool.label} className="chip with-icon">
+                  <IconBadge icon={toolIconMap[tool.key]} label={tool.label} tone="tool" size="sm" />
+                  {tool.label}
                 </span>
               ))}
             </div>
@@ -122,7 +170,7 @@ export default function ExperienceTimeline({ items }: ExperienceTimelineProps) {
           </div>
 
           <Link href={`/experience/${activeItem.slug}`} className="btn btn-primary" prefetch>
-            Open Full Role Detail
+            View Full Details
           </Link>
         </aside>
       </div>

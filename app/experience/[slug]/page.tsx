@@ -1,10 +1,10 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import VisualNav from "@/components/VisualNav";
-import IconGlyph from "@/components/IconGlyph";
-import EntityLogo from "@/components/EntityLogo";
+import IconBadge from "@/components/IconBadge";
 import DetailSectionGrid from "@/components/DetailSectionGrid";
 import { experiences } from "@/data/experience";
+import { companyIconMap, toolIconMap } from "@/lib/iconMap";
 
 type ExperienceDetailPageProps = {
   params: Promise<{ slug: string }>;
@@ -33,19 +33,17 @@ export default async function ExperienceDetailPage({
             Back to Experience
           </Link>
           <span className="detail-company">
-            <EntityLogo logoKey={item.logoKey} className="company-icon" />
+            <IconBadge
+              icon={companyIconMap[item.iconKey]}
+              label={item.company}
+              tone="company"
+              size="md"
+            />
             {item.company}
           </span>
           <h1>{item.title}</h1>
           <p>{item.dates}</p>
-          <div className="chip-list">
-            {item.techIcons.map((tool) => (
-              <span key={tool} className="chip with-icon">
-                <IconGlyph name={tool} className="chip-icon" />
-                {tool}
-              </span>
-            ))}
-          </div>
+          {item.note ? <p className="detail-note">{item.note}</p> : null}
         </section>
 
         <section className="panel overview-card">
@@ -56,27 +54,39 @@ export default async function ExperienceDetailPage({
         <DetailSectionGrid
           sections={[
             {
-              title: "Responsibilities",
-              items: item.details.responsibilities,
+              title: "Scope & Stakeholders",
+              items: item.details.scopeStakeholders,
             },
             {
-              title: "Tools & Tech",
-              items: item.details.toolsTech,
+              title: "Responsibilities",
+              items: item.details.responsibilities,
             },
             {
               title: "Programs/Clients",
               items: item.details.programsClients,
             },
             {
-              title: "Outcomes",
+              title: "Outcomes / Metrics",
               items: item.details.outcomes,
             },
             {
-              title: "Challenges & Resolutions",
+              title: "Challenges + How resolved",
               items: item.details.challengesResolutions,
             },
           ]}
         />
+
+        <section className="panel detail-card detail-tools-card">
+          <h2>Tools/Tech</h2>
+          <div className="chip-list">
+            {item.details.tools.map((tool) => (
+              <span key={tool.label} className="chip with-icon">
+                <IconBadge icon={toolIconMap[tool.key]} label={tool.label} tone="tool" size="sm" />
+                {tool.label}
+              </span>
+            ))}
+          </div>
+        </section>
       </div>
     </main>
   );

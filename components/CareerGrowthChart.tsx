@@ -9,7 +9,7 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import type { GrowthPoint } from "@/data/skills";
+import type { GrowthPoint } from "@/data/services";
 
 type CareerGrowthChartProps = {
   points: GrowthPoint[];
@@ -28,10 +28,12 @@ function GrowthTooltip({ active, payload }: { active?: boolean; payload?: Toolti
 
   return (
     <div className="chart-tooltip">
-      <strong>{point.year}</strong>
+      <strong>{point.stage}</strong>
+      <span>{point.year}</span>
       <span>{point.company}</span>
       <span>{point.role}</span>
-      <span>Scope Score: {point.score.toFixed(1)} / 6</span>
+      <span>{point.skillGrowth}</span>
+      <span>Scope Score: {point.scopeScore.toFixed(1)} / 6</span>
     </div>
   );
 }
@@ -41,7 +43,7 @@ export default function CareerGrowthChart({ points }: CareerGrowthChartProps) {
     <article className="panel graph-card">
       <div className="card-head">
         <h2>Career Growth</h2>
-        <p>Year vs Responsibility Scope</p>
+        <p>Year vs Responsibility/Scope</p>
       </div>
       <div className="chart-shell">
         <ResponsiveContainer width="100%" height={290}>
@@ -58,7 +60,7 @@ export default function CareerGrowthChart({ points }: CareerGrowthChartProps) {
             <Tooltip content={<GrowthTooltip />} />
             <Line
               type="monotone"
-              dataKey="score"
+              dataKey="scopeScore"
               stroke="#b8ceee"
               strokeWidth={2.8}
               dot={{ r: 4.2, stroke: "#4f76a6", strokeWidth: 1.2, fill: "#d9e8ff" }}

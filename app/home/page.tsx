@@ -13,7 +13,7 @@ import {
   metrics,
   profile,
 } from "@/data/site";
-import { careerGrowth, competencies, services } from "@/data/skills";
+import { competencyPoints, growthPoints, services } from "@/data/services";
 import { featuredProjectSlugs, projects } from "@/data/projects";
 
 const featuredProjects = projects.filter((item) =>
@@ -35,8 +35,8 @@ export default function HomePage() {
         tags={profile.introTags}
       />
       <QuickMetrics items={metrics} />
-      <CareerGrowthChart points={careerGrowth} />
-      <SkillsChart items={competencies} />
+      <CareerGrowthChart points={growthPoints} />
+      <SkillsChart items={competencyPoints} />
       <ServicesGrid items={services.slice(0, 6)} title="Core Services" />
       <FeaturedPrograms items={featuredProjects} />
       <NavCards items={homeNavCards} />

@@ -1,332 +1,254 @@
-import type { LogoKey } from "@/data/logos";
+import type { ServiceIconKey, ToolIconKey } from "@/lib/iconMap";
 
 export type ProjectCategory =
-  | "Enterprise Migration"
+  | "Enterprise Migration Programs"
   | "Linux Modernization"
   | "AI/Automation";
 
-export type ProjectDetail = {
+export type ToolRef = {
+  key: ToolIconKey;
+  label: string;
+};
+
+export type ProjectDetails = {
   problem: string;
   approach: string[];
   contribution: string[];
-  tools: string[];
+  tools: ToolRef[];
   outcomes: string[];
   artifacts: string[];
 };
 
 export type ProjectItem = {
+  id: string;
   slug: string;
   title: string;
   category: ProjectCategory;
-  logoKey: LogoKey;
+  iconKey: ServiceIconKey;
   clientProgram: string;
   role: string;
   bullets: string[];
-  toolIcons: string[];
-  details: ProjectDetail;
+  tools: ToolRef[];
+  details: ProjectDetails;
+};
+
+const t = {
+  aws: { key: "aws" as const, label: "AWS" },
+  cloudendure: { key: "cloudendure" as const, label: "CloudEndure" },
+  linux: { key: "linux" as const, label: "Linux" },
+  jira: { key: "jira" as const, label: "Jira" },
+  pmatt: { key: "pmatt" as const, label: "PMATT" },
+  powerbi: { key: "powerbi" as const, label: "Power BI" },
+  sql: { key: "sql" as const, label: "SQL" },
+  python: { key: "python" as const, label: "Python" },
+  vmware: { key: "vmware" as const, label: "VMware" },
+  universalDiscovery: {
+    key: "universalDiscovery" as const,
+    label: "Universal Discovery",
+  },
+  serviceNow: { key: "serviceNow" as const, label: "ServiceNow" },
+  agile: { key: "agile" as const, label: "Agile/Scrum/SAFe" },
+  shell: { key: "shell" as const, label: "Shell" },
+  git: { key: "git" as const, label: "Git" },
+  docker: { key: "docker" as const, label: "Docker" },
 };
 
 export const projects: ProjectItem[] = [
   {
+    id: "prj-att",
     slug: "att-enterprise-transition",
     title: "AT&T Infrastructure Transition Program",
-    category: "Enterprise Migration",
-    logoKey: "atandt",
-    clientProgram: "Client: AT&T (delivered via DXC environment)",
-    role: "Sr. Analyst II – Cloud Engineering",
+    category: "Enterprise Migration Programs",
+    iconKey: "tpm",
+    clientProgram: "AT&T (delivered via DXC environment)",
+    role: "Sr. Analyst II – Cloud Engineering (Project Manager)",
     bullets: [
-      "Coordinated multi-team transition sequencing and readiness governance.",
-      "Improved dependency visibility across infrastructure and application workstreams.",
-      "Standardized cutover governance for controlled transition windows.",
+      "Managed dependency-driven transition sequencing across technical workstreams.",
+      "Improved readiness visibility through structured governance checkpoints.",
+      "Standardized cutover and rollback readiness communication.",
     ],
-    toolIcons: ["jira", "service", "runbook", "dashboard"],
+    tools: [t.pmatt, t.jira, t.serviceNow, t.powerbi],
     details: {
       problem:
-        "Large-scale infrastructure transitions had dependency risk, uneven readiness evidence, and schedule pressure.",
+        "Large infrastructure transition dependencies increased execution risk and schedule instability.",
       approach: [
-        "Structured migration moves into governed groups with readiness criteria.",
-        "Ran coordinated cutover planning across infra, app, and operations teams.",
-        "Tracked risk and blockers with clear owners and escalation workflow.",
+        "Established governance cadence with scope, risk, and readiness checkpoints.",
+        "Aligned technical and business owners on cutover criteria and fallback controls.",
+        "Maintained execution signal tracking with status and risk summaries.",
       ],
       contribution: [
-        "Owned transition governance cadence and readiness checkpoints.",
-        "Coordinated stakeholder decision forums for cutover and stabilization.",
-        "Maintained leadership signal visibility via structured reporting.",
+        "Owned project-level governance and stakeholder cadence.",
+        "Maintained dependency, risk, and milestone control.",
+        "Coordinated decision-making and escalation pathways for blockers.",
       ],
-      tools: ["Jira", "ServiceNow", "Runbooks", "Dashboard reporting"],
+      tools: [t.pmatt, t.jira, t.serviceNow, t.powerbi, t.agile],
       outcomes: [
-        "Improved predictability during migration windows",
-        "Reduced cross-team execution ambiguity",
+        "Improved cutover readiness consistency",
+        "Reduced unplanned dependency escalations",
+        "Higher confidence in transition execution windows",
       ],
       artifacts: [
-        "Transition wave board snapshot (placeholder)",
-        "Cutover governance model diagram (placeholder)",
+        "Transition dependency board (placeholder)",
+        "Program status dashboard (placeholder)",
       ],
     },
   },
   {
+    id: "prj-workforce",
     slug: "workforce-resilience-aws-program",
-    title: "Workforce Resilience On-Prem -> AWS Program",
-    category: "Enterprise Migration",
-    logoKey: "workforce-resilience",
-    clientProgram: "Client: Workforce Resilience (delivered via DXC environment)",
-    role: "Sr. Analyst II – Cloud Engineering",
-    bullets: [
-      "Executed CloudEndure-led Linux server migrations to AWS.",
-      "Translated discovery outputs into wave-based migration plans.",
-      "Improved migration readiness with validation and rollback controls.",
-    ],
-    toolIcons: ["aws", "cloudendure", "linux", "discovery", "jira"],
-    details: {
-      problem:
-        "Legacy on-prem workloads needed reliable migration into AWS without operational disruption.",
-      approach: [
-        "Mapped discovery outputs into executable migration scope and waves.",
-        "Used CloudEndure for controlled Linux server migration execution.",
-        "Implemented validation gates before and after each cutover window.",
-      ],
-      contribution: [
-        "Led cross-team planning and migration execution governance.",
-        "Owned dependency and readiness signal tracking for each wave.",
-        "Managed escalation and stabilization communication with stakeholders.",
-      ],
-      tools: ["AWS", "CloudEndure", "Linux", "Universal Discovery", "Jira"],
-      outcomes: [
-        "Improved migration consistency across successive waves",
-        "Reduced unplanned issue exposure through readiness controls",
-      ],
-      artifacts: [
-        "Wave planning board (placeholder)",
-        "Migration validation checklist (placeholder)",
-      ],
-    },
-  },
-  {
-    slug: "astro-transition-program",
-    title: "Astro Infrastructure Transition",
-    category: "Enterprise Migration",
-    logoKey: "astro",
-    clientProgram: "Client: Astro (delivered via DXC environment)",
+    title: "Workforce Resilience On-Prem to AWS Program",
+    category: "Enterprise Migration Programs",
+    iconKey: "cloudMigration",
+    clientProgram: "Workforce Resilience (delivered via DXC environment)",
     role: "Sr. Analyst II – Cloud Engineering (Project Manager)",
     bullets: [
-      "Managed migration planning cadence and cross-team dependency control.",
-      "Aligned technical owners on cutover readiness and rollback criteria.",
-      "Maintained project governance visibility through RAID and status tracking.",
+      "Planned and executed Linux server migration waves to AWS.",
+      "Used discovery-to-wave planning to improve migration readiness.",
+      "Applied controlled cutover and rollback governance with CloudEndure.",
     ],
-    toolIcons: ["jira", "governance", "runbook", "dashboard"],
+    tools: [t.aws, t.cloudendure, t.linux, t.universalDiscovery, t.jira],
     details: {
       problem:
-        "Program delivery required stronger schedule and dependency control across distributed stakeholders.",
+        "Legacy on-prem workloads required controlled migration to AWS with minimal operational impact.",
       approach: [
-        "Applied PM-driven governance with milestone and risk tracking.",
-        "Integrated technical readiness evidence into cutover planning.",
-        "Maintained regular stakeholder updates and escalation flow.",
+        "Mapped discovery outputs into executable migration wave plans.",
+        "Applied CloudEndure for repeatable Linux server migration execution.",
+        "Maintained pre/post-cutover validation and rollback criteria.",
       ],
       contribution: [
-        "Led project management cadence and workstream alignment.",
-        "Tracked risks, blockers, and dependencies in governance routines.",
-        "Supported technical planning inputs for migration readiness.",
+        "Led migration governance and stakeholder coordination.",
+        "Managed readiness evidence, dependency tracking, and change control.",
+        "Directed stabilization and issue burn-down after cutover.",
       ],
-      tools: ["PMATT", "Microsoft Project", "Jira", "Runbooks", "Status dashboards"],
+      tools: [t.aws, t.cloudendure, t.linux, t.universalDiscovery, t.jira, t.pmatt],
       outcomes: [
-        "Improved execution clarity across migration workstreams",
-        "Reduced dependency-related surprises before planned cutovers",
+        "Improved migration wave readiness and execution consistency",
+        "Reduced cutover risk through structured controls",
       ],
       artifacts: [
-        "Program tracker snapshot (placeholder)",
-        "RAID and milestone view (placeholder)",
+        "Wave plan board (placeholder)",
+        "Cutover validation checklist (placeholder)",
       ],
     },
   },
   {
-    slug: "downer-transition-program",
-    title: "Downer Infrastructure Program",
-    category: "Enterprise Migration",
-    logoKey: "downer",
-    clientProgram: "Client: Downer (delivered via DXC environment)",
-    role: "Sr. Analyst II – Cloud Engineering (Project Manager)",
-    bullets: [
-      "Drove delivery schedule management and stakeholder governance.",
-      "Coordinated discovery-to-cutover handoffs across technical teams.",
-      "Improved reporting quality for leadership-level tracking.",
-    ],
-    toolIcons: ["jira", "discovery", "governance", "dashboard"],
-    details: {
-      problem:
-        "Cross-functional delivery streams needed tighter planning controls and clearer ownership.",
-      approach: [
-        "Established consistent governance cadence for planning and execution.",
-        "Mapped readiness inputs from discovery and technical workstreams.",
-        "Tracked escalation paths for risks impacting timelines.",
-      ],
-      contribution: [
-        "Owned PM execution framework for schedule and dependency governance.",
-        "Facilitated coordination between technical teams and program leadership.",
-        "Produced structured status outputs for decision support.",
-      ],
-      tools: ["PMATT", "Microsoft Project", "Jira", "Discovery data views"],
-      outcomes: [
-        "Improved governance maturity and delivery transparency",
-        "More predictable execution against committed milestones",
-      ],
-      artifacts: [
-        "Milestone plan snapshot (placeholder)",
-        "Governance report template (placeholder)",
-      ],
-    },
-  },
-  {
-    slug: "directv-transition-program",
-    title: "DirecTV Migration Support Program",
-    category: "Enterprise Migration",
-    logoKey: "directv",
-    clientProgram: "Client: DirecTV (delivered via DXC environment)",
-    role: "Sr. Analyst II – Cloud Engineering (Project Manager)",
-    bullets: [
-      "Managed migration governance and readiness review cycles.",
-      "Coordinated technical and business stakeholders for execution alignment.",
-      "Strengthened issue and risk visibility through structured updates.",
-    ],
-    toolIcons: ["jira", "service", "runbook", "governance"],
-    details: {
-      problem:
-        "Transition execution required stronger coordination between project governance and technical delivery teams.",
-      approach: [
-        "Applied PM governance model with scheduled risk and readiness reviews.",
-        "Consolidated technical signals into program-level status tracking.",
-        "Aligned execution decisions using change and dependency checkpoints.",
-      ],
-      contribution: [
-        "Owned project management coordination for migration activities.",
-        "Maintained risk/issue ownership with escalation follow-through.",
-        "Supported technical teams with planning and communication structure.",
-      ],
-      tools: ["PMATT", "Microsoft Project", "Jira", "ServiceNow", "Runbooks"],
-      outcomes: [
-        "Improved stakeholder alignment during migration cycles",
-        "Reduced ambiguity in execution readiness decisions",
-      ],
-      artifacts: [
-        "Execution dashboard view (placeholder)",
-        "Cutover communication checklist (placeholder)",
-      ],
-    },
-  },
-  {
+    id: "prj-linux-modernization",
     slug: "linux-modernization-factory",
     title: "Linux Migration & Modernization Factory",
     category: "Linux Modernization",
-    logoKey: "confidential",
-    clientProgram: "Client (confidential) - delivered across Adecco and DXC environments",
+    iconKey: "linux",
+    clientProgram: "Client: confidential",
     role: "Sr. Linux Migration Engineer / Sr. Analyst II – Cloud Engineering",
     bullets: [
-      "Built repeatable Linux migration playbooks and validation standards.",
-      "Improved post-cutover stabilization with baseline checks and runbooks.",
-      "Enabled cleaner operations handover through structured SOPs.",
+      "Standardized Linux migration playbooks across mixed environments.",
+      "Improved stabilization quality with baseline and validation checks.",
+      "Reduced operational handover ambiguity with SOP discipline.",
     ],
-    toolIcons: ["linux", "vmware", "migration", "runbook", "script"],
+    tools: [t.linux, t.vmware, t.shell, t.jira],
     details: {
       problem:
-        "Heterogeneous Linux estates and non-standard execution patterns increased migration risk.",
+        "Non-standard Linux migration execution increased risk across cutovers and stabilization.",
       approach: [
-        "Established migration checkpoints and technical validation baselines.",
-        "Executed cutover with rollback-ready runbooks and SOP governance.",
-        "Monitored stabilization signals and documented operational closure.",
+        "Defined migration baselines and runbook-led execution checkpoints.",
+        "Implemented rollback-ready controls for high-risk migration windows.",
+        "Tracked post-cutover issue patterns for early stabilization.",
       ],
       contribution: [
-        "Defined and maintained migration SOP framework.",
-        "Executed technical migration and defect triage workflows.",
-        "Aligned support ownership through clear handover criteria.",
+        "Built repeatable runbook framework and migration SOPs.",
+        "Executed migration activities and defect triage.",
+        "Aligned handover readiness across support teams.",
       ],
-      tools: ["Linux", "VMware", "Shell scripting", "Migration runbooks"],
+      tools: [t.linux, t.vmware, t.shell, t.jira, t.serviceNow],
       outcomes: [
-        "Improved migration reliability across mixed Linux workloads",
-        "Reduced stabilization effort after cutover windows",
+        "Improved migration reliability across Linux workload groups",
+        "Shortened stabilization and handover cycles",
       ],
       artifacts: [
-        "Linux migration checklist template (placeholder)",
-        "Post-cutover validation output (placeholder)",
+        "Linux migration SOP template (placeholder)",
+        "Post-cutover stabilization log (placeholder)",
       ],
     },
   },
   {
+    id: "prj-ai-governance",
     slug: "supplychainengine-ai-governance",
     title: "SupplyChainEngine AI Delivery Enablement",
     category: "AI/Automation",
-    logoKey: "confidential",
-    clientProgram: "Client (confidential) - AI initiative portfolio",
+    iconKey: "aiDelivery",
+    clientProgram: "Client: confidential",
     role: "AI Project Manager",
     bullets: [
-      "Implemented lifecycle checkpoints for AI initiative delivery.",
-      "Improved progress and risk communication through structured reporting.",
-      "Aligned AI execution priorities with operational constraints.",
+      "Implemented milestone-based governance for AI delivery tracks.",
+      "Improved risk and progress signal quality through structured updates.",
+      "Aligned AI activities with operational constraints and review controls.",
     ],
-    toolIcons: ["ai", "python", "dashboard", "governance"],
+    tools: [t.python, t.jira, t.powerbi, t.agile],
     details: {
       problem:
-        "AI delivery lacked consistent governance, causing execution ambiguity and reporting gaps.",
+        "AI initiative execution lacked consistent governance and stakeholder visibility.",
       approach: [
-        "Established milestone gates from planning through validation.",
-        "Introduced recurring risk/status synthesis workflows.",
-        "Maintained clear human approval boundaries for critical outputs.",
+        "Defined lifecycle checkpoints for planning, validation, and release.",
+        "Introduced recurring risk and status synthesis workflows.",
+        "Maintained human-in-the-loop quality controls for key outputs.",
       ],
       contribution: [
-        "Owned planning and governance of AI delivery track.",
-        "Aligned cross-functional stakeholders on sequence and acceptance criteria.",
-        "Maintained decision logs and risk controls across milestones.",
+        "Owned AI track planning and governance model.",
+        "Aligned stakeholder priorities and execution cadence.",
+        "Maintained decision logs and risk communication loops.",
       ],
-      tools: ["Python", "Dashboards", "Risk tracking", "Planning boards"],
+      tools: [t.python, t.jira, t.powerbi, t.agile, t.git],
       outcomes: [
-        "Improved delivery clarity and milestone accountability",
-        "Faster stakeholder update cycles with better consistency",
+        "Improved delivery clarity for AI milestones",
+        "Better stakeholder confidence through auditable execution flow",
       ],
       artifacts: [
-        "AI lifecycle governance diagram (placeholder)",
-        "Risk/status dashboard screenshot (placeholder)",
+        "AI governance flow diagram (placeholder)",
+        "Risk and status report sample (placeholder)",
       ],
     },
   },
   {
+    id: "prj-local-llm",
     slug: "local-llm-delivery-ops",
     title: "Local LLM Delivery Ops Assistant",
     category: "AI/Automation",
-    logoKey: "confidential",
-    clientProgram: "Client (confidential) - internal delivery operations",
+    iconKey: "aiDelivery",
+    clientProgram: "Internal initiative",
     role: "AI Project Manager",
     bullets: [
-      "Built local-first workflow for delivery status and risk synthesis.",
-      "Reduced repetitive reporting workload using structured templates.",
-      "Maintained review controls for output quality and trust.",
+      "Built local-first reporting assistant workflows for delivery operations.",
+      "Reduced repetitive reporting work using template-based AI summaries.",
+      "Maintained approval checkpoints for output quality and traceability.",
     ],
-    toolIcons: ["ollama", "python", "ai", "dashboard", "governance"],
+    tools: [t.python, t.docker, t.git, t.jira],
     details: {
       problem:
-        "Manual reporting cycles consumed execution bandwidth and delayed early risk visibility.",
+        "Manual status and risk reporting consumed bandwidth and delayed decision signals.",
       approach: [
-        "Built local LLM-assisted extraction and summary pipeline.",
-        "Applied standardized templates for status, RAID, and actions.",
-        "Added human review checkpoints before publishing outputs.",
+        "Designed a local LLM pipeline for extracting and summarizing delivery notes.",
+        "Applied structured templates for status, RAID, and action summaries.",
+        "Added review checkpoints before any stakeholder distribution.",
       ],
       contribution: [
-        "Defined workflow architecture and governance controls.",
-        "Implemented summary logic with source-aware validation steps.",
-        "Measured throughput and consistency gains in reporting cadence.",
+        "Defined technical architecture and governance boundaries.",
+        "Implemented summary flow with validation controls.",
+        "Measured turnaround improvements and output consistency gains.",
       ],
-      tools: ["Ollama", "Python", "Templates", "Dashboards"],
+      tools: [t.python, t.docker, t.git, t.jira, t.sql],
       outcomes: [
-        "Improved reporting turnaround and consistency",
-        "Increased trust via auditable human-in-the-loop flow",
+        "Faster reporting cycle time",
+        "Higher consistency in stakeholder-facing updates",
       ],
       artifacts: [
-        "Workflow diagram (placeholder)",
-        "Weekly summary sample (placeholder)",
+        "Workflow architecture diagram (placeholder)",
+        "Weekly summary output sample (placeholder)",
       ],
     },
   },
 ];
 
 export const projectCategories: ProjectCategory[] = [
-  "Enterprise Migration",
+  "Enterprise Migration Programs",
   "Linux Modernization",
   "AI/Automation",
 ];

@@ -1,6 +1,6 @@
 import Link from "next/link";
-import IconGlyph from "@/components/IconGlyph";
-import EntityLogo from "@/components/EntityLogo";
+import IconBadge from "@/components/IconBadge";
+import { serviceIconMap, toolIconMap } from "@/lib/iconMap";
 import type { ProjectItem } from "@/data/projects";
 
 type FeaturedProgramsProps = {
@@ -22,7 +22,12 @@ export default function FeaturedPrograms({ items }: FeaturedProgramsProps) {
             <span className="featured-category">{item.category}</span>
             <h3>{item.title}</h3>
             <p className="project-client-row">
-              <EntityLogo logoKey={item.logoKey} className="company-icon" />
+              <IconBadge
+                icon={serviceIconMap[item.iconKey]}
+                label={item.clientProgram}
+                tone="service"
+                size="sm"
+              />
               {item.clientProgram}
             </p>
             <ul>
@@ -31,10 +36,10 @@ export default function FeaturedPrograms({ items }: FeaturedProgramsProps) {
               ))}
             </ul>
             <div className="chip-list">
-              {item.toolIcons.slice(0, 4).map((tool) => (
-                <span key={tool} className="chip with-icon">
-                  <IconGlyph name={tool} className="chip-icon" />
-                  {tool}
+              {item.tools.slice(0, 4).map((tool) => (
+                <span key={tool.label} className="chip with-icon">
+                  <IconBadge icon={toolIconMap[tool.key]} label={tool.label} tone="tool" size="sm" />
+                  {tool.label}
                 </span>
               ))}
             </div>

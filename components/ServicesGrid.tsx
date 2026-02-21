@@ -1,6 +1,7 @@
-import IconGlyph from "@/components/IconGlyph";
 import Link from "next/link";
-import type { ServiceItem } from "@/data/skills";
+import IconBadge from "@/components/IconBadge";
+import { serviceIconMap } from "@/lib/iconMap";
+import type { ServiceItem } from "@/data/services";
 
 type ServicesGridProps = {
   items: ServiceItem[];
@@ -19,11 +20,17 @@ export default function ServicesGrid({
       <div className="services-grid">
         {items.map((item) => (
           <article key={item.title} className="panel service-card">
-            <IconGlyph name={item.icon} className="service-icon" />
+            <IconBadge
+              icon={serviceIconMap[item.iconKey]}
+              label={item.title}
+              tone="service"
+              size="md"
+              className="service-icon-badge"
+            />
             <h3>{item.title}</h3>
-            <p>{item.summary}</p>
+            <p>{item.value}</p>
             <Link
-              href={`/projects?category=${encodeURIComponent(item.projectFilter)}`}
+              href={`/projects?category=${encodeURIComponent(item.filterCategory)}`}
               className="detail-link"
               prefetch
             >

@@ -1,201 +1,281 @@
-import type { LogoKey } from "@/data/logos";
+import type { CompanyIconKey, ToolIconKey } from "@/lib/iconMap";
 
-export type ExperienceDetail = {
+export type ToolRef = {
+  key: ToolIconKey;
+  label: string;
+};
+
+export type ExperienceDetails = {
   overview: string;
+  scopeStakeholders: string[];
   responsibilities: string[];
-  toolsTech: string[];
+  tools: ToolRef[];
   programsClients: string[];
   outcomes: string[];
   challengesResolutions: string[];
 };
 
 export type ExperienceItem = {
-  slug: string;
+  id: string;
+  slug: "tata" | "huawei" | "ericsson" | "adecco" | "dxc";
   company: string;
-  logoKey: LogoKey;
+  iconKey: CompanyIconKey;
   title: string;
   dates: string;
-  highlights: string[];
-  techIcons: string[];
-  details: ExperienceDetail;
+  note?: string;
+  bullets: string[];
+  tools: ToolRef[];
+  details: ExperienceDetails;
+};
+
+const commonTools = {
+  jira: { key: "jira" as const, label: "Jira" },
+  linux: { key: "linux" as const, label: "Linux" },
+  python: { key: "python" as const, label: "Python" },
+  vmware: { key: "vmware" as const, label: "VMware" },
+  aws: { key: "aws" as const, label: "AWS" },
+  cloudendure: { key: "cloudendure" as const, label: "CloudEndure" },
+  serviceNow: { key: "serviceNow" as const, label: "ServiceNow" },
+  pmatt: { key: "pmatt" as const, label: "PMATT" },
+  adept: { key: "adept" as const, label: "ADEPT" },
+  universalDiscovery: {
+    key: "universalDiscovery" as const,
+    label: "Universal Discovery",
+  },
+  powerbi: { key: "powerbi" as const, label: "Power BI" },
+  shell: { key: "shell" as const, label: "Shell Scripting" },
+  sql: { key: "sql" as const, label: "SQL" },
+  git: { key: "git" as const, label: "Git" },
+  confluence: { key: "confluence" as const, label: "Confluence" },
+  azure: { key: "azure" as const, label: "Azure" },
+  agile: { key: "agile" as const, label: "Agile/Scrum/SAFe" },
 };
 
 export const experiences: ExperienceItem[] = [
   {
+    id: "exp-tata",
     slug: "tata",
     company: "Tata",
-    logoKey: "tata",
+    iconKey: "tata",
     title: "Assistant Manager / Technical Engineer",
     dates: "June 2013 - Oct 2016",
-    highlights: [
+    bullets: [
       "Stabilized daily technical operations for business-critical environments.",
-      "Improved response quality by standardizing triage and handoff patterns.",
-      "Reduced repeat manual effort through script-assisted operations.",
+      "Improved incident response quality through repeatable runbook execution.",
+      "Reduced manual operational load through scripting and checklists.",
     ],
-    techIcons: ["linux", "monitor", "script", "service"],
+    tools: [commonTools.linux, commonTools.shell, commonTools.serviceNow],
     details: {
       overview:
-        "Built a strong operations foundation focused on service reliability, runbook discipline, and execution consistency.",
-      responsibilities: [
-        "Executed platform operations routines and production support activities",
-        "Maintained Linux operations diagnostics and health checks",
-        "Maintained incident triage and escalation handoffs across teams",
-        "Standardized recurring operational procedures and documentation",
+        "Built a technical operations base focused on reliability, support discipline, and execution consistency.",
+      scopeStakeholders: [
+        "Operations support teams",
+        "Network and platform engineering teams",
+        "Internal delivery and service leads",
       ],
-      toolsTech: ["Linux", "Monitoring tools", "Scripting", "Ticketing systems"],
-      programsClients: ["Client (confidential)"],
+      responsibilities: [
+        "Executed production operations and service assurance routines",
+        "Maintained Linux diagnostics and routine health checks",
+        "Managed incident triage and escalation handoffs",
+        "Standardized recurring runbooks and operating checklists",
+        "Supported service continuity during maintenance events",
+      ],
+      tools: [commonTools.linux, commonTools.shell, commonTools.serviceNow],
+      programsClients: ["Client: confidential"],
       outcomes: [
         "Improved operational consistency across support cycles",
-        "Reduced handling variability through standardized runbooks",
+        "Reduced issue handling variability through standard operating patterns",
+        "Improved turnaround for repeat incident classes",
       ],
       challengesResolutions: [
-        "Process inconsistency across shifts -> introduced shared SOP checklists and handoff templates",
-        "High manual load in repetitive tasks -> automated repeated activities with scripts",
+        "Inconsistent shift-level process execution -> standardized shared runbooks and handoff templates",
+        "Repeated manual operations effort -> introduced scripts for frequent tasks",
       ],
     },
   },
   {
+    id: "exp-huawei",
     slug: "huawei",
     company: "Huawei",
-    logoKey: "huawei",
+    iconKey: "huawei",
     title: "Sr. Technical Engineer",
     dates: "Oct 2016 - May 2017",
-    highlights: [
-      "Improved release readiness checks and deployment control discipline.",
-      "Strengthened coordination between engineering and operations groups.",
+    bullets: [
+      "Improved release readiness checks and deployment discipline.",
+      "Strengthened engineering-operations coordination for production rollouts.",
       "Reduced avoidable deployment defects via validation checkpoints.",
     ],
-    techIcons: ["linux", "release", "security", "service"],
+    tools: [commonTools.linux, commonTools.jira, commonTools.agile],
     details: {
       overview:
-        "Supported platform reliability initiatives with structured release validation and operational control.",
+        "Supported platform reliability through release controls, environment validation, and coordinated technical execution.",
+      scopeStakeholders: [
+        "Platform engineering teams",
+        "Operations and production support teams",
+        "Release and change management stakeholders",
+      ],
       responsibilities: [
         "Validated release dependencies before production windows",
-        "Supported diagnostics for platform and infrastructure incidents",
-        "Coordinated readiness checkpoints with operations stakeholders",
-        "Maintained quality checks for deployment and environment transitions",
+        "Supported technical diagnostics across platform incidents",
+        "Coordinated readiness checkpoints with operations",
+        "Maintained deployment quality controls across environments",
+        "Supported stabilization during release windows",
       ],
-      toolsTech: ["Linux", "Release workflows", "Security checks", "Incident systems"],
-      programsClients: ["Client (confidential)"],
+      tools: [commonTools.linux, commonTools.jira, commonTools.agile],
+      programsClients: ["Client: confidential"],
       outcomes: [
-        "Improved release predictability and technical quality posture",
-        "Lowered production risk through disciplined pre-release checks",
+        "Improved release predictability and execution quality",
+        "Lowered production risk through disciplined pre-release validation",
       ],
       challengesResolutions: [
-        "Compressed release windows -> enforced readiness evidence before cutover",
-        "Cross-team dependency gaps -> implemented explicit checkpoint ownership",
+        "Tight release windows -> enforced readiness evidence and freeze checkpoints",
+        "Cross-team dependency gaps -> added explicit release ownership checkpoints",
       ],
     },
   },
   {
+    id: "exp-ericsson",
     slug: "ericsson",
     company: "Ericsson",
-    logoKey: "ericsson",
+    iconKey: "ericsson",
     title: "Solution Integrator",
     dates: "June 2017 - Nov 2018",
-    highlights: [
-      "Integrated platform components with dependency-aware sequencing.",
-      "Improved first-pass release readiness for integrated solutions.",
-      "Reduced downstream rework from late dependency discovery.",
+    bullets: [
+      "Integrated multi-component platform solutions with dependency control.",
+      "Improved first-pass readiness for integrated release outcomes.",
+      "Reduced downstream rework by resolving dependencies earlier.",
     ],
-    techIcons: ["integration", "linux", "release", "security"],
+    tools: [commonTools.linux, commonTools.jira, commonTools.agile],
     details: {
       overview:
-        "Delivered integration-led solution readiness with emphasis on dependency management and rollout stability.",
-      responsibilities: [
-        "Coordinated integration sequencing across platform components",
-        "Validated compatibility and release-readiness criteria",
-        "Aligned testing, integration, and rollout dependencies",
-        "Supported stabilization and defect triage after go-live",
+        "Delivered integration-focused execution with emphasis on compatibility, sequencing, and stabilization.",
+      scopeStakeholders: [
+        "Solution architecture and integration teams",
+        "Testing and validation teams",
+        "Operations and deployment stakeholders",
       ],
-      toolsTech: ["Linux", "Integration workflows", "Release coordination", "Validation frameworks"],
-      programsClients: ["Client (confidential)"],
+      responsibilities: [
+        "Coordinated integration sequencing for dependent components",
+        "Validated solution compatibility and release readiness",
+        "Aligned integration, testing, and rollout checkpoints",
+        "Supported go-live stabilization and defect triage",
+        "Maintained integration documentation and evidence trails",
+      ],
+      tools: [commonTools.linux, commonTools.jira, commonTools.agile],
+      programsClients: ["Client: confidential"],
       outcomes: [
-        "Higher first-pass solution readiness during release cycles",
-        "Reduced release friction from unresolved dependencies",
+        "Improved first-pass release readiness for integrated solutions",
+        "Reduced late-stage integration rework",
       ],
       challengesResolutions: [
-        "Complex inter-component dependencies -> used dependency-first integration plans",
-        "Late defect surfacing -> tightened pre-release integration gates",
+        "Dependency complexity across components -> used dependency-first integration sequencing",
+        "Late defect discovery risk -> tightened pre-release integration validation criteria",
       ],
     },
   },
   {
+    id: "exp-adecco",
     slug: "adecco",
     company: "Adecco",
-    logoKey: "adecco",
+    iconKey: "adecco",
     title: "Sr. Linux Migration Engineer",
     dates: "May 2019 - Jan 2020",
-    highlights: [
+    bullets: [
       "Executed Linux migration waves with controlled cutover governance.",
-      "Improved migration repeatability via runbooks and validation gates.",
-      "Reduced post-migration defects through standard baseline checks.",
+      "Improved migration repeatability using runbooks and validation gates.",
+      "Reduced post-cutover defects via baseline checks and SOPs.",
     ],
-    techIcons: ["linux", "vmware", "migration", "runbook"],
+    tools: [commonTools.linux, commonTools.vmware, commonTools.shell],
     details: {
       overview:
-        "Led Linux migration execution with focus on reliability, change control, and rapid post-cutover stabilization.",
-      responsibilities: [
-        "Executed migration waves for Linux workloads",
-        "Defined pre-cutover and post-cutover validation standards",
-        "Maintained rollback readiness for high-risk migration windows",
-        "Standardized migration SOPs for handover consistency",
+        "Led Linux migration execution with focus on reliability, change control, and handover readiness.",
+      scopeStakeholders: [
+        "Infrastructure and platform operations teams",
+        "Application owners and support leads",
+        "Change and release governance stakeholders",
       ],
-      toolsTech: ["Linux", "VMware", "Migration runbooks", "Change controls"],
-      programsClients: ["Client (confidential)"],
+      responsibilities: [
+        "Executed Linux workload migration waves",
+        "Defined pre-cutover and post-cutover validation standards",
+        "Maintained rollback readiness for high-risk change windows",
+        "Standardized migration SOPs and checklists",
+        "Monitored post-cutover stabilization and issue burn-down",
+      ],
+      tools: [commonTools.linux, commonTools.vmware, commonTools.shell],
+      programsClients: ["Client: confidential"],
       outcomes: [
-        "Improved migration consistency across multiple waves",
-        "Shortened stabilization timeline after production cutovers",
+        "Improved migration consistency across workload groups",
+        "Shortened stabilization timeline after cutovers",
       ],
       challengesResolutions: [
-        "Limited documentation quality -> introduced migration SOP templates",
-        "Tight change windows -> rehearsed cutover and rollback checklists",
+        "Uneven documentation quality -> introduced standardized migration SOP templates",
+        "Tight maintenance windows -> rehearsed cutover and rollback checklists",
       ],
     },
   },
   {
+    id: "exp-dxc",
     slug: "dxc",
     company: "DXC Technology",
-    logoKey: "dxc",
+    iconKey: "dxc",
     title: "Sr. Analyst II – Cloud Engineering",
     dates: "Feb 2020 - Dec 2023",
-    highlights: [
-      "Primary execution role: Project Manager across migration programs and client workstreams.",
-      "Handled parallel tracks across Linux Migration Engineer, Discovery Data Specialist, and Application Contexter responsibilities.",
-      "Delivered on-prem to AWS Linux migration waves using CloudEndure.",
+    note:
+      "Worked across Technical PM / Project Manager, Discovery Tool Engineer, Discovery Data Specialist, and Linux Migration Engineer responsibilities.",
+    bullets: [
+      "Primary execution role: Project Manager for migration programs and client workstreams.",
+      "Managed discovery-to-wave planning and migration cutover governance in enterprise environments.",
+      "Delivered Linux server migrations from on-prem to AWS using CloudEndure.",
+      "Improved stakeholder visibility through RAID discipline and dashboard reporting.",
     ],
-    techIcons: ["aws", "cloudendure", "linux", "jira", "powerbi", "governance"],
+    tools: [
+      commonTools.aws,
+      commonTools.azure,
+      commonTools.cloudendure,
+      commonTools.linux,
+      commonTools.jira,
+      commonTools.pmatt,
+      commonTools.powerbi,
+      commonTools.python,
+      commonTools.vmware,
+      commonTools.universalDiscovery,
+    ],
     details: {
       overview:
-        "Led enterprise cloud migration delivery with Project Management as the primary function, while also executing discovery, contexting, and Linux migration workstreams in parallel.",
-      responsibilities: [
-        "Primary role: Project Manager for multi-track migration execution and governance",
-        "Owned end-to-end wave lifecycle: discovery, plan, readiness, cutover, and stabilization",
-        "Managed weekly program governance calls, RAID reviews, and stakeholder decision forums",
-        "Used PMATT and Microsoft Project for schedule control, dependency tracking, and milestone planning",
-        "Applied Agile Scrum methodology for delivery cadence, sprint planning, and cross-team follow-up",
-        "Planned and governed migration waves end-to-end",
-        "Translated discovery outputs into executable migration scope",
-        "Worked as Discovery Data Specialist to reconcile and curate inventory quality",
-        "Performed Application Contexter activities to map applications to infrastructure and owners",
-        "Ran dependency mapping and readiness checkpoints across infra, app, network, and security teams",
-        "Managed RAID controls, dependency ownership, and stakeholder cadence",
-        "Prepared CAB-ready change packets, runbooks, and rollback criteria",
-        "Executed Linux Migration Engineer responsibilities during cutover and stabilization windows",
-        "Maintained weekly executive status, risk narratives, and burn-down tracking",
-        "Mentored junior engineers on migration hygiene, validation evidence, and issue triage flow",
-        "Tracked program signal dashboards for leadership visibility",
+        "Led enterprise migration delivery as a project manager while executing technical discovery, data specialization, application contexting, and Linux migration responsibilities.",
+      scopeStakeholders: [
+        "Client infrastructure, network, and security teams",
+        "Application owners and service transition leads",
+        "Program leadership, PMO, CAB, and operations stakeholders",
       ],
-      toolsTech: [
-        "Program Leadership: Cross-Functional Execution, Program Planning & Delivery, Risk Management, Stakeholder Alignment, Technical Decision-Making",
-        "Delivery Methods: Agile, Scrum, SAFe",
-        "Cloud: AWS (EC2, S3, IAM, VPC, CloudEndure, CloudWatch)",
-        "Cloud: Azure (VMs, Storage, NSG)",
-        "Infrastructure: VMware vSphere, High Availability (HA), Disaster Recovery (DR)",
-        "Linux Platforms: RHEL, SLES, CentOS",
-        "Networking & Systems: Network Planning, Load Balancing, Infrastructure Discovery, SDLC Optimization, Performance Monitoring, System Design",
-        "Data & Reporting: Python, SQL, Power BI, Excel Macros, Shell Scripting",
-        "Program Tooling: PMATT, ADEPT, Universal Discovery, Microsoft Project, JIRA, Confluence, Git, ServiceNow",
+      responsibilities: [
+        "Owned program planning and cross-functional execution cadence",
+        "Ran weekly governance reviews across scope, risk, dependencies, and milestones",
+        "Used PMATT and Microsoft Project to maintain baseline schedule and tracking discipline",
+        "Applied Agile/Scrum/SAFe practices for delivery sequencing and stakeholder alignment",
+        "Managed RAID governance and escalation pathways",
+        "Directed discovery normalization and application context mapping for execution readiness",
+        "Led Linux migration cutover planning and stabilization review cycles",
+        "Prepared CAB-ready change packets, runbooks, and rollback criteria",
+      ],
+      tools: [
+        commonTools.pmatt,
+        commonTools.adept,
+        commonTools.agile,
+        commonTools.aws,
+        commonTools.azure,
+        commonTools.vmware,
+        commonTools.linux,
+        commonTools.universalDiscovery,
+        commonTools.python,
+        commonTools.sql,
+        commonTools.powerbi,
+        commonTools.shell,
+        commonTools.jira,
+        commonTools.confluence,
+        commonTools.git,
+        commonTools.serviceNow,
+        commonTools.cloudendure,
       ],
       programsClients: [
         "Client: AT&T (delivered via DXC environment)",
@@ -203,113 +283,18 @@ export const experiences: ExperienceItem[] = [
         "Client: Astro (delivered via DXC environment)",
         "Client: Downer (delivered via DXC environment)",
         "Client: DirecTV (delivered via DXC environment)",
-        "Migration Discovery Program (Universal Discovery + manual reconciliation)",
       ],
       outcomes: [
-        "Improved schedule predictability by running PM-driven governance across parallel workstreams",
-        "Increased migration wave readiness accuracy through dependency-led planning",
-        "Improved migration throughput using wave-based governance model",
-        "Reduced execution friction through discovery normalization and readiness gates",
-        "Increased leadership visibility through structured delivery dashboards",
-        "Reduced cutover surprises by enforcing rollback-ready evidence before go-live",
-        "Improved cross-team coordination by integrating PM planning with technical discovery and contexting outputs",
-        "Strengthened personal capability in enterprise stakeholder orchestration and risk-led decisioning",
+        "Improved migration wave readiness accuracy through dependency-led planning",
+        "Reduced cutover surprises by enforcing rollback-ready readiness evidence",
+        "Improved schedule predictability across parallel workstreams",
+        "Strengthened leadership signal quality through structured dashboard reporting",
       ],
       challengesResolutions: [
-        "Inconsistent discovery signal quality -> built normalization and confidence tagging routines",
-        "Cross-team dependency drift -> applied explicit gate ownership and escalation paths",
-        "High-risk cutover windows -> enforced rollback-ready cutover playbooks",
-        "Conflicting stakeholder priorities -> used decision logs and risk-based prioritization in weekly governance",
-        "Learning outcome: shifted from task tracking to system-level program control and measurable delivery outcomes",
-      ],
-    },
-  },
-  {
-    slug: "masters",
-    company: "Stevens Institute of Technology",
-    logoKey: "stevens",
-    title: "Masters: Stevens Institute of Technology (MS Information Systems)",
-    dates: "Jan 2024 - May 2025",
-    highlights: [
-      "Deepened enterprise information systems and analytics capabilities.",
-      "Strengthened strategic decision-making for technical delivery leadership.",
-      "Applied academic frameworks to cloud and AI delivery scenarios.",
-    ],
-    techIcons: ["education", "analytics", "python", "strategy"],
-    details: {
-      overview:
-        "Completed graduate training to strengthen strategy, data-driven decisioning, and program execution capability.",
-      responsibilities: [
-        "Delivered course projects in systems, analytics, and strategy tracks",
-        "Executed team-based assignments with structured delivery controls",
-        "Applied program management frameworks to technical scenarios",
-        "Produced stakeholder-facing analysis and recommendation artifacts",
-      ],
-      toolsTech: ["Python", "Analytics methods", "Project management frameworks", "Data tooling"],
-      programsClients: ["Academic Program: MS Information Systems"],
-      outcomes: [
-        "Strengthened TPM decision quality through analytics-backed reasoning",
-        "Improved readiness for AI-enabled delivery leadership",
-      ],
-      challengesResolutions: [
-        "Balancing broad and deep coursework -> prioritized enterprise-relevant domains",
-        "Adapting theory to execution -> converted models into practical delivery artifacts",
-      ],
-    },
-  },
-  {
-    slug: "savvy",
-    company: "Savvy Global Technologies",
-    logoKey: "savvy",
-    title: "AI Project Manager",
-    dates: "July 2025 - Nov 2025",
-    highlights: [
-      "Led AI initiative planning and governance with structured checkpoints.",
-      "Improved reporting cadence using AI-assisted status and risk synthesis.",
-      "Maintained human-in-the-loop controls for decision integrity.",
-    ],
-    techIcons: ["ai", "python", "ollama", "dashboard", "governance"],
-    details: {
-      overview:
-        "Positioned AI as strategic enablement for delivery operations, not experimental output generation.",
-      responsibilities: [
-        "Owned end-to-end project planning as AI Project Manager for delivery initiatives",
-        "Defined AI delivery operating model aligned to program governance standards",
-        "Defined scope, milestones, and validation criteria for AI initiatives",
-        "Maintained project plans, risk logs, and progress tracking for leadership reporting",
-        "Ran stakeholder syncs to align product, engineering, and business decisions",
-        "Designed planning, risk-sensing, and reporting workflows using local-first AI tooling",
-        "Implemented review checkpoints for AI-assisted outputs",
-        "Built reusable templates for status, RAID, decision notes, and stakeholder updates",
-        "Aligned product, delivery, and leadership stakeholders",
-        "Maintained auditable risk and status reporting frameworks",
-        "Established boundaries for automation vs human decision ownership",
-      ],
-      toolsTech: [
-        "Python",
-        "Ollama (local LLM)",
-        "Dashboards",
-        "Governance checklists",
-        "Jira",
-        "Agile Scrum methodology",
-      ],
-      programsClients: [
-        "Client (confidential)",
-        "AI Project Manager initiatives (delivery acceleration + reporting automation)",
-      ],
-      outcomes: [
-        "Improved planning clarity by converting ambiguous AI tasks into milestone-driven delivery tracks",
-        "Faster delivery reporting cycles with consistent output quality",
-        "Stronger confidence in AI-assisted operations through controlled review flow",
-        "Improved cross-team alignment by surfacing risks earlier in delivery cadence",
-        "Reduced manual PM reporting effort using standardized AI-assisted templates",
-        "Strengthened practical learning on AI governance, quality checks, and traceability",
-      ],
-      challengesResolutions: [
-        "Low trust in generated outputs -> introduced source-linked validation checks",
-        "Ambiguous early scope -> enforced milestone-based governance and acceptance criteria",
-        "Adoption resistance for AI workflow changes -> rolled out phased pilots with measured feedback loops",
-        "Learning outcome: reframed AI from novelty to controlled strategic enablement for delivery teams",
+        "Discovery data inconsistency -> implemented normalization and confidence tagging",
+        "Cross-team dependency drift -> enforced ownership and escalation checkpoints",
+        "High-risk migration windows -> used rehearsal-led cutover and rollback controls",
+        "Competing stakeholder priorities -> used decision logs and risk-based prioritization",
       ],
     },
   },

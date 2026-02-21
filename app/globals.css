@@ -454,6 +454,10 @@ a {
   gap: var(--space-3);
 }
 
+.service-icon-badge {
+  margin-bottom: var(--space-1);
+}
+
 .service-card h3 {
   margin: 0;
   font-size: 17px;
@@ -536,7 +540,7 @@ a {
 .nav-card {
   padding: var(--space-4);
   display: grid;
-  grid-template-columns: 20px 1fr;
+  grid-template-columns: 36px 1fr;
   align-items: center;
   gap: var(--space-3);
   font-size: 14px;
@@ -562,7 +566,6 @@ a {
   color: var(--text-1);
   font-size: 12px;
   line-height: 1;
-  text-transform: lowercase;
 }
 
 .chip.with-icon {
@@ -574,6 +577,63 @@ a {
 .chip-icon {
   width: 14px;
   height: 14px;
+}
+
+.icon-badge {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.icon-badge svg {
+  width: 18px;
+  height: 18px;
+  stroke-width: 1.8;
+}
+
+.icon-badge-sm {
+  width: 22px;
+  height: 22px;
+  border-radius: 8px;
+}
+
+.icon-badge-sm svg {
+  width: 14px;
+  height: 14px;
+}
+
+.icon-badge-md {
+  width: 36px;
+  height: 36px;
+}
+
+.icon-badge-company {
+  color: #b5caeb;
+  background: rgba(150, 183, 225, 0.16);
+  border-color: rgba(157, 190, 230, 0.38);
+}
+
+.icon-badge-education {
+  color: #b8d1ff;
+  background: rgba(147, 186, 244, 0.16);
+  border-color: rgba(162, 193, 245, 0.38);
+}
+
+.icon-badge-service {
+  color: #d0def5;
+  background: rgba(170, 194, 226, 0.12);
+  border-color: rgba(170, 194, 226, 0.35);
+}
+
+.icon-badge-tool {
+  color: #9fb4d6;
+  background: rgba(140, 170, 208, 0.1);
+  border-color: rgba(155, 183, 220, 0.3);
 }
 
 .experience-layout,
@@ -642,6 +702,10 @@ a {
   align-items: center;
   gap: 8px;
   font-size: 20px;
+}
+
+.exp-company-row strong {
+  line-height: 1.2;
 }
 
 .company-icon {
@@ -718,6 +782,10 @@ a {
   top: 88px;
   display: grid;
   gap: var(--space-4);
+}
+
+.exp-preview.is-hidden-mobile {
+  display: none;
 }
 
 .exp-preview-head {
@@ -961,6 +1029,12 @@ a {
   color: var(--text-2);
 }
 
+.education-subsection p {
+  margin: 0;
+  color: var(--text-1);
+  font-size: 13px;
+}
+
 .education-subsection ul,
 .education-why ul,
 .detail-card ul {
@@ -1045,6 +1119,11 @@ a {
   color: var(--text-1);
 }
 
+.detail-note {
+  color: var(--text-2);
+  font-size: 13px;
+}
+
 .overview-card {
   padding: var(--space-5);
   display: grid;
@@ -1076,6 +1155,10 @@ a {
 .detail-card h2 {
   margin: 0;
   font-size: 16px;
+}
+
+.detail-tools-card {
+  padding: var(--space-4);
 }
 
 .work-container {
@@ -1168,6 +1251,10 @@ a {
   .exp-preview,
   .project-preview {
     position: static;
+  }
+
+  .exp-preview.is-hidden-mobile {
+    display: none;
   }
 }
 

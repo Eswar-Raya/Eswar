@@ -1,22 +1,23 @@
-import type { LogoKey } from "@/data/logos";
+import type { EducationIconKey } from "@/lib/iconMap";
 
 export type EducationItem = {
+  id: string;
   slug: string;
   institution: string;
-  logoKey: LogoKey;
+  iconKey: EducationIconKey;
   degree: string;
   field: string;
   dates: string;
   coursework: string[];
-  outcomes: string[];
-  whyThisMatters: string[];
+  supportText: string;
 };
 
 export const education: EducationItem[] = [
   {
+    id: "edu-masters",
     slug: "stevens-msis",
     institution: "Stevens Institute of Technology",
-    logoKey: "stevens",
+    iconKey: "masters",
     degree: "Master's Degree",
     field: "MS Information Systems",
     dates: "Jan 2024 - May 2025",
@@ -27,21 +28,14 @@ export const education: EducationItem[] = [
       "Python",
       "Digital Innovation",
     ],
-    outcomes: [
-      "Improved ability to connect technology decisions with business outcomes",
-      "Built stronger analytics discipline for execution planning",
-      "Strengthened enterprise delivery frameworks for TPM leadership",
-    ],
-    whyThisMatters: [
-      "Supports data-driven program controls for cloud migration planning.",
-      "Improves communication and decision quality in multi-stakeholder delivery.",
-      "Provides structured grounding for AI-enabled delivery operations.",
-    ],
+    supportText:
+      "This degree strengthened my ability to lead technical programs with data-backed planning and AI-enabled delivery thinking.",
   },
   {
+    id: "edu-bachelors",
     slug: "aditya-ece",
     institution: "Aditya Engineering College, JNTUK",
-    logoKey: "aditya",
+    iconKey: "bachelors",
     degree: "Bachelor's Degree",
     field: "Electronics and Communication Engineering",
     dates: "Aug 2009 - May 2013",
@@ -52,13 +46,7 @@ export const education: EducationItem[] = [
       "Microprocessors",
       "Network Fundamentals",
     ],
-    outcomes: [
-      "Built foundational systems engineering and problem-solving capability",
-      "Developed core technical reasoning used in infrastructure and migration roles",
-    ],
-    whyThisMatters: [
-      "Provides engineering fundamentals behind platform and migration decisions.",
-      "Strengthens technical depth for TPM execution in infrastructure programs.",
-    ],
+    supportText:
+      "This foundation built core systems thinking that supports infrastructure decision-making and migration execution rigor.",
   },
 ];

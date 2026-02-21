@@ -1,10 +1,10 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import VisualNav from "@/components/VisualNav";
-import IconGlyph from "@/components/IconGlyph";
-import EntityLogo from "@/components/EntityLogo";
+import IconBadge from "@/components/IconBadge";
 import DetailSectionGrid from "@/components/DetailSectionGrid";
 import { projects } from "@/data/projects";
+import { serviceIconMap, toolIconMap } from "@/lib/iconMap";
 
 type ProjectDetailPageProps = {
   params: Promise<{ slug: string }>;
@@ -31,17 +31,22 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
             Back to Projects
           </Link>
           <span className="detail-company">
-            <EntityLogo logoKey={project.logoKey} className="company-icon" />
+            <IconBadge
+              icon={serviceIconMap[project.iconKey]}
+              label={project.clientProgram}
+              tone="service"
+              size="md"
+            />
             {project.clientProgram}
           </span>
           <h1>{project.title}</h1>
           <p>{project.category}</p>
           <span className="detail-role">{project.role}</span>
           <div className="chip-list">
-            {project.toolIcons.map((tool) => (
-              <span key={tool} className="chip with-icon">
-                <IconGlyph name={tool} className="chip-icon" />
-                {tool}
+            {project.tools.map((tool) => (
+              <span key={tool.label} className="chip with-icon">
+                <IconBadge icon={toolIconMap[tool.key]} label={tool.label} tone="tool" size="sm" />
+                {tool.label}
               </span>
             ))}
           </div>
@@ -63,19 +68,27 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
               items: project.details.contribution,
             },
             {
-              title: "Tools",
-              items: project.details.tools,
-            },
-            {
               title: "Outcomes",
               items: project.details.outcomes,
             },
             {
-              title: "Screenshots/Diagrams Placeholders",
+              title: "Diagram/Screenshot placeholders",
               items: project.details.artifacts,
             },
           ]}
         />
+
+        <section className="panel detail-card detail-tools-card">
+          <h2>Tools</h2>
+          <div className="chip-list">
+            {project.details.tools.map((tool) => (
+              <span key={tool.label} className="chip with-icon">
+                <IconBadge icon={toolIconMap[tool.key]} label={tool.label} tone="tool" size="sm" />
+                {tool.label}
+              </span>
+            ))}
+          </div>
+        </section>
       </div>
     </main>
   );
