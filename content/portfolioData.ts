@@ -46,6 +46,52 @@ export const portfolioData = {
   },
   timeline: [
     {
+      slug: "community-dreams-groundedai",
+      title: "GroundedAI Program Delivery",
+      org: "Community Dreams Foundation",
+      role: "Project Manager",
+      dates: "Dec 2025 - Present",
+      stage: "GroundedAI",
+      summary:
+        "Delivered secure local-AI program execution using grounded RAG architecture and governance-first controls.",
+      impacts: [
+        "Reduced manual document review effort by approximately 60%",
+        "Improved decision precision by approximately 25% in restock prioritization",
+        "Strengthened AI governance with refusal logic and citation-backed traceability",
+      ],
+      stack: [
+        "Python",
+        "Ollama",
+        "ChromaDB",
+        "LlamaIndex",
+        "RAG",
+        "Streamlit",
+        "AI Governance",
+      ],
+      detail: {
+        context:
+          "The program required secure offline AI capabilities with strict source-grounded responses and measurable business outcomes.",
+        challenges: [
+          "Need for local-first AI architecture due to security and privacy constraints",
+          "High risk of hallucination without robust response controls",
+          "Need to translate model outputs into decision-ready leadership reporting",
+        ],
+        decision:
+          "Implement a modular local RAG pipeline with strict evaluation gates, refusal controls, and dashboarded outcome visibility.",
+        execution: [
+          "Built ingestion -> chunking -> embedding -> indexing -> orchestration workflow",
+          "Implemented local Q&A assistant with citation-grounded response behavior",
+          "Delivered hybrid forecasting workflow combining ETS and LLM prioritization",
+          "Created dashboards for model quality, budget constraints, and KPI tracking",
+        ],
+        outcomes: [
+          "Manual document review reduced by approximately 60%",
+          "Decision precision improved by approximately 25%",
+          "Governance confidence improved through traceable AI output controls",
+        ],
+      },
+    },
+    {
       slug: "tata-automation-foundation",
       title: "Technical Foundation",
       org: "Tata Teleservices",
@@ -333,6 +379,7 @@ export const portfolioData = {
     },
   ] as SkillGroup[],
   caseStudySlugs: [
+    "community-dreams-groundedai",
     "dxc-enterprise-cloud-leadership",
     "adecco-linux-migration",
     "ai-project-leadership",

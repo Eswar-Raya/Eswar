@@ -10,6 +10,7 @@ export type ToolRef = {
 export type ExperienceItem = {
   id: string;
   slug:
+    | "groundedai"
     | "savvy"
     | "stevens"
     | "dxc"
@@ -88,6 +89,65 @@ const t = {
 };
 
 export const experiences: ExperienceItem[] = [
+  {
+    id: "exp-groundedai",
+    slug: "groundedai",
+    label: "Community Dreams Foundation",
+    iconKey: "savvy",
+    stageLabel: "GroundedAI",
+    type: "employment",
+    title: "Project Manager | GroundedAI",
+    startDate: "2025-12",
+    endDate: "present",
+    periodLabel: "Dec 2025 - Present",
+    timelineOrder: 8,
+    chartOrder: 8,
+    growthScore: 7.5,
+    growthHighlight:
+      "Delivered secure local-AI program outcomes using RAG, evaluation controls, and governance-first execution.",
+    headlineBullets: [
+      "Designed and delivered a production-grade local RAG assistant using Ollama and ChromaDB.",
+      "Built modular AI pipelines from PDF ingestion through vector retrieval and grounded response delivery.",
+      "Introduced strict evaluation controls including refusal logic, hallucination checks, and evidence tracking.",
+      "Delivered stakeholder-facing dashboards for model quality, budgets, and KPI visibility.",
+    ],
+    detailBullets: [
+      "Designed local RAG architecture for offline, source-grounded question answering.",
+      "Implemented ingestion -> chunking -> embedding -> indexing -> orchestration workflow.",
+      "Built hybrid forecasting approach combining ETS baseline modeling with LLM prioritization.",
+      "Established accuracy validation and traceability controls for safer AI-assisted decisions.",
+      "Drove full lifecycle execution from requirements and architecture through validation readiness.",
+      "Created leadership-ready reporting for model behavior, delivery health, and risk indicators.",
+    ],
+    tools: [
+      t.python,
+      t.ollama,
+      t.llamaindex,
+      t.chroma,
+      t.fastapi,
+      t.prompting,
+      t.powerbi,
+      t.jira,
+      t.agile,
+      t.git,
+    ],
+    scopeStakeholders: [
+      "Foundation leadership and decision stakeholders",
+      "AI engineering and data contributors",
+      "Operations and reporting consumers",
+    ],
+    programsClients: ["Program: GroundedAI (Community Dreams Foundation)"],
+    outcomes: [
+      "Reduced manual document review effort by approximately 60%.",
+      "Improved decision precision by approximately 25% in budget-constrained restock prioritization.",
+      "Improved governance traceability through citation-grounded response controls.",
+    ],
+    challengesResolutions: [
+      "Need for secure offline AI execution -> designed local-first architecture with strict grounding controls.",
+      "Risk of hallucinated responses -> enforced refusal logic, evidence checks, and validation gates.",
+      "Cross-functional understanding gaps -> introduced dashboard-based KPI and model quality reporting.",
+    ],
+  },
   {
     id: "exp-savvy",
     slug: "savvy",
@@ -477,6 +537,14 @@ export const growthChartPoints: GrowthChartPoint[] = [...experiences]
   }));
 
 export const careerStory: CareerStoryBlock[] = [
+  {
+    id: "story-groundedai",
+    phase: "Grounded AI Program Delivery",
+    period: "Dec 2025 - Present",
+    headline: "Built secure local-AI delivery patterns with measurable outcomes.",
+    narrative:
+      "At Community Dreams Foundation, I led GroundedAI execution using RAG pipelines, validation controls, and governance-first reporting.",
+  },
   {
     id: "story-savvy",
     phase: "AI Delivery Execution",
