@@ -94,7 +94,7 @@ export const experiences: ExperienceItem[] = [
     slug: "groundedai",
     label: "Community Dreams Foundation",
     iconKey: "savvy",
-    stageLabel: "GroundedAI",
+    stageLabel: "CDF",
     type: "employment",
     title: "Project Manager | GroundedAI",
     startDate: "2025-12",
