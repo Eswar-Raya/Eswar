@@ -10,14 +10,14 @@ export type ToolRef = {
 export type ExperienceItem = {
   id: string;
   slug:
-    | "groundedai"
-    | "savvy"
-    | "stevens"
-    | "dxc"
-    | "adecco"
-    | "ericsson"
-    | "huawei"
-    | "tata";
+  | "groundedai"
+  | "savvy"
+  | "stevens"
+  | "dxc"
+  | "adecco"
+  | "ericsson"
+  | "huawei"
+  | "tata";
   label: string;
   iconKey: ExperienceIconKey;
   stageLabel: string;
@@ -84,7 +84,7 @@ const t = {
   llamaindex: { key: "llamaindex" as const, label: "LlamaIndex" },
   chroma: { key: "chroma" as const, label: "ChromaDB" },
   fastapi: { key: "fastapi" as const, label: "FastAPI" },
-  prompting: { key: "prompting" as const, label: "Prompt Engineering" },
+  prompting: { key: "prompting" as const, label: "Context Engineering" },
   ml: { key: "ml" as const, label: "Machine Learning" },
 };
 

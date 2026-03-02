@@ -46,12 +46,12 @@ export const portfolioData = {
   },
   timeline: [
     {
-      slug: "community-dreams-groundedai",
+      slug: "community-dreams-foundation-groundedai",
       title: "GroundedAI Program Delivery",
       org: "Community Dreams Foundation",
       role: "Project Manager",
       dates: "Dec 2025 - Present",
-      stage: "GroundedAI",
+      stage: "CDF",
       summary:
         "Delivered secure local-AI program execution using grounded RAG architecture and governance-first controls.",
       impacts: [
