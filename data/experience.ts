@@ -28,7 +28,7 @@ export type ExperienceItem = {
   periodLabel: string;
   timelineOrder: number;
   chartOrder: number;
-  growthScore: number; // 1-7
+  growthScore: number; // 1-8
   growthHighlight: string;
   note?: string;
   headlineBullets: string[];

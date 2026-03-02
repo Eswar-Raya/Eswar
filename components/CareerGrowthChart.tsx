@@ -33,7 +33,7 @@ function GrowthTooltip({ active, payload }: { active?: boolean; payload?: Toolti
       <span>{point.roleOrPhase}</span>
       <span>{point.periodLabel}</span>
       <span>{point.growthHighlight}</span>
-      <span>Scope Score: {point.growthScore.toFixed(1)} / 7</span>
+      <span>Scope Score: {point.growthScore.toFixed(1)} / 8</span>
     </div>
   );
 }
@@ -68,8 +68,8 @@ export default function CareerGrowthChart({ points }: CareerGrowthChartProps) {
               }}
             />
             <YAxis
-              domain={[1, 7]}
-              ticks={[1, 2, 3, 4, 5, 6, 7]}
+              domain={[1, 8]}
+              ticks={[1, 2, 3, 4, 5, 6, 7, 8]}
               tick={{ fill: "#9fb2cf", fontSize: 11 }}
               axisLine={false}
               tickLine={false}
