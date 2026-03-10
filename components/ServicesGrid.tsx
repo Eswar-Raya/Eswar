@@ -1,7 +1,11 @@
+"use client";
+
 import Link from "next/link";
 import IconBadge from "@/components/IconBadge";
+import ToolBadge from "@/components/ToolBadge";
 import { serviceIconMap } from "@/lib/iconMap";
 import type { ServiceItem } from "@/data/services";
+import { motion, useReducedMotion } from "framer-motion";
 
 type ServicesGridProps = {
   items: ServiceItem[];
@@ -10,35 +14,98 @@ type ServicesGridProps = {
 
 export default function ServicesGrid({
   items,
-  title = "Skills / Services",
+  title = "Capabilities",
 }: ServicesGridProps) {
+  const reduceMotion = useReducedMotion();
+
+  const capabilityMeta: Record<string, string[]> = {
+    "Infrastructure Transformation": ["Telecom + Enterprise", "Hybrid Environments"],
+    "Cloud Migration Programs": ["Data Center to AWS", "Migration Waves"],
+    "Linux Platform Modernization": ["RHEL / SLES / CentOS", "Rollback-Ready"],
+    "Program Governance & Delivery Leadership": ["RAID Governance", "Executive Reporting"],
+  };
+
+  const capabilityTools: Record<string, { key: "aws" | "azure" | "linux" | "vmware" | "cloudendure" | "jira" | "powerbi"; label: string }[]> = {
+    "Infrastructure Transformation": [
+      { key: "linux", label: "Linux" },
+      { key: "vmware", label: "VMware" },
+      { key: "jira", label: "Jira" },
+    ],
+    "Cloud Migration Programs": [
+      { key: "aws", label: "AWS" },
+      { key: "azure", label: "Azure" },
+      { key: "cloudendure", label: "CloudEndure" },
+    ],
+    "Linux Platform Modernization": [
+      { key: "linux", label: "Linux" },
+      { key: "vmware", label: "VMware" },
+      { key: "jira", label: "Jira" },
+    ],
+    "Program Governance & Delivery Leadership": [
+      { key: "jira", label: "Jira" },
+      { key: "powerbi", label: "Power BI" },
+      { key: "aws", label: "AWS" },
+    ],
+  };
+
   return (
     <section className="visual-section">
       <div className="section-header">
         <h2>{title}</h2>
       </div>
-      <div className="services-grid">
-        {items.map((item) => (
-          <article key={item.title} className="panel service-card">
-            <IconBadge
-              icon={serviceIconMap[item.iconKey]}
-              label={item.title}
-              tone="service"
-              size="md"
-              className="service-icon-badge"
-            />
-            <h3>{item.title}</h3>
+      <motion.div
+        className="services-grid capability-grid"
+        initial={reduceMotion ? false : "hidden"}
+        whileInView="show"
+        viewport={{ once: true, amount: 0.2 }}
+        variants={{
+          hidden: {},
+          show: { transition: { staggerChildren: 0.08 } },
+        }}
+      >
+        {items.map((item, index) => (
+          <motion.article
+            key={item.title}
+            className={`panel service-card ${index % 2 ? "is-offset" : ""}`}
+            variants={{
+              hidden: { opacity: 0, y: 18 },
+              show: { opacity: 1, y: 0 },
+            }}
+            transition={{ duration: 0.45, ease: "easeOut" }}
+            whileHover={reduceMotion ? undefined : { y: -4 }}
+          >
+            <div className="service-card-head">
+              <IconBadge
+                icon={serviceIconMap[item.iconKey]}
+                label={item.title}
+                tone="service"
+                size="md"
+                className="service-icon-badge"
+              />
+              <h3>{item.title}</h3>
+            </div>
             <p>{item.value}</p>
+            <div className="service-meta-row">
+              {(capabilityMeta[item.title] ?? [item.filterCategory]).map((meta) => (
+                <span key={meta}>{meta}</span>
+              ))}
+            </div>
+            <div className="service-tool-row">
+              {(capabilityTools[item.title] ?? []).map((tool) => (
+                <ToolBadge key={tool.label} toolKey={tool.key} label={tool.label} size="sm" />
+              ))}
+            </div>
+            <div className="service-strip" aria-hidden />
             <Link
               href={`/projects?category=${encodeURIComponent(item.filterCategory)}`}
               className="detail-link"
               prefetch
             >
-              See relevant programs
+              View related case studies
             </Link>
-          </article>
+          </motion.article>
         ))}
-      </div>
+      </motion.div>
     </section>
   );
 }

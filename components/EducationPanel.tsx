@@ -14,8 +14,11 @@ export default function EducationPanel({ items }: EducationPanelProps) {
       </div>
 
       <div className="education-grid">
-        {items.map((item) => (
-          <article key={item.slug} className="panel education-card">
+        {items.map((item, index) => (
+          <article
+            key={item.slug}
+            className={`panel education-card ${index % 2 === 0 ? "education-card-navy" : ""}`}
+          >
             <div className="education-head">
               <span className="education-school">
                 <IconBadge

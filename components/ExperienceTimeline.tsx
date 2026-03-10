@@ -1,39 +1,28 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { useMemo, useState } from "react";
 import IconBadge from "@/components/IconBadge";
 import type { ExperienceItem } from "@/data/experience";
-import { experienceIconMap, toolIconMap } from "@/lib/iconMap";
+import ToolBadge from "@/components/ToolBadge";
+import { experienceIconMap } from "@/lib/iconMap";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 
 type ExperienceTimelineProps = {
   items: ExperienceItem[];
 };
 
 export default function ExperienceTimeline({ items }: ExperienceTimelineProps) {
+  const reduceMotion = useReducedMotion();
   const timelineItems = useMemo(
     () => [...items].sort((a, b) => b.timelineOrder - a.timelineOrder),
     [items],
   );
-  const [activeSlug, setActiveSlug] = useState(timelineItems[0]?.slug ?? "");
-  const [supportsHover, setSupportsHover] = useState(true);
-  const [mobilePreviewOpen, setMobilePreviewOpen] = useState(false);
-  const reduceMotion = useReducedMotion();
-
-  useEffect(() => {
-    const mediaQuery = window.matchMedia("(hover: hover) and (pointer: fine)");
-    const updateValue = () => {
-      const canHover = mediaQuery.matches;
-      setSupportsHover(canHover);
-      setMobilePreviewOpen(canHover);
-    };
-
-    updateValue();
-    mediaQuery.addEventListener("change", updateValue);
-
-    return () => mediaQuery.removeEventListener("change", updateValue);
-  }, []);
+  const defaultActive = useMemo(
+    () => timelineItems.find((item) => item.slug === "dxc")?.slug ?? timelineItems[0]?.slug ?? "",
+    [timelineItems],
+  );
+  const [activeSlug, setActiveSlug] = useState(defaultActive);
 
   const activeItem = useMemo(
     () => timelineItems.find((item) => item.slug === activeSlug) ?? timelineItems[0],
@@ -44,216 +33,102 @@ export default function ExperienceTimeline({ items }: ExperienceTimelineProps) {
     return null;
   }
 
-  const isPreviewVisible = supportsHover || mobilePreviewOpen;
-  const activeIconTone = activeItem.type === "education_phase" ? "education" : "company";
   const activeIcon = experienceIconMap[activeItem.iconKey as keyof typeof experienceIconMap];
-  const previewBullets =
-    activeItem.type === "education_phase" && activeItem.projectsDuringPhase?.length
-      ? activeItem.projectsDuringPhase
-      : activeItem.detailBullets;
 
   return (
-    <div className="experience-layout">
-      <div className="experience-stack" role="listbox" aria-label="Experience timeline">
-        {timelineItems.map((item) => {
+    <section className="experience-journey">
+      <aside className="panel experience-rail" role="tablist" aria-label="Employer timeline">
+        {timelineItems.map((item, index) => {
           const isActive = item.slug === activeItem.slug;
-          const iconTone = item.type === "education_phase" ? "education" : "company";
+          const isFlagship = item.slug === "dxc";
           const itemIcon = experienceIconMap[item.iconKey as keyof typeof experienceIconMap];
-          const cardBullets =
-            item.type === "education_phase" && item.projectsDuringPhase?.length
-              ? item.projectsDuringPhase
-              : item.headlineBullets;
 
           return (
-            <motion.article
+            <motion.button
               key={item.slug}
-              className={`panel exp-item ${isActive ? "is-active" : ""}`}
-              onMouseEnter={() => {
-                if (supportsHover) {
-                  setActiveSlug(item.slug);
-                }
-              }}
-              initial={false}
-              whileHover={reduceMotion ? undefined : { y: -2 }}
-              transition={{ duration: 0.18, ease: "easeOut" }}
+              type="button"
+              role="tab"
+              aria-selected={isActive}
+              className={`experience-rail-item ${isActive ? "is-active" : ""}`}
+              onClick={() => setActiveSlug(item.slug)}
+              initial={reduceMotion ? false : { opacity: 0, y: 20 }}
+              whileInView={reduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.45 }}
+              whileHover={reduceMotion ? undefined : { y: -4 }}
+              transition={{ duration: 0.6, ease: "easeOut", delay: index * 0.06 }}
             >
-              <Link
-                href={`/experience/${item.slug}`}
-                className="exp-trigger"
-                role="option"
-                aria-selected={isActive}
-                onFocus={() => setActiveSlug(item.slug)}
-                onClick={(event) => {
-                  if (!supportsHover) {
-                    if (!mobilePreviewOpen || !isActive) {
-                      event.preventDefault();
-                      setActiveSlug(item.slug);
-                      setMobilePreviewOpen(true);
-                      return;
-                    }
-                  }
-                  setActiveSlug(item.slug);
-                }}
-                prefetch
-              >
-                <span className="exp-company-row">
-                  <IconBadge
-                    icon={itemIcon}
-                    label={item.label}
-                    tone={iconTone}
-                    size="md"
-                  />
-                  <strong>{item.label}</strong>
-                </span>
-                <span className="exp-role-line">{item.title}</span>
-                <span className="exp-date-line">{item.periodLabel}</span>
-                {item.type === "education_phase" ? (
-                  <span className="phase-badge">Education Phase</span>
-                ) : null}
-              </Link>
-
-              <ul className="exp-highlight-list">
-                {cardBullets.slice(0, 5).map((point) => (
-                  <li key={point}>{point}</li>
-                ))}
-              </ul>
-
-              <div className="chip-list">
-                {item.tools.slice(0, 6).map((tool) => (
-                  <span key={tool.label} className="chip with-icon" title={tool.label}>
-                    <IconBadge icon={toolIconMap[tool.key]} label={tool.label} tone="tool" size="sm" />
-                    {tool.label}
-                  </span>
-                ))}
-              </div>
-
-              <span className="detail-link">View role case study</span>
-            </motion.article>
+              <span className="experience-rail-period">{item.periodLabel}</span>
+              <span className="experience-rail-company">
+                <IconBadge icon={itemIcon} label={item.label} tone="company" size="sm" />
+                {item.label}
+              </span>
+              {isFlagship ? <span className="timeline-badge">Flagship role</span> : null}
+              <span className="experience-rail-role">{item.title}</span>
+            </motion.button>
           );
         })}
-      </div>
-
-      <aside
-        className={`panel exp-preview ${supportsHover ? "" : "exp-preview-mobile-hidden"} ${!isPreviewVisible ? "is-hidden-mobile" : ""}`}
-        aria-live="polite"
-      >
-        <div className="exp-preview-head">
-          <IconBadge
-            icon={activeIcon}
-            label={activeItem.label}
-            tone={activeIconTone}
-            size="md"
-          />
-          <div>
-            <h3>{activeItem.label}</h3>
-            <p>{activeItem.title}</p>
-            <span>{activeItem.periodLabel}</span>
-            {activeItem.type === "education_phase" ? (
-              <span className="phase-badge">Education Phase</span>
-            ) : null}
-          </div>
-        </div>
-
-        <div className="preview-block">
-          <h4>{activeItem.type === "education_phase" ? "Projects During Stevens" : "Quick Preview"}</h4>
-          <ul>
-            {previewBullets.slice(0, 8).map((entry) => (
-              <li key={entry}>{entry}</li>
-            ))}
-          </ul>
-        </div>
-
-        <div className="preview-block">
-          <h4>Tools/Tech</h4>
-          <div className="chip-list">
-            {activeItem.tools.map((tool) => (
-              <span key={tool.label} className="chip with-icon">
-                <IconBadge icon={toolIconMap[tool.key]} label={tool.label} tone="tool" size="sm" />
-                {tool.label}
-              </span>
-            ))}
-          </div>
-        </div>
-
-        <div className="preview-block">
-          <h4>Outcomes</h4>
-          <ul>
-            {activeItem.outcomes.slice(0, 3).map((entry) => (
-              <li key={entry}>{entry}</li>
-            ))}
-          </ul>
-        </div>
-
-        <Link href={`/experience/${activeItem.slug}`} className="btn btn-primary" prefetch>
-          View Full Details
-        </Link>
       </aside>
 
-      {!supportsHover && mobilePreviewOpen ? (
-        <div className="exp-mobile-modal-backdrop" onClick={() => setMobilePreviewOpen(false)}>
-          <aside
-            className="panel exp-mobile-modal"
-            role="dialog"
-            aria-modal="true"
-            aria-label="Experience quick preview"
-            onClick={(event) => event.stopPropagation()}
-          >
-            <div className="exp-mobile-modal-head">
-              <h3>Quick Preview</h3>
-              <button
-                type="button"
-                className="project-tab"
-                onClick={() => setMobilePreviewOpen(false)}
-              >
-                Close
-              </button>
+      <AnimatePresence mode="wait">
+        <motion.article
+          key={activeItem.slug}
+          className="panel experience-focus panel-navy"
+          initial={reduceMotion ? false : { opacity: 0, y: 40 }}
+          animate={reduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
+          exit={reduceMotion ? { opacity: 1 } : { opacity: 0, y: -20 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+        >
+          <div className="experience-focus-head">
+            <div className="experience-focus-title">
+              <span className="detail-company">
+                <IconBadge icon={activeIcon} label={activeItem.label} tone="company" size="md" />
+                {activeItem.label}
+              </span>
+              <h3>{activeItem.title}</h3>
+              <p>{activeItem.periodLabel}</p>
+              {activeItem.slug === "dxc" ? <span className="timeline-badge">Flagship role</span> : null}
             </div>
-            <div className="exp-preview-head">
-              <IconBadge
-                icon={activeIcon}
-                label={activeItem.label}
-                tone={activeIconTone}
-                size="md"
-              />
-              <div>
-                <h3>{activeItem.label}</h3>
-                <p>{activeItem.title}</p>
-                <span>{activeItem.periodLabel}</span>
-                {activeItem.type === "education_phase" ? (
-                  <span className="phase-badge">Education Phase</span>
-                ) : null}
-              </div>
-            </div>
-            <div className="preview-block">
-              <h4>{activeItem.type === "education_phase" ? "Projects During Stevens" : "Quick Preview"}</h4>
+            <Link href={`/experience/${activeItem.slug}`} className="detail-link" prefetch>
+              View full role case study
+            </Link>
+          </div>
+
+          <div className="experience-focus-grid">
+            <section className="focus-block">
+              <h4>Responsibilities</h4>
               <ul>
-                {previewBullets.slice(0, 8).map((entry) => (
+                {activeItem.detailBullets.slice(0, 6).map((entry) => (
                   <li key={entry}>{entry}</li>
                 ))}
               </ul>
-            </div>
-            <div className="preview-block">
-              <h4>Tools/Tech</h4>
-              <div className="chip-list">
-                {activeItem.tools.map((tool) => (
-                  <span key={tool.label} className="chip with-icon">
-                    <IconBadge
-                      icon={toolIconMap[tool.key]}
-                      label={tool.label}
-                      tone="tool"
-                      size="sm"
-                    />
-                    {tool.label}
-                  </span>
+            </section>
+
+            <section className="focus-block">
+              <h4>Outcomes</h4>
+              <ul>
+                {activeItem.outcomes.slice(0, 4).map((entry) => (
+                  <li key={entry}>{entry}</li>
                 ))}
-              </div>
-            </div>
-            <Link href={`/experience/${activeItem.slug}`} className="btn btn-primary" prefetch>
-              View Full Details
-            </Link>
-          </aside>
-        </div>
-      ) : null}
-    </div>
+              </ul>
+            </section>
+
+            <section className="focus-block">
+              <h4>Tools</h4>
+                <div className="chip-list">
+                  {activeItem.tools.slice(0, 10).map((tool) => (
+                    <ToolBadge
+                      key={tool.label}
+                      toolKey={tool.key}
+                      label={tool.label}
+                      size="sm"
+                      tone="dark"
+                    />
+                  ))}
+                </div>
+              </section>
+          </div>
+        </motion.article>
+      </AnimatePresence>
+    </section>
   );
 }

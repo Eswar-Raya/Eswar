@@ -2,9 +2,10 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import VisualNav from "@/components/VisualNav";
 import IconBadge from "@/components/IconBadge";
+import ToolBadge from "@/components/ToolBadge";
 import DetailSectionGrid from "@/components/DetailSectionGrid";
 import { experiences, type ExperienceItem } from "@/data/experience";
-import { experienceIconMap, toolIconMap } from "@/lib/iconMap";
+import { experienceIconMap } from "@/lib/iconMap";
 
 type ExperienceDetailPageProps = {
   params: Promise<{ slug: string }>;
@@ -56,6 +57,38 @@ export default async function ExperienceDetailPage({
           <p>{item.growthHighlight}</p>
         </section>
 
+        {item.flagshipPanel ? (
+          <section className="visual-section">
+            <div className="section-header">
+              <h2>Flagship Transformation Snapshot</h2>
+            </div>
+            <DetailSectionGrid
+              sections={[
+                {
+                  title: "Scope",
+                  items: item.flagshipPanel.scope,
+                },
+                {
+                  title: "Environments",
+                  items: item.flagshipPanel.environments,
+                },
+                {
+                  title: "Team Size & Coordination",
+                  items: item.flagshipPanel.team,
+                },
+                {
+                  title: "Transformation Type",
+                  items: item.flagshipPanel.transformationType,
+                },
+                {
+                  title: "Outcomes",
+                  items: item.flagshipPanel.outcomes,
+                },
+              ]}
+            />
+          </section>
+        ) : null}
+
         {isEducationPhase ? (
           <DetailSectionGrid
             sections={[
@@ -81,37 +114,44 @@ export default async function ExperienceDetailPage({
           <DetailSectionGrid
             sections={[
               {
-                title: "Scope & Stakeholders",
+                title: "Stakeholders",
                 items: item.scopeStakeholders,
               },
               {
-                title: "Responsibilities / Contributions",
+                title: "Responsibilities",
                 items: item.detailBullets,
               },
               {
-                title: "Programs/Clients",
+                title: "Programs / Accounts",
                 items: item.programsClients,
               },
               {
-                title: "Outcomes / Metrics",
+                title: "Outcomes",
                 items: item.outcomes,
               },
               {
-                title: "Challenges + How resolved",
+                title: "Challenges and Resolutions",
                 items: item.challengesResolutions,
               },
             ]}
           />
         )}
 
-        <section className="panel detail-card detail-tools-card">
+        <section
+          className={`panel detail-card detail-tools-card ${
+            !isEducationPhase ? "panel-navy detail-tools-card-navy" : ""
+          }`}
+        >
           <h2>{isEducationPhase ? "Skills/Tools Strengthened" : "Tools/Tech"}</h2>
           <div className="chip-list">
             {item.tools.map((tool) => (
-              <span key={tool.label} className="chip with-icon">
-                <IconBadge icon={toolIconMap[tool.key]} label={tool.label} tone="tool" size="sm" />
-                {tool.label}
-              </span>
+              <ToolBadge
+                key={tool.label}
+                toolKey={tool.key}
+                label={tool.label}
+                size="sm"
+                tone={!isEducationPhase ? "dark" : "light"}
+              />
             ))}
           </div>
         </section>

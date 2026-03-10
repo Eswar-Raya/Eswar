@@ -5,8 +5,9 @@ import { useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { motion, useReducedMotion } from "framer-motion";
 import IconBadge from "@/components/IconBadge";
+import ToolBadge from "@/components/ToolBadge";
 import { projectCategories, type ProjectCategory, type ProjectItem } from "@/data/projects";
-import { serviceIconMap, toolIconMap } from "@/lib/iconMap";
+import { serviceIconMap } from "@/lib/iconMap";
 
 type ProjectBoardsProps = {
   items: ProjectItem[];
@@ -17,17 +18,14 @@ function getCategoryFromQuery(value: string | null): ProjectCategory | null {
     return null;
   }
   const normalized = value.toLowerCase().trim();
-  if (normalized.includes("cloud")) {
-    return "Cloud & Infrastructure Strategy";
+  if (normalized.includes("infrastructure") || normalized.includes("platform")) {
+    return "Infrastructure Transformation";
   }
-  if (normalized.includes("service")) {
-    return "Service/Product Innovation";
+  if (normalized.includes("cloud") || normalized.includes("migration")) {
+    return "Cloud Migration Programs";
   }
   if (normalized.includes("ai")) {
-    return "AI Strategy & Governance";
-  }
-  if (normalized.includes("process") || normalized.includes("bpr")) {
-    return "Process Innovation (BPR)";
+    return "Applied AI Projects";
   }
   return null;
 }
@@ -37,8 +35,7 @@ export default function ProjectBoards({ items }: ProjectBoardsProps) {
   const reduceMotion = useReducedMotion();
   const [activeCategory, setActiveCategory] = useState<ProjectCategory | null>(null);
   const categoryFromQuery = getCategoryFromQuery(searchParams.get("category"));
-  const selectedCategory =
-    activeCategory ?? categoryFromQuery ?? "Cloud & Infrastructure Strategy";
+  const selectedCategory = activeCategory ?? categoryFromQuery ?? "Infrastructure Transformation";
 
   const filteredProjects = useMemo(
     () => items.filter((item) => item.category === selectedCategory),
@@ -48,7 +45,11 @@ export default function ProjectBoards({ items }: ProjectBoardsProps) {
   return (
     <section className="visual-section">
       <div className="section-header">
-        <h2>Stevens Projects Portfolio</h2>
+        <h2>Program Case Studies</h2>
+        <p>
+          Infrastructure and cloud transformation programs are primary. Applied AI projects are
+          shown as a secondary capability.
+        </p>
       </div>
 
       <div className="project-tab-row" role="tablist" aria-label="Project category filters">
@@ -67,10 +68,12 @@ export default function ProjectBoards({ items }: ProjectBoardsProps) {
       </div>
 
       <div className="project-grid project-grid-wide">
-        {filteredProjects.map((project) => (
+        {filteredProjects.map((project, index) => (
           <motion.article
             key={project.slug}
-            className="panel project-card"
+            className={`panel project-card ${
+              project.category !== "Applied AI Projects" && index % 2 === 0 ? "project-card-navy" : ""
+            }`}
             whileHover={reduceMotion ? undefined : { y: -2 }}
             transition={{ duration: 0.18, ease: "easeOut" }}
           >
@@ -86,17 +89,24 @@ export default function ProjectBoards({ items }: ProjectBoardsProps) {
               </span>
               <h4>{project.title}</h4>
               <p className="project-role">My Role: {project.role}</p>
-              <ul>
-                {project.bullets.slice(0, 3).map((bullet) => (
-                  <li key={bullet}>{bullet}</li>
-                ))}
-              </ul>
+              <p className="project-scope">{project.scope}</p>
+              <div className="project-mini-rows">
+                <div className="project-mini-row">
+                  <span>Responsibilities</span>
+                  <ul>
+                    {project.bullets.slice(0, 2).map((bullet) => (
+                      <li key={bullet}>{bullet}</li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="project-mini-row">
+                  <span>Outcome</span>
+                  <p>{project.details.outcomes[0]}</p>
+                </div>
+              </div>
               <div className="chip-list">
                 {project.tools.map((tool) => (
-                  <span key={tool.label} className="chip with-icon" title={tool.label}>
-                    <IconBadge icon={toolIconMap[tool.key]} label={tool.label} tone="tool" size="sm" />
-                    {tool.label}
-                  </span>
+                  <ToolBadge key={tool.label} toolKey={tool.key} label={tool.label} size="sm" />
                 ))}
               </div>
               <span className="project-hover-cta">View case study</span>

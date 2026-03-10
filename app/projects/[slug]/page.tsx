@@ -2,9 +2,10 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import VisualNav from "@/components/VisualNav";
 import IconBadge from "@/components/IconBadge";
+import ToolBadge from "@/components/ToolBadge";
 import DetailSectionGrid from "@/components/DetailSectionGrid";
 import { projects } from "@/data/projects";
-import { serviceIconMap, toolIconMap } from "@/lib/iconMap";
+import { serviceIconMap } from "@/lib/iconMap";
 
 type ProjectDetailPageProps = {
   params: Promise<{ slug: string }>;
@@ -44,10 +45,7 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
           <span className="detail-role">{project.role}</span>
           <div className="chip-list">
             {project.tools.map((tool) => (
-              <span key={tool.label} className="chip with-icon">
-                <IconBadge icon={toolIconMap[tool.key]} label={tool.label} tone="tool" size="sm" />
-                {tool.label}
-              </span>
+              <ToolBadge key={tool.label} toolKey={tool.key} label={tool.label} size="sm" />
             ))}
           </div>
         </section>
@@ -86,10 +84,7 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
           <h2>Tools</h2>
           <div className="chip-list">
             {project.details.tools.map((tool) => (
-              <span key={tool.label} className="chip with-icon">
-                <IconBadge icon={toolIconMap[tool.key]} label={tool.label} tone="tool" size="sm" />
-                {tool.label}
-              </span>
+              <ToolBadge key={tool.label} toolKey={tool.key} label={tool.label} size="sm" />
             ))}
           </div>
         </section>

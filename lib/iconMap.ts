@@ -31,6 +31,7 @@ export const companyIconMap = {
   ericsson: Network,
   adecco: Terminal,
   dxc: CloudCog,
+  community: BriefcaseBusiness,
   savvy: Brain,
 } satisfies Record<string, LucideIcon>;
 
@@ -45,6 +46,7 @@ export const experienceIconMap = {
   ericsson: Network,
   adecco: Terminal,
   dxc: CloudCog,
+  community: BriefcaseBusiness,
   stevens: GraduationCap,
   savvy: Brain,
 } satisfies Record<string, LucideIcon>;
@@ -82,7 +84,9 @@ export const toolIconMap = {
   ollama: Brain,
   llamaindex: FileCode2,
   chroma: Database,
+  langchain: FileCode2,
   fastapi: FileCode2,
+  carbonite: Shield,
   prompting: Brain,
   ml: LineChart,
 } satisfies Record<string, LucideIcon>;

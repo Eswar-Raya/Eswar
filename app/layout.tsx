@@ -4,7 +4,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Eswar Rayavarapu",
   description:
-    "Technical Project Manager - Cloud Infrastructure & AI-Enabled Delivery",
+    "Infrastructure & Cloud Transformation Technical Project Manager with enterprise migration, Linux modernization, and governance-led delivery experience.",
 };
 
 export default function RootLayout({

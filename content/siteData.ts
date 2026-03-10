@@ -137,14 +137,15 @@ export type SiteData = {
 export const siteData: SiteData = {
   identity: {
     name: "Eswar Rayavarapu",
-    roleLine: "Technical Project Manager | AI Project Manager",
+    roleLine: "Infrastructure & Cloud Transformation Technical Project Manager",
     locationLine: "New Jersey, US",
   },
 
   hero: {
     // LOCK THESE EXACTLY (per your decision)
-    headline: "I work where systems change.",
-    subline: "Cloud migrations | Infrastructure programs | AI-assisted delivery",
+    headline: "Infrastructure & Cloud Transformation Technical Project Manager",
+    subline:
+      "Enterprise cloud migration | Linux platform modernization | program governance and production cutover delivery",
   },
 
   labels: {
@@ -158,7 +159,7 @@ export const siteData: SiteData = {
 
     work: {
       title: "Active Transitions",
-      lead: "A transformation map from telecom operations to cloud leadership and AI project delivery.",
+      lead: "A transformation map from telecom operations to enterprise cloud migration and infrastructure program leadership.",
       openLabel: "Technical brief",
       closeLabel: "Close",
       briefLabel: "Technical brief",
@@ -183,11 +184,11 @@ export const siteData: SiteData = {
 
     agents: {
       title: "Where automation earns its place",
-      lead: "Automation accelerates repeatable work. Scope, risk, and release decisions stay human.",
+      lead: "Applied AI supports repeatable workflows; infrastructure scope, risk, and cutover decisions stay human-led.",
       modeStable: "Stable",
       modeExplore: "Explore",
       learningNote:
-        "Built from current AI project delivery work in 2025, with auditability and human review at each critical gate.",
+        "Applied AI workflows are used as secondary capability with auditability and human review at critical gates.",
       inputLabel: "Input",
       outputLabel: "Output",
       humanBoundaryLabel: "Human boundary",
@@ -338,12 +339,12 @@ export const siteData: SiteData = {
     },
     {
       id: "savvy-ai-project-leadership",
-      label: "Traditional PM cadence -> AI/ML lifecycle acceleration",
+      label: "Technical Project Manager controls -> AI innovation delivery acceleration",
       meta: {
         org: "Savvy Global Technologies",
-        roleType: "Project Manager",
-        period: "2025 - Present",
-        domain: "AI/ML program delivery",
+        roleType: "Technical Project Manager",
+        period: "Jul 2025 - Nov 2025",
+        domain: "Applied AI program delivery (secondary capability)",
         tools: ["Python", "Data Preprocessing", "Model Evaluation", "Stakeholder Governance"],
       },
       brief: {
@@ -521,7 +522,7 @@ export const siteData: SiteData = {
     lead: "If your systems are changing, clarity matters.",
     email: "eswar.rayavarapu23@gmail.com",
     linkedinUrl: "https://www.linkedin.com/in/eswarrayavarapu/",
-    resumeUrl: "/resume.pdf",
+    resumeUrl: "/Eswar_Raviteja_Rayavarapu_Infrastructure_Cloud_Transformation_PM.pdf",
   },
 };
 

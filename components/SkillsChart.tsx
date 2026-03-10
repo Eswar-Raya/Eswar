@@ -57,7 +57,7 @@ export default function SkillsChart({ items }: SkillsChartProps) {
     <article className="panel graph-card">
       <div className="card-head">
         <h2>Competency Snapshot</h2>
-        <p>Current capability profile</p>
+        <p>Recruiter-facing capability profile</p>
       </div>
 
       <div className="skills-legend">

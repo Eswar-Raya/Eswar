@@ -29,7 +29,7 @@ export const education: EducationItem[] = [
       "Digital Innovation",
     ],
     supportText:
-      "This degree strengthened my ability to lead technical programs with data-backed planning and AI-enabled delivery thinking.",
+      "This degree strengthened my ability to lead technical programs with data-backed planning, enterprise strategy alignment, and modernization discipline.",
   },
   {
     id: "edu-bachelors",

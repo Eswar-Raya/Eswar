@@ -6,6 +6,8 @@ import { navItems } from "@/data/site";
 
 export default function VisualNav() {
   const pathname = usePathname();
+  const isActive = (href: string) =>
+    pathname === href || (href !== "/home" && pathname.startsWith(`${href}/`));
 
   return (
     <header className="top-nav panel">
@@ -13,7 +15,7 @@ export default function VisualNav() {
         <span className="brand-mark">ER</span>
         <div className="brand-copy">
           <span className="brand-title">Eswar Rayavarapu</span>
-          <span className="brand-subtitle">Technical Project Manager</span>
+          <span className="brand-subtitle">Infrastructure & Cloud Transformation TPM</span>
         </div>
       </div>
       <nav aria-label="Primary">
@@ -21,7 +23,7 @@ export default function VisualNav() {
           <Link
             key={item.href}
             href={item.href}
-            className={pathname === item.href ? "is-active" : undefined}
+            className={isActive(item.href) ? "is-active" : undefined}
           >
             {item.label}
           </Link>

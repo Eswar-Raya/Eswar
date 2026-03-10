@@ -1,15 +1,15 @@
+import type { ProjectCategory } from "@/data/projects";
 import type { ServiceIconKey, ToolIconKey } from "@/lib/iconMap";
 
 export type CompetencyPoint = {
   id: string;
   category:
-    | "TPM Delivery"
-    | "Cloud Migration"
-    | "Linux Modernization"
-    | "Stakeholder & Risk"
-    | "AI Enablement"
-    | "LLM / RAG Delivery"
-    | "ML & Analytics";
+    | "Infrastructure Transformation"
+    | "Cloud Migration Delivery"
+    | "Linux Platform Modernization"
+    | "Program Governance (RAID)"
+    | "Global Engineering Coordination"
+    | "Applied AI Delivery (Secondary)";
   score: number;
   iconKey: ServiceIconKey;
 };
@@ -27,108 +27,172 @@ export type ServiceItem = {
   title: string;
   iconKey: ServiceIconKey;
   value: string;
-  filterCategory:
-    | "Cloud & Infrastructure Strategy"
-    | "Service/Product Innovation"
-    | "AI Strategy & Governance"
-    | "Process Innovation (BPR)";
+  filterCategory: ProjectCategory;
+};
+
+export type CapabilityGroup = {
+  id: string;
+  title:
+    | "Cloud Platforms"
+    | "Infrastructure"
+    | "Migration & Discovery"
+    | "Program Delivery"
+    | "Data / AI";
+  items: string[];
 };
 
 export const competencyPoints: CompetencyPoint[] = [
-  { id: "tpm", category: "TPM Delivery", score: 5.9, iconKey: "tpm" },
-  { id: "cloud", category: "Cloud Migration", score: 5.7, iconKey: "cloudMigration" },
-  { id: "linux", category: "Linux Modernization", score: 5.6, iconKey: "linuxModernization" },
-  { id: "risk", category: "Stakeholder & Risk", score: 5.6, iconKey: "stakeholderRisk" },
-  { id: "ai", category: "AI Enablement", score: 5.4, iconKey: "aiDelivery" },
-  { id: "llm-rag", category: "LLM / RAG Delivery", score: 5.0, iconKey: "aiDelivery" },
-  { id: "ml-analytics", category: "ML & Analytics", score: 5.2, iconKey: "dashboards" },
+  {
+    id: "infra-transformation",
+    category: "Infrastructure Transformation",
+    score: 6.0,
+    iconKey: "tpm",
+  },
+  {
+    id: "cloud-migration",
+    category: "Cloud Migration Delivery",
+    score: 5.9,
+    iconKey: "cloudMigration",
+  },
+  {
+    id: "linux-modernization",
+    category: "Linux Platform Modernization",
+    score: 5.8,
+    iconKey: "linuxModernization",
+  },
+  {
+    id: "raids",
+    category: "Program Governance (RAID)",
+    score: 5.8,
+    iconKey: "stakeholderRisk",
+  },
+  {
+    id: "global-coordination",
+    category: "Global Engineering Coordination",
+    score: 5.7,
+    iconKey: "dashboards",
+  },
+  {
+    id: "applied-ai",
+    category: "Applied AI Delivery (Secondary)",
+    score: 4.9,
+    iconKey: "aiDelivery",
+  },
 ];
 
 export const services: ServiceItem[] = [
   {
-    id: "svc-cloud",
+    id: "svc-infra-transformation",
+    slug: "infrastructure-transformation-programs",
+    title: "Infrastructure Transformation",
+    iconKey: "tpm",
+    value:
+      "Lead enterprise transformation initiatives across telecom and global enterprise environments.",
+    filterCategory: "Infrastructure Transformation",
+  },
+  {
+    id: "svc-cloud-migration",
     slug: "cloud-migration-programs",
     title: "Cloud Migration Programs",
     iconKey: "cloudMigration",
-    value: "Enterprise wave planning with cutover governance, rollback readiness, and stabilization control.",
-    filterCategory: "Cloud & Infrastructure Strategy",
-  },
-  {
-    id: "svc-tpm",
-    slug: "technical-program-management",
-    title: "Technical Program Management",
-    iconKey: "tpm",
-    value: "Cross-functional delivery leadership across infra, application, network, and security stakeholders.",
-    filterCategory: "Process Innovation (BPR)",
+    value:
+      "Deliver data center to AWS and data center to data center migration programs with multi-wave planning.",
+    filterCategory: "Cloud Migration Programs",
   },
   {
     id: "svc-linux",
-    slug: "linux-modernization",
-    title: "Linux Migration & Modernization",
+    slug: "linux-platform-modernization",
+    title: "Linux Platform Modernization",
     iconKey: "linuxModernization",
-    value: "Factory-style Linux transition execution using baseline checks, runbooks, and post-cutover stabilization.",
-    filterCategory: "Cloud & Infrastructure Strategy",
+    value:
+      "Modernize Linux platforms with readiness validation, rollback strategy, and controlled production cutovers.",
+    filterCategory: "Infrastructure Transformation",
   },
   {
-    id: "svc-risk",
-    slug: "stakeholder-risk-management",
-    title: "Stakeholder & Risk Management",
-    iconKey: "stakeholderRisk",
-    value: "RAID governance, escalation routing, and decision cadence for complex enterprise delivery.",
-    filterCategory: "Process Innovation (BPR)",
-  },
-  {
-    id: "svc-dash",
-    slug: "delivery-intelligence-dashboards",
-    title: "Delivery Dashboards & Reporting",
+    id: "svc-governance",
+    slug: "program-governance-delivery-leadership",
+    title: "Program Governance & Delivery Leadership",
     iconKey: "dashboards",
-    value: "Program visibility using KPI and risk signal dashboards for leadership-level execution tracking.",
-    filterCategory: "Service/Product Innovation",
+    value:
+      "Run RAID governance, dependency tracking, cross-functional coordination, and executive-ready reporting.",
+    filterCategory: "Cloud Migration Programs",
+  },
+];
+
+export const capabilityGroups: CapabilityGroup[] = [
+  {
+    id: "cap-cloud",
+    title: "Cloud Platforms",
+    items: ["AWS", "Azure"],
   },
   {
-    id: "svc-ai",
-    slug: "ai-enabled-delivery-ops",
-    title: "AI-Enabled Delivery Optimization",
-    iconKey: "aiDelivery",
-    value: "Human-in-the-loop AI workflows for planning, risk sensing, and reporting acceleration.",
-    filterCategory: "AI Strategy & Governance",
+    id: "cap-infra",
+    title: "Infrastructure",
+    items: [
+      "Linux (RHEL, SLES, CentOS)",
+      "VMware",
+      "High Availability (HA)",
+      "Disaster Recovery (DR)",
+    ],
+  },
+  {
+    id: "cap-migration",
+    title: "Migration & Discovery",
+    items: [
+      "CloudEndure",
+      "Universal Discovery",
+      "VMware vSphere Replication",
+      "Carbonite Double-Take",
+      "Readiness Validation",
+      "Rollback Strategy",
+    ],
+  },
+  {
+    id: "cap-program",
+    title: "Program Delivery",
+    items: [
+      "RAID Governance",
+      "Executive Reporting",
+      "Stakeholder Management",
+      "Cutover Planning",
+      "Migration Wave Planning",
+      "Global Delivery Coordination",
+    ],
+  },
+  {
+    id: "cap-ai",
+    title: "Data / AI",
+    items: [
+      "Python",
+      "SQL",
+      "LangChain",
+      "ChromaDB",
+      "Ollama",
+      "Model Validation & Evaluation Oversight",
+    ],
   },
 ];
 
 export const aiMlSkills: AiMlSkill[] = [
   {
     id: "aiml-rag",
-    title: "RAG Workflow Design",
+    title: "RAG Delivery System",
     summary:
-      "Built local-first retrieval workflows using chunking, vector indexing, and source-grounded response patterns.",
-    toolKey: "chroma",
+      "Designed a locally hosted RAG system using LangChain, ChromaDB, and Ollama with source-grounded response controls.",
+    toolKey: "langchain",
   },
   {
-    id: "aiml-llm-orchestration",
-    title: "LLM Orchestration",
+    id: "aiml-forecasting",
+    title: "Hybrid Forecasting / Decision Support",
     summary:
-      "Structured local model execution with Ollama and LlamaIndex for planning, synthesis, and controlled automation.",
-    toolKey: "ollama",
-  },
-  {
-    id: "aiml-prompt-governance",
-    title: "Prompt & Output Governance",
-    summary:
-      "Applied human-in-the-loop validation, traceable prompts, and quality checkpoints for delivery-facing AI outputs.",
-    toolKey: "prompting",
-  },
-  {
-    id: "aiml-analytics",
-    title: "ML-Driven Delivery Insights",
-    summary:
-      "Used analytics and ML coursework outcomes to identify delivery trends, risks, and execution bottlenecks.",
+      "Built a hybrid forecasting workflow with interpretable outputs, operational prioritization logic, and dashboard reporting.",
     toolKey: "ml",
   },
   {
-    id: "aiml-python-fastapi",
-    title: "Python + FastAPI Integration",
+    id: "aiml-governance",
+    title: "Prompt Guardrails and Validation",
     summary:
-      "Integrated Python automation and FastAPI services for local AI-enabled portfolio and reporting use cases.",
-    toolKey: "fastapi",
+      "Applied refusal handling, citation checks, and review checkpoints to keep applied AI outputs auditable.",
+    toolKey: "prompting",
   },
 ];

@@ -1,10 +1,9 @@
 import type { ServiceIconKey, ToolIconKey } from "@/lib/iconMap";
 
 export type ProjectCategory =
-  | "Cloud & Infrastructure Strategy"
-  | "Service/Product Innovation"
-  | "AI Strategy & Governance"
-  | "Process Innovation (BPR)";
+  | "Infrastructure Transformation"
+  | "Cloud Migration Programs"
+  | "Applied AI Projects";
 
 export type ToolRef = {
   key: ToolIconKey;
@@ -24,16 +23,17 @@ export type ProjectDetails = {
 export type ProjectItem = {
   id: string;
   slug:
-    | "cloud-migration-strategy"
-    | "tryb4ufly"
-    | "sllm-business"
-    | "memoria"
-    | "netflix-bpr";
+    | "enterprise-cloud-migration-program"
+    | "data-center-migration-consolidation-program"
+    | "hybrid-cloud-linux-modernization-program"
+    | "rag-delivery-system"
+    | "hybrid-forecasting-decision-support";
   title: string;
   category: ProjectCategory;
   iconKey: ServiceIconKey;
   context: string;
   role: string;
+  scope: string;
   bullets: string[];
   tools: ToolRef[];
   details: ProjectDetails;
@@ -41,247 +41,302 @@ export type ProjectItem = {
 
 const t = {
   aws: { key: "aws" as const, label: "AWS" },
-  azure: { key: "azure" as const, label: "Azure / GCP Evaluation" },
-  security: { key: "security" as const, label: "Security / Compliance" },
-  pmatt: { key: "pmatt" as const, label: "Project Planning" },
-  analytics: { key: "analytics" as const, label: "Analytics Dashboards" },
-  python: { key: "python" as const, label: "Python" },
+  azure: { key: "azure" as const, label: "Azure" },
+  linux: { key: "linux" as const, label: "Linux (RHEL/SLES/CentOS)" },
+  vmware: { key: "vmware" as const, label: "VMware vSphere Replication" },
+  cloudendure: { key: "cloudendure" as const, label: "CloudEndure" },
+  universalDiscovery: {
+    key: "universalDiscovery" as const,
+    label: "Universal Discovery",
+  },
+  powerbi: { key: "powerbi" as const, label: "Power BI" },
   jira: { key: "jira" as const, label: "Jira" },
-  docker: { key: "docker" as const, label: "Cloud/Platform Packaging" },
-  git: { key: "git" as const, label: "Git" },
-  cloudendure: { key: "cloudendure" as const, label: "Migration Simulation Controls" },
-  ollama: { key: "ollama" as const, label: "Ollama" },
-  llamaindex: { key: "llamaindex" as const, label: "LlamaIndex" },
+  serviceNow: { key: "serviceNow" as const, label: "ServiceNow" },
+  python: { key: "python" as const, label: "Python" },
+  sql: { key: "sql" as const, label: "SQL" },
+  langchain: { key: "langchain" as const, label: "LangChain" },
   chroma: { key: "chroma" as const, label: "ChromaDB" },
-  fastapi: { key: "fastapi" as const, label: "FastAPI" },
-  prompting: { key: "prompting" as const, label: "Prompt Engineering" },
-  ml: { key: "ml" as const, label: "Machine Learning" },
-};
+  ollama: { key: "ollama" as const, label: "Ollama" },
+  prompting: { key: "prompting" as const, label: "Prompt Guardrails" },
+  ml: { key: "ml" as const, label: "Model Validation" },
+  analytics: { key: "analytics" as const, label: "Decision Dashboards" },
+} satisfies Record<string, ToolRef>;
 
 export const projects: ProjectItem[] = [
   {
-    id: "proj-cloud-migration-strategy",
-    slug: "cloud-migration-strategy",
-    title: "Cloud Migration Strategy for Data Centers",
-    category: "Cloud & Infrastructure Strategy",
+    id: "proj-enterprise-cloud-migration",
+    slug: "enterprise-cloud-migration-program",
+    title: "Enterprise Cloud Migration Program",
+    category: "Cloud Migration Programs",
     iconKey: "cloudMigration",
-    context: "Stevens Projects · Academic Initiative",
-    role: "Strategy Lead / Technical PM (Academic Program)",
+    context: "DXC Technology | Feb 2020 - Dec 2023",
+    role: "Technical Project Manager",
+    scope:
+      "Directed multi-wave migration delivery for 1000+ Linux servers across enterprise data center to AWS programs.",
     bullets: [
-      "Designed end-to-end migration strategy with phased roadmap and governance.",
-      "Defined risk controls, change readiness, and KPI-driven success criteria.",
-      "Built structured schedule and execution model to reduce migration disruption.",
+      "Led dependency discovery and migration wave planning using Universal Discovery outputs.",
+      "Coordinated approximately 40 engineers across global infra, app, network, and operations teams.",
+      "Governed readiness validation, rollback criteria, and production cutover execution.",
     ],
-    tools: [t.aws, t.azure, t.security, t.pmatt],
+    tools: [
+      t.aws,
+      t.azure,
+      t.linux,
+      t.cloudendure,
+      t.universalDiscovery,
+      t.powerbi,
+      t.jira,
+      t.serviceNow,
+    ],
     details: {
       problem:
-        "Organizations need a structured migration plan that reduces disruption while improving scalability, security, and cost-efficiency.",
+        "Enterprise workloads needed migration from data center environments without disrupting business-critical operations.",
       approach: [
-        "Defined scope, stakeholders, mission, and success criteria for cloud migration.",
-        "Built phased roadmap covering assessment, architecture, migration planning, execution, and post-migration operations.",
-        "Developed a detailed WBS and schedule plan with risk management and change readiness.",
+        "Structured migration lifecycle from discovery and dependency mapping through cutover and stabilization.",
+        "Sequenced workloads into controlled waves based on readiness evidence and dependency risk.",
+        "Used governance checkpoints to keep schedule, risk, and stakeholder alignment on track.",
       ],
       contribution: [
-        "Led strategy framing and transition sequencing model.",
-        "Mapped governance controls, risk checkpoints, and communication cadence.",
-        "Translated business objectives into execution-ready migration phases.",
+        "Directed program planning cadence, RAID governance, and executive reporting.",
+        "Aligned global engineering teams on wave sequencing, cutover ownership, and escalation paths.",
+        "Maintained delivery controls for validation, rollback strategy, and production readiness.",
       ],
       deliverables: [
-        "Project scope + event/context artifacts",
-        "Multi-tier WBS + schedule plan",
-        "Risk management + communications plan",
+        "Migration wave plan and dependency matrix",
+        "Cutover runbooks with rollback criteria",
+        "Executive dashboards for cost, schedule, and risk visibility",
       ],
-      tools: [t.aws, t.azure, t.security, t.pmatt],
+      tools: [
+        t.aws,
+        t.azure,
+        t.linux,
+        t.cloudendure,
+        t.universalDiscovery,
+        t.powerbi,
+        t.jira,
+        t.serviceNow,
+      ],
       outcomes: [
-        "Migration plan optimized for scalability, security, cost-efficiency, and reduced disruption.",
+        "Delivered multi-wave enterprise migration execution across 1000+ Linux servers.",
+        "Drove approximately 15-20% infrastructure cost optimization through migration sequencing.",
+        "Improved schedule predictability through RAID governance and executive reporting.",
       ],
       artifacts: [
-        "Architecture and migration roadmap diagram (placeholder)",
-        "WBS and execution planning deck (placeholder)",
+        "Wave governance framework",
+        "Cutover readiness checklist",
+        "Executive migration KPI dashboard",
       ],
     },
   },
   {
-    id: "proj-tryb4ufly",
-    slug: "tryb4ufly",
-    title: "TryB4UFly (Airport-to-Flight Simulation Service)",
-    category: "Service/Product Innovation",
-    iconKey: "dashboards",
-    context: "Stevens Projects · Academic Initiative",
-    role: "Technical PM / Service Designer",
-    bullets: [
-      "Designed full service model for guided airport + flight simulation experience.",
-      "Built blueprint across customer journey, operations, and technology systems.",
-      "Defined scalable cloud + analytics architecture to support readiness scoring.",
-    ],
-    tools: [t.azure, t.analytics, t.cloudendure, t.aws],
-    details: {
-      problem:
-        "First-time and anxious flyers struggle due to unfamiliar airport steps and fear triggers (e.g., turbulence) with no safe practice environment.",
-      approach: [
-        "Designed the full experience flow: booking -> simulation -> debrief -> follow-up.",
-        "Built service blueprint across customer actions, frontstage, backstage ops, and technology systems.",
-        "Defined scalable architecture for booking, simulation engine, analytics, and readiness scoring.",
-      ],
-      contribution: [
-        "Owned service architecture and end-to-end flow definition.",
-        "Structured operational dependencies for delivery and scale.",
-        "Aligned digital touchpoints with measurable readiness outcomes.",
-      ],
-      deliverables: [
-        "Service Blueprint",
-        "Solution Sequence Diagram",
-        "Structure Diagram",
-        "Tech stack mapping (cloud + data/analytics)",
-      ],
-      tools: [t.azure, t.aws, t.analytics, t.cloudendure],
-      outcomes: [
-        "Improves readiness via feedback + confidence scoring and post-session tips.",
-        "Reduces bottlenecks via guided simulation and structured follow-up.",
-      ],
-      artifacts: [
-        "Service blueprint board (placeholder)",
-        "Flow architecture mock (placeholder)",
-      ],
-    },
-  },
-  {
-    id: "proj-sllm-business",
-    slug: "sllm-business",
-    title: "Small Language Learning Models (SLLMs) in Business",
-    category: "AI Strategy & Governance",
-    iconKey: "aiDelivery",
-    context: "Stevens Projects · Academic Initiative",
-    role: "AI Strategy Analyst",
-    bullets: [
-      "Created enterprise framework for adopting SLLMs in secure, task-focused workflows.",
-      "Compared LLM vs SLLM tradeoffs for cost, scalability, and privacy.",
-      "Mapped governance controls for responsible AI operations in business contexts.",
-    ],
-    tools: [t.security, t.analytics, t.ml, t.python, t.ollama, t.llamaindex, t.chroma, t.git],
-    details: {
-      problem:
-        "Businesses want AI automation but face cost, infrastructure, and privacy constraints with large-scale LLM deployments.",
-      approach: [
-        "Compared LLMs vs SLLMs for cost, scalability, and real-world suitability.",
-        "Defined in-house privacy/security posture (data control, compliance alignment, access controls).",
-        "Documented integration challenges and mitigation (monitoring, retraining, bias controls).",
-      ],
-      contribution: [
-        "Owned strategy analysis and governance framing.",
-        "Designed practical adoption sequence for enterprise rollouts.",
-        "Translated AI risk concerns into control-oriented implementation guidance.",
-      ],
-      deliverables: [
-        "Comparative analysis",
-        "Security & compliance considerations",
-        "Deployment architecture + data integration guidance",
-      ],
-      tools: [t.security, t.analytics, t.ml, t.python, t.ollama, t.llamaindex, t.chroma, t.git],
-      outcomes: [
-        "Provides a practical adoption strategy for secure, task-focused AI inside enterprise workflows.",
-      ],
-      artifacts: [
-        "SLLM governance canvas (placeholder)",
-        "AI strategy presentation (placeholder)",
-      ],
-    },
-  },
-  {
-    id: "proj-memoria",
-    slug: "memoria",
-    title: "MEMORIA (AI Memorial Platform)",
-    category: "Service/Product Innovation",
-    iconKey: "aiDelivery",
-    context: "Stevens Projects · Academic Initiative",
-    role: "Product Strategy + TPM (Academic Team)",
-    bullets: [
-      "Designed digital memorial platform with AI-generated eulogies and memorial pages.",
-      "Defined scalable cloud architecture and integration model for services and donations.",
-      "Outlined monetization model with inclusive remote participation capabilities.",
-    ],
-    tools: [t.aws, t.analytics, t.ml, t.security, t.python, t.fastapi, t.prompting],
-    details: {
-      problem:
-        "Families face information overload, disconnected tools, limited personalization, and low accessibility for distant relatives during memorial planning.",
-      approach: [
-        "Designed invitation workflows, memory collection, memorial page creation, live-stream access, and anniversary reminders.",
-        "Defined applied technologies: AI eulogy generation + content moderation + cloud scalability and secure storage.",
-        "Outlined integrations and revenue streams (one-time fees, e-commerce, partnerships).",
-      ],
-      contribution: [
-        "Led product strategy framing and service decomposition.",
-        "Mapped scalable architecture and integration pathways.",
-        "Connected user empathy goals with feasible delivery components.",
-      ],
-      deliverables: [
-        "Solution narrative + scenarios",
-        "Feature set + monetization model",
-        "Architecture/diagrams placeholders (sequence/structure)",
-      ],
-      tools: [t.aws, t.analytics, t.ml, t.security, t.python, t.fastapi, t.prompting],
-      outcomes: [
-        "Centralizes planning, increases inclusion, and scales memorial experiences globally.",
-      ],
-      artifacts: [
-        "Product concept deck (placeholder)",
-        "Architecture and sequence diagrams (placeholder)",
-      ],
-    },
-  },
-  {
-    id: "proj-netflix-bpr",
-    slug: "netflix-bpr",
-    title: "Netflix Recommendation Process Reengineering (BPR)",
-    category: "Process Innovation (BPR)",
+    id: "proj-data-center-consolidation",
+    slug: "data-center-migration-consolidation-program",
+    title: "Data Center Migration & Consolidation Program",
+    category: "Infrastructure Transformation",
     iconKey: "tpm",
-    context: "Stevens Projects · Academic Initiative",
-    role: "Process Analyst / Change Strategy",
+    context: "DXC Technology | Feb 2020 - Dec 2023",
+    role: "Technical Project Manager",
+    scope:
+      "Executed data center to data center and data center to AWS transitions across greenfield and brownfield infrastructure environments.",
     bullets: [
-      "Proposed process reengineering model to improve recommendation effectiveness.",
-      "Applied data analysis, benchmarking, and expert evaluation to TO-BE design.",
-      "Defined change strategy for measurable personalization and retention outcomes.",
+      "Planned migration move groups, maintenance windows, and cross-team cutover communications.",
+      "Executed readiness checks, rollback planning, and post-migration validation for production workloads.",
+      "Managed delivery governance across engineering teams and change control stakeholders.",
     ],
-    tools: [t.analytics, t.pmatt, t.jira, t.git],
+    tools: [
+      t.vmware,
+      t.linux,
+      t.cloudendure,
+      t.jira,
+      t.serviceNow,
+      t.powerbi,
+    ],
     details: {
       problem:
-        "Recommendation accuracy and content discovery drive engagement and retention; improvements must be systematic and measurable.",
+        "Programs required infrastructure consolidation with near-zero downtime expectations and strict production assurance.",
       approach: [
-        "Selected recommendation as a high-impact process aligned to strategic goals.",
-        "Proposed improvement methods: data analysis, benchmarking, expert evaluation.",
-        "Built TO-BE process design and change management approach to mitigate disruption.",
+        "Separated workloads into greenfield and brownfield paths with distinct risk controls.",
+        "Applied validation-first governance before each move window.",
+        "Kept rollback strategy and owner accountability explicit at every cutover gate.",
       ],
       contribution: [
-        "Performed process analysis and target-state design mapping.",
-        "Framed KPIs for recommendation quality and retention impact.",
-        "Built stakeholder-aligned change approach for adoption.",
+        "Owned planning and execution controls spanning dependency discovery, migration, and stabilization.",
+        "Coordinated dependency handoffs across infrastructure and application stakeholders.",
+        "Maintained change governance, RAID reporting, and stakeholder communications during transition windows.",
       ],
       deliverables: [
-        "Reengineering proposal + heuristics",
-        "TO-BE process design",
-        "Change management analysis",
+        "Migration readiness checklists",
+        "Cutover and rollback execution plans",
+        "Post-migration validation reports",
       ],
-      tools: [t.analytics, t.pmatt, t.jira, t.git],
+      tools: [
+        t.vmware,
+        t.linux,
+        t.cloudendure,
+        t.jira,
+        t.serviceNow,
+      ],
       outcomes: [
-        "Target outcomes / expected impact: improved recommendation accuracy, personalization quality, user satisfaction, and retention impact.",
+        "Delivered controlled migration execution across greenfield and brownfield environments.",
+        "Maintained rollback-ready delivery posture across production cutover windows.",
+        "Improved delivery predictability through structured governance and sequencing.",
       ],
       artifacts: [
-        "Process reengineering document (placeholder)",
-        "TO-BE model diagram (placeholder)",
+        "Migration runbook templates",
+        "Rollback decision matrix",
+        "Stabilization sign-off checklist",
+      ],
+    },
+  },
+  {
+    id: "proj-hybrid-cloud-linux-modernization",
+    slug: "hybrid-cloud-linux-modernization-program",
+    title: "Hybrid Cloud Infrastructure Modernization",
+    category: "Infrastructure Transformation",
+    iconKey: "linuxModernization",
+    context: "DXC Technology | Feb 2020 - Dec 2023",
+    role: "Technical Project Manager",
+    scope:
+      "Modernized Linux workload operations across hybrid cloud environments with repeatable governance, validation, and stabilization patterns.",
+    bullets: [
+      "Standardized Linux migration runbooks, validation gates, and post-cutover stabilization controls.",
+      "Aligned platform modernization milestones with risk visibility, change governance, and operational ownership transfer.",
+      "Connected infrastructure execution to cost optimization and service continuity outcomes.",
+    ],
+    tools: [t.linux, t.aws, t.azure, t.vmware, t.jira, t.serviceNow],
+    details: {
+      problem:
+        "Linux platform estates required modernization without introducing instability or delivery drift.",
+      approach: [
+        "Established repeatable runbook patterns across migration waves and operating environments.",
+        "Integrated governance signals (RAID, readiness checks, and cutover criteria) into execution cadence.",
+        "Applied post-migration stabilization and ownership handover controls.",
+      ],
+      contribution: [
+        "Led Linux modernization delivery planning and coordination across technical teams.",
+        "Maintained migration lifecycle governance from discovery through stabilization.",
+        "Ensured production readiness evidence before major platform transitions.",
+      ],
+      deliverables: [
+        "Linux migration playbooks",
+        "Readiness and rollback standards",
+        "Post-cutover stabilization tracking",
+      ],
+      tools: [t.linux, t.aws, t.azure, t.vmware, t.jira, t.serviceNow],
+      outcomes: [
+        "Established repeatable Linux platform modernization patterns for migration waves.",
+        "Improved production cutover reliability through validation and rollback controls.",
+        "Strengthened operational handover readiness after migration activities.",
+      ],
+      artifacts: [
+        "Linux readiness checklist",
+        "Migration wave SOPs",
+        "Operations handover pack",
+      ],
+    },
+  },
+  {
+    id: "proj-rag-delivery",
+    slug: "rag-delivery-system",
+    title: "Retrieval-Augmented Generation (RAG) Delivery System",
+    category: "Applied AI Projects",
+    iconKey: "aiDelivery",
+    context: "Applied AI Project | Secondary Capability",
+    role: "Technical Project Manager",
+    scope:
+      "Built a locally hosted RAG workflow to support source-grounded responses and governance-minded delivery decisions.",
+    bullets: [
+      "Designed ingestion, chunking, embedding, indexing, and retrieval orchestration workflow.",
+      "Implemented citation validation and refusal handling guardrails for grounded outputs.",
+      "Connected model behavior reporting to stakeholder-facing decision support dashboards.",
+    ],
+    tools: [t.python, t.langchain, t.chroma, t.ollama, t.prompting],
+    details: {
+      problem:
+        "Decision support use cases required reliable AI outputs with traceable source grounding and controlled risk.",
+      approach: [
+        "Built local-first retrieval architecture with explicit source linkage.",
+        "Added prompt and output controls to reduce ungrounded responses.",
+        "Integrated evaluation checkpoints before sharing outputs with stakeholders.",
+      ],
+      contribution: [
+        "Defined solution architecture and implementation path.",
+        "Established guardrails for accuracy and response behavior.",
+        "Aligned AI workflow outputs to program reporting needs.",
+      ],
+      deliverables: [
+        "Local RAG architecture",
+        "Prompt/output validation guardrails",
+        "Source-grounded response workflow",
+      ],
+      tools: [t.python, t.langchain, t.chroma, t.ollama, t.prompting],
+      outcomes: [
+        "Improved confidence in AI-assisted summaries through source-grounded output controls.",
+        "Demonstrated governance-minded applied AI capability as a complement to infrastructure delivery leadership.",
+      ],
+      artifacts: [
+        "RAG workflow design",
+        "Validation checklist",
+        "Evaluation summary dashboard",
+      ],
+    },
+  },
+  {
+    id: "proj-hybrid-forecasting",
+    slug: "hybrid-forecasting-decision-support",
+    title: "Hybrid Forecasting & Decision Support Model",
+    category: "Applied AI Projects",
+    iconKey: "dashboards",
+    context: "Applied AI Project | Secondary Capability",
+    role: "Technical Project Manager",
+    scope:
+      "Developed a hybrid forecasting workflow combining time-series baselines with decision-support prioritization logic.",
+    bullets: [
+      "Structured data preparation, model evaluation, and quality checkpoint cadence.",
+      "Built interpretable dashboard outputs for operational planning decisions.",
+      "Introduced validation and review controls to keep assumptions explicit.",
+    ],
+    tools: [t.python, t.sql, t.ml, t.analytics, t.powerbi],
+    details: {
+      problem:
+        "Operational planning needed interpretable forecasting outputs rather than opaque model-only predictions.",
+      approach: [
+        "Combined time-series forecasting with practical prioritization rules for decision support.",
+        "Validated outputs against operational constraints and stakeholder expectations.",
+        "Presented results in dashboard format for fast review and actionability.",
+      ],
+      contribution: [
+        "Framed use case, success criteria, and delivery checkpoints.",
+        "Aligned technical outputs to business review cadence.",
+        "Ensured governance and traceability in model reporting.",
+      ],
+      deliverables: [
+        "Hybrid forecasting workflow",
+        "Model validation summary",
+        "Decision-support dashboard",
+      ],
+      tools: [t.python, t.sql, t.ml, t.analytics, t.powerbi],
+      outcomes: [
+        "Delivered interpretable forecasting views for operational decision support.",
+        "Showed practical AI/analytics application under governance constraints.",
+      ],
+      artifacts: [
+        "Forecast evaluation report",
+        "Decision-prioritization matrix",
+        "Operational dashboard snapshots",
       ],
     },
   },
 ];
 
 export const projectCategories: ProjectCategory[] = [
-  "Cloud & Infrastructure Strategy",
-  "Service/Product Innovation",
-  "AI Strategy & Governance",
-  "Process Innovation (BPR)",
+  "Infrastructure Transformation",
+  "Cloud Migration Programs",
+  "Applied AI Projects",
 ];
 
 export const featuredProjectSlugs: ProjectItem["slug"][] = [
-  "cloud-migration-strategy",
-  "tryb4ufly",
-  "sllm-business",
+  "enterprise-cloud-migration-program",
+  "data-center-migration-consolidation-program",
+  "hybrid-cloud-linux-modernization-program",
 ];
