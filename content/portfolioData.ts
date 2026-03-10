@@ -388,7 +388,7 @@ export const portfolioData = {
   contact: {
     line: "If your systems are changing, precision in delivery is the advantage.",
     email: "eswar.rayavarapu23@gmail.com",
-    linkedin: "https://www.linkedin.com/in/eswarrayavarapu/",
+    linkedin: "https://www.linkedin.com/in/eswar-rayavarapu",
     resume: "/Eswar_Raviteja_Rayavarapu_AI_TPM.pdf",
   },
 };

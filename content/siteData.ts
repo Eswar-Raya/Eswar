@@ -521,7 +521,7 @@ export const siteData: SiteData = {
     title: "Contact",
     lead: "If your systems are changing, clarity matters.",
     email: "eswar.rayavarapu23@gmail.com",
-    linkedinUrl: "https://www.linkedin.com/in/eswarrayavarapu/",
+    linkedinUrl: "https://www.linkedin.com/in/eswar-rayavarapu",
     resumeUrl: "/Eswar_Raviteja_Rayavarapu_Infrastructure_Cloud_Transformation_PM.pdf",
   },
 };

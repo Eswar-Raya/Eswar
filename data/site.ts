@@ -108,6 +108,6 @@ export const metrics: MetricItem[] = [
 
 export const contact = {
   email: "eswar.rayavarapu23@gmail.com",
-  linkedin: "https://www.linkedin.com/in/eswarrayavarapu/",
+  linkedin: "https://www.linkedin.com/in/eswar-rayavarapu",
   resume: "/Eswar_Raviteja_Rayavarapu_Infrastructure_Cloud_Transformation_PM.pdf",
 };
