@@ -33,7 +33,7 @@ export default async function ExperienceDetailPage({
     <main className="corp-page">
       <VisualNav />
       <div className="corp-container">
-        <section className="panel detail-hero">
+        <section className={`panel detail-hero ${!isEducationPhase ? "panel-navy" : ""}`}>
           <Link href="/experience" className="detail-back">
             Back to Experience
           </Link>

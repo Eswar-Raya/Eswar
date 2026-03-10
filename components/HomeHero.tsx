@@ -35,16 +35,6 @@ export default function HomeHero({
           show: { transition: { staggerChildren: 0.14 } },
         }}
       >
-        <motion.span
-          className="page-eyebrow"
-          variants={{
-            hidden: { opacity: 0, y: 24 },
-            show: { opacity: 1, y: 0 },
-          }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-        >
-          Infrastructure Leadership Portfolio
-        </motion.span>
         <motion.h1
           className="home-hero-title"
           variants={{

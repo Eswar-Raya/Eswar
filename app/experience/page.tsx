@@ -22,9 +22,6 @@ export default function ExperiencePage() {
             <div>
               <span className="panel-kicker">Experience Journey</span>
               <h2>From telecom operations to enterprise cloud transformation leadership.</h2>
-              <p>
-                Recruiter-first timeline with DXC as the flagship role and education separated.
-              </p>
             </div>
             <div className="journey-map">
               {timelineExperiences.slice(0, 4).map((item) => (

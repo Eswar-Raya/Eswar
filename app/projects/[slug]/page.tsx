@@ -27,7 +27,7 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
     <main className="corp-page">
       <VisualNav />
       <div className="corp-container">
-        <section className="panel detail-hero">
+        <section className="panel detail-hero panel-navy">
           <Link href="/projects" className="detail-back">
             Back to Projects
           </Link>
@@ -45,7 +45,13 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
           <span className="detail-role">{project.role}</span>
           <div className="chip-list">
             {project.tools.map((tool) => (
-              <ToolBadge key={tool.label} toolKey={tool.key} label={tool.label} size="sm" />
+              <ToolBadge
+                key={tool.label}
+                toolKey={tool.key}
+                label={tool.label}
+                size="sm"
+                tone="dark"
+              />
             ))}
           </div>
         </section>
@@ -80,11 +86,17 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
           ]}
         />
 
-        <section className="panel detail-card detail-tools-card">
+        <section className="panel detail-card detail-tools-card panel-navy detail-tools-card-navy">
           <h2>Tools</h2>
           <div className="chip-list">
             {project.details.tools.map((tool) => (
-              <ToolBadge key={tool.label} toolKey={tool.key} label={tool.label} size="sm" />
+              <ToolBadge
+                key={tool.label}
+                toolKey={tool.key}
+                label={tool.label}
+                size="sm"
+                tone="dark"
+              />
             ))}
           </div>
         </section>

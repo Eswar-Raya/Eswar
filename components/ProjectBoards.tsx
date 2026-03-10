@@ -68,12 +68,10 @@ export default function ProjectBoards({ items }: ProjectBoardsProps) {
       </div>
 
       <div className="project-grid project-grid-wide">
-        {filteredProjects.map((project, index) => (
+        {filteredProjects.map((project) => (
           <motion.article
             key={project.slug}
-            className={`panel project-card ${
-              project.category !== "Applied AI Projects" && index % 2 === 0 ? "project-card-navy" : ""
-            }`}
+            className="panel project-card"
             whileHover={reduceMotion ? undefined : { y: -2 }}
             transition={{ duration: 0.18, ease: "easeOut" }}
           >

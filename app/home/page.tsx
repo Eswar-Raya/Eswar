@@ -41,7 +41,6 @@ const flagshipTools = [
 export default function HomePage() {
   return (
     <PageContainer
-      eyebrow="Infrastructure Leadership Portfolio"
       title="Infrastructure & Cloud Transformation Technical Project Manager"
       subtitle="Enterprise cloud migration, data center transformation, Linux platform modernization, and governance-led delivery."
       hideBanner
