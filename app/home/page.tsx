@@ -23,10 +23,10 @@ const featuredProjects = projects.filter((item) =>
 );
 const transformationPreview = featuredProjects.slice(0, 2);
 const credibilityItems = [
-  "AT&T",
-  "Workforce Resilience",
-  "DIRECTV",
-  "Enterprise Infrastructure Programs",
+  "DXC (AT&T, WorkForce Resilience, Astro, Downer)",
+  "Ericsson",
+  "Huawei",
+  "TATA",
 ];
 
 const flagshipTools = [

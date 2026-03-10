@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
+import { BriefcaseBusiness, Building2, FileDown, Layers3, Mail, Network } from "lucide-react";
 import CloudLifecycleDiagram from "@/components/CloudLifecycleDiagram";
 
 type HomeHeroProps = {
@@ -84,33 +85,50 @@ export default function HomeHero({
           }}
           transition={{ duration: 0.6, ease: "easeOut" }}
         >
-          <Link href="/experience" className="btn btn-primary">
+          <Link href="/experience" className="btn btn-primary hero-cta-btn">
+            <BriefcaseBusiness className="hero-cta-icon" aria-hidden="true" />
             View Experience
           </Link>
-          <Link href="/projects" className="btn btn-primary">
+          <Link href="/projects" className="btn btn-primary hero-cta-btn">
+            <Network className="hero-cta-icon" aria-hidden="true" />
             View Transformation Programs
           </Link>
-          <Link href={resumeUrl} className="btn btn-secondary" target="_blank" rel="noreferrer">
+          <Link
+            href={resumeUrl}
+            className="btn btn-secondary hero-cta-btn"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <FileDown className="hero-cta-icon" aria-hidden="true" />
             Download Resume
           </Link>
-          <Link href="/contact" className="btn btn-secondary">
+          <Link href="/contact" className="btn btn-secondary hero-cta-btn">
+            <Mail className="hero-cta-icon" aria-hidden="true" />
             Contact
           </Link>
         </motion.div>
 
         <motion.div
-          className="hero-cred-strip"
+          className="hero-cred-tile"
           variants={{
             hidden: { opacity: 0, y: 18 },
             show: { opacity: 1, y: 0 },
           }}
           transition={{ duration: 0.6, ease: "easeOut" }}
         >
-          {credibilityItems.map((item) => (
-            <span key={item} className="hero-cred-chip">
-              {item}
-            </span>
-          ))}
+          <span className="hero-cred-title">Clients</span>
+          <div className="hero-cred-strip">
+            {credibilityItems.map((item) => (
+              <span key={item} className="hero-cred-chip">
+                {item.includes("Programs") ? (
+                  <Layers3 className="hero-cred-icon" aria-hidden="true" />
+                ) : (
+                  <Building2 className="hero-cred-icon" aria-hidden="true" />
+                )}
+                {item}
+              </span>
+            ))}
+          </div>
         </motion.div>
       </motion.div>
 
