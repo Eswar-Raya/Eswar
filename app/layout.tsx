@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Script from "next/script";
 import "./globals.css";
+import ScrollToTop from "../components/ScrollToTop";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://eswarrayavarapu.com"),
@@ -21,6 +22,7 @@ export default function RootLayout({
     <html lang="en">
       <body suppressHydrationWarning className="antialiased">
         {children}
+        <ScrollToTop />
         {/* Profile chatbot: uses same-origin /chat (proxies to CHATBOT_API_URL when set) */}
         <Script
           src="/widget.js?v=20260311"

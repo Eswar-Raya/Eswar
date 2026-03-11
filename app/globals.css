@@ -58,6 +58,64 @@ body {
   min-height: 100vh;
 }
 
+/* Scroll-to-top button (transparent, right side) */
+.scroll-top {
+  position: fixed;
+  right: 20px;
+  bottom: 118px; /* sits above chat mascot */
+  width: 42px;
+  height: 42px;
+  border-radius: 999px;
+  border: 1px solid rgba(46, 79, 130, 0.22);
+  background: rgba(255, 255, 255, 0.55);
+  color: var(--accent);
+  box-shadow: 0 12px 28px rgba(11, 33, 61, 0.12);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: translateY(10px);
+  pointer-events: none;
+  transition: opacity 180ms ease, transform 180ms ease, background 180ms ease;
+  z-index: 9998;
+}
+
+.scroll-top svg {
+  width: 20px;
+  height: 20px;
+}
+
+.scroll-top.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.scroll-top:hover {
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.scroll-top:focus-visible {
+  outline: 2px solid rgba(46, 79, 130, 0.55);
+  outline-offset: 3px;
+}
+
+@media (max-width: 480px) {
+  .scroll-top {
+    right: 14px;
+    bottom: 112px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-top {
+    transition: none;
+  }
+}
+
 a {
   color: inherit;
   text-decoration: none;
