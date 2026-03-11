@@ -9,31 +9,33 @@
   root.id = "profile-chat-root";
   root.innerHTML =
     '<button type="button" id="profile-chat-toggle" aria-label="Ask about my profile">' +
-    '<svg id="profile-chat-mascot" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
-    '<circle cx="32" cy="18" r="10" fill="rgba(255,255,255,0.18)" stroke="currentColor"/>' +
-    '<path d="M22 18c3-3 17-3 20 0" opacity="0.9"/>' +
-    '<path d="M24 22h0" />' +
-    '<path d="M40 22h0" />' +
-    '<path d="M32 28c-3 0-6-2-6-2" opacity="0.85"/>' +
-    '<path d="M32 28c3 0 6-2 6-2" opacity="0.85"/>' +
-    '<path d="M32 28v2" opacity="0.6"/>' +
-    '<path d="M32 28c0 4-4 6-8 6" opacity="0.6"/>' +
-    '<path d="M32 28c0 4 4 6 8 6" opacity="0.6"/>' +
-    '<path d="M32 28c0 6 0 10 0 14" />' +
-    '<path d="M22 38c4-6 16-6 20 0" opacity="0.8"/>' +
-    '<path d="M24 54c4-10 12-10 16 0" opacity="0.65"/>' +
-    '<g id="profile-chat-mascot-arm" transform="translate(44,32)">' +
-    '<path d="M0 0c6 2 10 6 12 10" />' +
-    '<path d="M12 10l4-2" />' +
-    '<path d="M12 10l2 4" />' +
+    '<svg id="profile-chat-mascot" viewBox="0 0 64 64" aria-hidden="true">' +
+    '<defs>' +
+    '<linearGradient id="pc-hood" x1="0" y1="0" x2="1" y2="1">' +
+    '<stop offset="0" stop-color="#EAF0F7"/>' +
+    '<stop offset="1" stop-color="#CFE0F5"/>' +
+    "</linearGradient>" +
+    "</defs>" +
+    '<g fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">' +
+    '<path d="M18 30c1-12 10-20 14-20h0c4 0 13 8 14 20" fill="url(#pc-hood)" opacity="0.95"/>' +
+    '<path d="M22 30c2-8 7-14 10-14s8 6 10 14" opacity="0.55"/>' +
+    '<circle cx="32" cy="30" r="10" fill="rgba(255,255,255,0.18)"/>' +
+    '<circle cx="28" cy="30" r="1.2" fill="currentColor" stroke="none"/>' +
+    '<circle cx="36" cy="30" r="1.2" fill="currentColor" stroke="none"/>' +
+    '<path d="M29 35c2 2 4 2 6 0" opacity="0.9"/>' +
+    '<path d="M24 42c2-4 6-7 8-7s6 3 8 7" fill="rgba(255,255,255,0.10)" opacity="0.9"/>' +
+    '<path d="M26 54c2-6 10-6 12 0" opacity="0.7"/>' +
+    '<g id="profile-chat-mascot-arm" transform="translate(43,41)">' +
+    '<path d="M0 0c6 2 11 6 13 11" />' +
+    '<path d="M13 11l4-2" />' +
+    '<path d="M13 11l2 4" />' +
     "</g>" +
-    '<path d="M20 34c4 4 8 6 12 6" opacity="0.6"/>' +
+    "</g>" +
     "</svg>" +
     "</button>" +
     '<div id="profile-chat-panel">' +
     '<div id="profile-chat-header">Ask about my profile <button type="button" id="profile-chat-close" aria-label="Close">×</button></div>' +
     '<div id="profile-chat-messages"></div>' +
-    '<div id="profile-chat-suggestions" aria-label="Suggested actions"></div>' +
     '<div id="profile-chat-input-wrap">' +
     '<form id="profile-chat-input-form">' +
     '<textarea id="profile-chat-input" rows="1" placeholder="Ask anything about my profile..." autocomplete="off"></textarea>' +
@@ -54,7 +56,6 @@
   var toggle = document.getElementById("profile-chat-toggle");
   var closeBtn = document.getElementById("profile-chat-close");
   var messagesEl = document.getElementById("profile-chat-messages");
-  var suggestionsEl = document.getElementById("profile-chat-suggestions");
   var form = document.getElementById("profile-chat-input-form");
   var input = document.getElementById("profile-chat-input");
   var sendBtn = document.getElementById("profile-chat-send");
@@ -115,46 +116,42 @@
     return html;
   }
 
+  function mascotSvgMarkup() {
+    // Same SVG as the button mascot, smaller for message avatars.
+    return (
+      '<svg viewBox="0 0 64 64" aria-hidden="true">' +
+      '<defs><linearGradient id="pc-hood-mini" x1="0" y1="0" x2="1" y2="1">' +
+      '<stop offset="0" stop-color="#EAF0F7"/>' +
+      '<stop offset="1" stop-color="#CFE0F5"/>' +
+      "</linearGradient></defs>" +
+      '<g fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">' +
+      '<path d="M18 30c1-12 10-20 14-20h0c4 0 13 8 14 20" fill="url(#pc-hood-mini)" opacity="0.95"/>' +
+      '<circle cx="32" cy="30" r="10" fill="rgba(255,255,255,0.18)"/>' +
+      '<circle cx="28" cy="30" r="1.2" fill="currentColor" stroke="none"/>' +
+      '<circle cx="36" cy="30" r="1.2" fill="currentColor" stroke="none"/>' +
+      '<path d="M29 35c2 2 4 2 6 0" opacity="0.9"/>' +
+      "</g></svg>"
+    );
+  }
+
   function addMessage(role, content, isThinking) {
     var div = document.createElement("div");
     div.className = "msg " + (isThinking ? "thinking" : role);
     if (role === "assistant" && !isThinking) {
-      div.innerHTML = linkifySafe(content);
+      div.classList.add("with-avatar");
+      div.innerHTML =
+        '<span class="avatar" aria-hidden="true">' +
+        mascotSvgMarkup() +
+        "</span>" +
+        '<span class="bubble">' +
+        linkifySafe(content) +
+        "</span>";
     } else {
       div.textContent = content;
     }
     messagesEl.appendChild(div);
     messagesEl.scrollTop = messagesEl.scrollHeight;
     return div;
-  }
-
-  function renderSuggestions() {
-    if (!suggestionsEl) return;
-    suggestionsEl.innerHTML = "";
-
-    var items = [
-      { type: "link", label: "Experience →", href: "https://eswarrayavarapu.com/experience" },
-      { type: "link", label: "Programs →", href: "https://eswarrayavarapu.com/projects" },
-      { type: "link", label: "Contact →", href: "https://eswarrayavarapu.com/contact" },
-    ];
-
-    items.forEach(function (item) {
-      var btn = document.createElement("button");
-      btn.type = "button";
-      btn.className = "chip";
-      btn.textContent = item.label;
-      btn.addEventListener("click", function () {
-        if (item.type === "link") {
-          window.open(item.href, "_blank", "noopener,noreferrer");
-          return;
-        }
-        if (item.type === "ask") {
-          input.value = item.text;
-          form.requestSubmit();
-        }
-      });
-      suggestionsEl.appendChild(btn);
-    });
   }
 
   function setThinking(show) {
@@ -201,8 +198,6 @@
         addMessage("assistant", "Sorry, something went wrong. " + (err.message || "Please try again."));
       });
   });
-
-  renderSuggestions();
 
   /* Enter sends message; Shift+Enter adds new line */
   input.addEventListener("keydown", function (e) {
