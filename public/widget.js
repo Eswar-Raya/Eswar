@@ -14,6 +14,7 @@
     '<div id="profile-chat-panel">' +
     '<div id="profile-chat-header">Ask about my profile <button type="button" id="profile-chat-close" aria-label="Close">×</button></div>' +
     '<div id="profile-chat-messages"></div>' +
+    '<div id="profile-chat-suggestions" aria-label="Suggested actions"></div>' +
     '<div id="profile-chat-input-wrap">' +
     '<form id="profile-chat-input-form">' +
     '<textarea id="profile-chat-input" rows="1" placeholder="Ask anything about my profile..." autocomplete="off"></textarea>' +
@@ -34,6 +35,7 @@
   var toggle = document.getElementById("profile-chat-toggle");
   var closeBtn = document.getElementById("profile-chat-close");
   var messagesEl = document.getElementById("profile-chat-messages");
+  var suggestionsEl = document.getElementById("profile-chat-suggestions");
   var form = document.getElementById("profile-chat-input-form");
   var input = document.getElementById("profile-chat-input");
   var sendBtn = document.getElementById("profile-chat-send");
@@ -58,6 +60,36 @@
     messagesEl.appendChild(div);
     messagesEl.scrollTop = messagesEl.scrollHeight;
     return div;
+  }
+
+  function renderSuggestions() {
+    if (!suggestionsEl) return;
+    suggestionsEl.innerHTML = "";
+
+    var items = [
+      { type: "link", label: "Experience", href: "https://eswarrayavarapu.com/experience" },
+      { type: "link", label: "Programs", href: "https://eswarrayavarapu.com/projects" },
+      { type: "link", label: "Contact", href: "https://eswarrayavarapu.com/contact" },
+      { type: "ask", label: "Top skills", text: "What are Eswar's top skills?" },
+    ];
+
+    items.forEach(function (item) {
+      var btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "chip";
+      btn.textContent = item.label;
+      btn.addEventListener("click", function () {
+        if (item.type === "link") {
+          window.open(item.href, "_blank", "noopener,noreferrer");
+          return;
+        }
+        if (item.type === "ask") {
+          input.value = item.text;
+          form.requestSubmit();
+        }
+      });
+      suggestionsEl.appendChild(btn);
+    });
   }
 
   function setThinking(show) {
@@ -104,6 +136,8 @@
         addMessage("assistant", "Sorry, something went wrong. " + (err.message || "Please try again."));
       });
   });
+
+  renderSuggestions();
 
   /* Enter sends message; Shift+Enter adds new line */
   input.addEventListener("keydown", function (e) {

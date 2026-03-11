@@ -101,6 +101,30 @@
   background: #f8f9fa;
 }
 
+#profile-chat-suggestions {
+  padding: 10px 12px 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  background: #fff;
+  border-top: 1px solid #e5e7eb;
+}
+
+#profile-chat-suggestions .chip {
+  border: 1px solid rgba(46, 79, 130, 0.25);
+  background: rgba(46, 79, 130, 0.06);
+  color: #2E4F82;
+  padding: 7px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+#profile-chat-suggestions .chip:hover {
+  background: rgba(46, 79, 130, 0.1);
+}
+
 #profile-chat-messages .msg {
   max-width: 85%;
   padding: 10px 14px;
