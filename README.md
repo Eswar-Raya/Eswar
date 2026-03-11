@@ -39,20 +39,13 @@ Key security-related values:
 
 ### Profile chatbot on the live site
 
-The floating “Ask about my profile” chat widget is wired to a **profile chatbot** (from `Projects/AI_Chatbot` or `services/profile-chat`). Vercel only hosts the Next.js app, so the chatbot API must run elsewhere.
+The floating “Ask about my profile” chat widget now talks to a **Vercel serverless route** at `/chat` which calls OpenAI directly using your key.
 
-1. **Deploy the chatbot API** (Python FastAPI) to a service that runs 24/7, e.g.:
-   - [Railway](https://railway.app)
-   - [Render](https://render.com)
-   - [Fly.io](https://fly.io)
+1. In your Vercel project → **Settings → Environment Variables**, add:
+   - **`OPENAI_API_KEY`** – your OpenAI API key
+   - Optional: **`OPENAI_MODEL`** – e.g. `gpt-4o-mini`
 
-   Use the code in `Projects/AI_Chatbot` (or `services/profile-chat`): run `uvicorn api:app --host 0.0.0.0`, and ensure `profile.json` and `.env` (e.g. `OPENAI_API_KEY` or `USE_OLLAMA=true`) are available there.
-
-2. **Set the API URL on Vercel**: In your Vercel project → Settings → Environment Variables, add:
-   - **Name:** `CHATBOT_API_URL`
-   - **Value:** your deployed API URL (e.g. `https://your-app.up.railway.app`)
-
-3. Redeploy the portfolio. The widget will call your site’s `/chat` route, which proxies to `CHATBOT_API_URL`. If `CHATBOT_API_URL` is not set, the widget still appears but will show a “not configured” message when users send a message.
+2. Redeploy the portfolio. The widget will call `/chat` on the same origin, and the route in `app/chat/route.ts` will handle the conversation using OpenAI.
 
 ## Learn More
 

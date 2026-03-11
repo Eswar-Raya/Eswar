@@ -1,11 +1,17 @@
 import { NextResponse } from "next/server";
 
 /**
- * Proxy for the profile chatbot (AI_Chatbot / services/profile-chat).
+ * Serverless profile chatbot implemented directly on Vercel.
  * The widget sends { message, history } and expects { reply }.
- * Set CHATBOT_API_URL in Vercel to your deployed profile-chat API (e.g. Railway, Render).
+ *
+ * Requires:
+ * - OPENAI_API_KEY (Vercel env)
+ * - optional OPENAI_MODEL (defaults to gpt-4o-mini)
  */
-const CHATBOT_API_URL = process.env.CHATBOT_API_URL ?? "";
+
+const OPENAI_API_KEY = process.env.OPENAI_API_KEY ?? "";
+const OPENAI_MODEL = process.env.OPENAI_MODEL ?? "gpt-4o-mini";
+
 const RATE_LIMIT_WINDOW_MS = Number(
   process.env.CHAT_RATE_LIMIT_WINDOW_MS ?? "60000",
 );
@@ -33,7 +39,7 @@ function getClientId(request: Request): string {
 }
 
 function checkRateLimit(
-  clientId: string
+  clientId: string,
 ): { allowed: true } | { allowed: false; retryAfterSeconds: number } {
   const now = Date.now();
   const currentEntry = rateLimitStore.get(clientId);
@@ -65,14 +71,34 @@ function cleanupRateLimitStore() {
   }
 }
 
+const SYSTEM_PROMPT = `
+You are a helpful AI assistant that lives on Eswar Raviteja Rayavarapu's public portfolio website (eswarrayavarapu.com).
+Visitors are recruiters, hiring managers, or peers who want to quickly understand Eswar's background.
+You are NOT talking to Eswar; you are describing him in the third person.
+
+Goals:
+- Give short, clear answers (1–2 sentences, or at most 3 short bullets).
+- When relevant, point visitors to the right page on the site:
+  - Experience page: https://eswarrayavarapu.com/experience
+  - Transformation programs: https://eswarrayavarapu.com/projects
+  - Contact page: https://eswarrayavarapu.com/contact
+
+Style rules (follow strictly):
+- Always refer to Eswar in the third person (\"Eswar\", \"he\", \"his\"). Never say \"you\" when you mean Eswar.
+- Keep answers concise and easy to scan.
+- If you include a URL, do NOT put a period or comma immediately after it. End the sentence before or after the link.
+- When asked broad questions (\"strengths\", \"top skills\", \"summary\"), mention at most 3 key points and then suggest where to read more.
+  Example: \"You can see more detail on the Experience page: https://eswarrayavarapu.com/experience\"
+`;
+
 export async function POST(request: Request) {
-  if (!CHATBOT_API_URL) {
+  if (!OPENAI_API_KEY) {
     return NextResponse.json(
       {
         detail:
-          "Profile chat is not configured. Set CHATBOT_API_URL to your deployed chatbot API.",
+          "Profile chat is not configured. Set OPENAI_API_KEY in your Vercel environment.",
       },
-      { status: 503 }
+      { status: 503 },
     );
   }
 
@@ -85,7 +111,7 @@ export async function POST(request: Request) {
       {
         status: 429,
         headers: { "Retry-After": String(rateLimit.retryAfterSeconds) },
-      }
+      },
     );
   }
 
@@ -93,7 +119,7 @@ export async function POST(request: Request) {
   if (!contentType?.includes("application/json")) {
     return NextResponse.json(
       { detail: "Request must be JSON." },
-      { status: 415 }
+      { status: 415 },
     );
   }
 
@@ -103,7 +129,7 @@ export async function POST(request: Request) {
   } catch {
     return NextResponse.json(
       { detail: "Invalid JSON payload." },
-      { status: 400 }
+      { status: 400 },
     );
   }
 
@@ -111,46 +137,79 @@ export async function POST(request: Request) {
   if (!message) {
     return NextResponse.json(
       { detail: "message is required." },
-      { status: 400 }
+      { status: 400 },
     );
   }
 
   const history = Array.isArray(body.history) ? body.history : [];
-  const backendUrl = CHATBOT_API_URL.replace(/\/$/, "");
+  const apiUrl = "https://api.openai.com/v1/chat/completions";
   const abortController = new AbortController();
   const timeoutId = setTimeout(
     () => abortController.abort(),
-    BACKEND_TIMEOUT_MS
+    BACKEND_TIMEOUT_MS,
   );
 
+  const messages = [
+    { role: "system", content: SYSTEM_PROMPT },
+    ...history
+      .filter(
+        (h) =>
+          h &&
+          (h.role === "user" || h.role === "assistant") &&
+          typeof h.content === "string" &&
+          h.content.trim(),
+      )
+      .slice(-8),
+    { role: "user", content: message },
+  ];
+
   try {
-    const response = await fetch(`${backendUrl}/chat`, {
+    const response = await fetch(apiUrl, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ message, history }),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${OPENAI_API_KEY}`,
+      },
+      body: JSON.stringify({
+        model: OPENAI_MODEL,
+        messages,
+        temperature: 0.4,
+      }),
       cache: "no-store",
       signal: abortController.signal,
     });
 
     const data = await response.json().catch(() => ({}));
+
     if (!response.ok) {
-      return NextResponse.json(
-        { detail: data.detail ?? "Chat backend error." },
-        { status: response.status === 503 ? 503 : 502 }
-      );
+      const detail =
+        (data && (data.error?.message || data.detail)) ||
+        "Chat backend error.";
+      const status =
+        typeof data?.error?.code === "string" &&
+        data.error.code.toLowerCase().includes("quota")
+          ? 429
+          : response.status;
+
+      return NextResponse.json({ detail }, { status });
     }
 
-    return NextResponse.json({ reply: data.reply ?? "" });
+    const reply: string =
+      data.choices?.[0]?.message?.content && typeof data.choices[0].message.content === "string"
+        ? data.choices[0].message.content
+        : "";
+
+    return NextResponse.json({ reply });
   } catch (error) {
     if (error instanceof Error && error.name === "AbortError") {
       return NextResponse.json(
         { detail: "Assistant backend timed out." },
-        { status: 504 }
+        { status: 504 },
       );
     }
     return NextResponse.json(
-      { detail: "Unable to reach chatbot backend." },
-      { status: 502 }
+      { detail: "Unable to reach assistant backend." },
+      { status: 502 },
     );
   } finally {
     clearTimeout(timeoutId);
