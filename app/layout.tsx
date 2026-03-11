@@ -23,7 +23,7 @@ export default function RootLayout({
         {children}
         {/* Profile chatbot: uses same-origin /chat (proxies to CHATBOT_API_URL when set) */}
         <Script
-          src="/widget.js"
+          src="/widget.js?v=20260311"
           strategy="afterInteractive"
         />
       </body>
