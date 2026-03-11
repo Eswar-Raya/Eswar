@@ -8,8 +8,8 @@
   var root = document.createElement("div");
   root.id = "profile-chat-root";
   root.innerHTML =
-    '<button type="button" id="profile-chat-toggle" aria-label="Open chat">' +
-    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>' +
+    '<button type="button" id="profile-chat-toggle" aria-label="Ask about my profile">' +
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.5 4.5L18 9l-4.5 1.5L12 15l-1.5-4.5L6 9l4.5-1.5L12 3z"/><path d="M19 10l.75 2.25L22 13l-2.25.75L19 16l-.75-2.25L16 13l2.25-.75L19 10z"/><path d="M5 16l.75 2.25L8 19.5l-2.25.75L5 22.5l-.75-2.25L2 19.5l2.25-.75L5 16z"/></svg>' +
     "</button>" +
     '<div id="profile-chat-panel">' +
     '<div id="profile-chat-header">Ask about my profile <button type="button" id="profile-chat-close" aria-label="Close">×</button></div>' +
@@ -103,6 +103,14 @@
         history.push({ role: "assistant", content: "Sorry, something went wrong. Please try again." });
         addMessage("assistant", "Sorry, something went wrong. " + (err.message || "Please try again."));
       });
+  });
+
+  /* Enter sends message; Shift+Enter adds new line */
+  input.addEventListener("keydown", function (e) {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      form.requestSubmit();
+    }
   });
 
   /* Auto-resize textarea */
