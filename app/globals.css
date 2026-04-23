@@ -1294,7 +1294,7 @@ h4 {
 }
 
 .service-card.is-offset {
-  transform: translateY(12px);
+  margin-top: 12px;
 }
 
 .service-card-head {

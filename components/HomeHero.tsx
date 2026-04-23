@@ -83,15 +83,16 @@ export default function HomeHero({
             <Network className="hero-cta-icon" aria-hidden="true" />
             View Transformation Programs
           </Link>
-          <Link
+          <a
             href={resumeUrl}
             className="btn btn-secondary hero-cta-btn"
             target="_blank"
             rel="noreferrer"
+            download
           >
             <FileDown className="hero-cta-icon" aria-hidden="true" />
             Download Resume
-          </Link>
+          </a>
           <Link href="/contact" className="btn btn-secondary hero-cta-btn">
             <Mail className="hero-cta-icon" aria-hidden="true" />
             Contact

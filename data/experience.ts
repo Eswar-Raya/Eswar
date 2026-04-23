@@ -241,7 +241,7 @@ export const experiences: ExperienceItem[] = [
     iconKey: "dxc",
     stageLabel: "DXC",
     type: "employment",
-    title: "Technical Project Manager | Cloud & Infrastructure Programs",
+    title: "Technical Project Manager | Cloud Infrastructure Programs",
     startDate: "2020-02",
     endDate: "2023-12",
     periodLabel: "Feb 2020 - Dec 2023",

@@ -97,6 +97,7 @@ export default function ContactPanel({
                 href={resume}
                 target="_blank"
                 rel="noreferrer"
+                download
                 className="contact-link"
                 variants={{
                   hidden: { opacity: 0, y: 20 },
