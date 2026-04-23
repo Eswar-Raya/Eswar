@@ -26,6 +26,7 @@ export type ProjectItem = {
     | "enterprise-cloud-migration-program"
     | "data-center-migration-consolidation-program"
     | "hybrid-cloud-linux-modernization-program"
+    | "renewsight-ai"
     | "rag-delivery-system"
     | "hybrid-forecasting-decision-support";
   title: string;
@@ -63,6 +64,53 @@ const t = {
 } satisfies Record<string, ToolRef>;
 
 export const projects: ProjectItem[] = [
+  {
+    id: "proj-renewsight-ai",
+    slug: "renewsight-ai",
+    title: "RenewSight-AI Predictive Analytics Platform",
+    category: "Applied AI Projects",
+    iconKey: "aiDelivery",
+    context: "Community Dreams Foundation | Dec 2025 - Present",
+    role: "Technical Project Manager",
+    scope:
+      "Leading delivery of an AI-powered predictive analytics and decision support platform with architecture alignment, validation controls, and stakeholder-ready reporting.",
+    bullets: [
+      "Defined system architecture across data pipelines, model workflows, and AI-driven recommendation logic.",
+      "Coordinated engineering execution for model integration, data processing, and output validation checkpoints.",
+      "Drove Agile delivery cadence from ideation to deployment readiness with dependency and risk tracking.",
+    ],
+    tools: [t.python, t.ml, t.analytics, t.powerbi, t.jira],
+    details: {
+      problem:
+        "Stakeholders needed reliable predictive insights and decision support with clear assumptions, measurable impact, and delivery governance.",
+      approach: [
+        "Structured delivery around data pipeline readiness, model workflow checkpoints, and recommendation output validation.",
+        "Introduced evaluation criteria and release readiness gates before sharing outputs beyond the team.",
+        "Built dashboard reporting to translate system performance into stakeholder-relevant signals.",
+      ],
+      contribution: [
+        "Owned planning, scope alignment, and execution governance across cross-functional contributors.",
+        "Defined architecture collaboration points across data, model, and recommendation components.",
+        "Established reporting rhythm and delivery controls for stakeholder communication.",
+      ],
+      deliverables: [
+        "Platform delivery plan and milestone cadence",
+        "Validation checkpoints and evaluation criteria",
+        "Stakeholder dashboards and reporting framework",
+      ],
+      tools: [t.python, t.ml, t.analytics, t.powerbi, t.jira],
+      outcomes: [
+        "Improved execution clarity through milestone-based delivery governance.",
+        "Strengthened stakeholder visibility with dashboard-based reporting and measurable signals.",
+        "Aligned AI workflow delivery to deployment readiness and operational impact tracking.",
+      ],
+      artifacts: [
+        "Architecture alignment notes",
+        "Validation checklist and release readiness gates",
+        "Dashboard reporting pack",
+      ],
+    },
+  },
   {
     id: "proj-enterprise-cloud-migration",
     slug: "enterprise-cloud-migration-program",

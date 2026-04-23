@@ -17,6 +17,16 @@ const scaleHandled = [
   "Drove approximately 15-20% infrastructure cost optimization outcomes.",
 ];
 
+const coreCompetencies = [
+  "Program management for large-scale cloud transformation (governance, RAID, risk).",
+  "AWS cloud migration execution (legacy to AWS and hybrid cloud delivery).",
+  "Migration planning and cutover execution (readiness, validation, rollback strategy).",
+  "Infrastructure and application modernization with dependency discovery and interoperability alignment.",
+  "Cross-functional leadership across infrastructure, network, security, applications, and operations.",
+  "Change management and release control with operational readiness and post-migration stability.",
+  "Cost optimization and financial tracking aligned to program outcomes.",
+];
+
 const deliveryApproach = [
   "Dependency discovery before migration commitments.",
   "Wave planning anchored in readiness evidence.",
@@ -98,6 +108,14 @@ export default function AboutPage() {
             <h3 className="about-section-title">Scale I&apos;ve Handled</h3>
             <ul>
               {scaleHandled.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          </article>
+          <article className="panel detail-card">
+            <h3 className="about-section-title">Core Competencies</h3>
+            <ul>
+              {coreCompetencies.map((item) => (
                 <li key={item}>{item}</li>
               ))}
             </ul>
