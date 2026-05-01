@@ -1,6 +1,7 @@
 import Link from "next/link";
 import PageContainer from "@/components/PageContainer";
 import HomeHero from "@/components/HomeHero";
+import ClientStrip from "@/components/ClientStrip";
 import QuickMetrics from "@/components/QuickMetrics";
 import FeaturedPrograms from "@/components/FeaturedPrograms";
 import ContactPanel from "@/components/ContactPanel";
@@ -22,11 +23,12 @@ const featuredProjects = projects.filter((item) =>
   featuredProjectSlugs.includes(item.slug),
 );
 const transformationPreview = featuredProjects.slice(0, 2);
-const credibilityItems = [
-  "DXC (AT&T, WorkForce Resilience, Astro, Downer)",
-  "Ericsson",
-  "Huawei",
-  "TATA",
+const topCompanies = [
+  "DXC Technology(AT&T, ISOS, Astro, Downer)",
+  "Adecco(HPI)",
+  "Ericsson(MTN)",
+  "Huawei(T-Mobile)",
+  "TATA(Docomo)", 
 ];
 
 const flagshipTools = [
@@ -48,11 +50,12 @@ export default function HomePage() {
       <SectionReveal direction="left">
         <HomeHero
           headline={profile.headline}
-          subheadline={profile.subheadline}
-          supportingText={profile.supportingText}
-          credibilityItems={credibilityItems}
           resumeUrl={contact.resume}
         />
+      </SectionReveal>
+
+      <SectionReveal direction="up" delay={0.04}>
+        <ClientStrip items={topCompanies} />
       </SectionReveal>
 
       <SectionReveal direction="up" delay={0.04}>
@@ -127,7 +130,7 @@ export default function HomePage() {
               </div>
               <div className="flagship-stat">
                 <span>Engineers Coordinated</span>
-                <strong>40</strong>
+                <strong>40+</strong>
               </div>
               <div className="flagship-stat">
                 <span>Migration Programs</span>

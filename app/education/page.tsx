@@ -5,9 +5,8 @@ import { education } from "@/data/education";
 export default function EducationPage() {
   return (
     <PageContainer
-      eyebrow="Education"
-      title="Education"
-      subtitle="Graduate and undergraduate foundation supporting infrastructure transformation and technical program leadership."
+      title="Academic Foundation"
+      subtitle="Graduate and undergraduate foundation supporting technical program leadership and infrastructure transformation delivery."
     >
       <EducationPanel items={education} />
     </PageContainer>

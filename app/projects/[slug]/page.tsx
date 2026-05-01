@@ -27,7 +27,7 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
     <main className="corp-page">
       <VisualNav />
       <div className="corp-container">
-        <section className="panel detail-hero panel-navy">
+        <section className="panel detail-hero">
           <Link href="/projects" className="detail-back">
             Back to Projects
           </Link>
@@ -86,7 +86,7 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
           ]}
         />
 
-        <section className="panel detail-card detail-tools-card panel-navy detail-tools-card-navy">
+        <section className="panel detail-card detail-tools-card">
           <h2>Tools</h2>
           <div className="chip-list">
             {project.details.tools.map((tool) => (

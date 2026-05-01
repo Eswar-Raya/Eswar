@@ -29,12 +29,12 @@ export const profile = {
   introTags: [
     "10+ Years Experience",
     "1000+ Linux Servers",
-    "40 Engineers Coordinated",
+    "40+ Engineers Coordinated",
     "AWS / Azure / Linux / VMware",
   ],
   proofPoints: [
     "Led multi-wave data center to AWS migration delivery using CloudEndure.",
-    "Coordinated approximately 40 engineers across global migration workstreams.",
+    "Coordinated approximately 40+ engineers across global migration workstreams.",
   ],
 };
 
@@ -63,7 +63,7 @@ export const flagshipDxc: FlagshipHighlight = {
     "RAID management and executive reporting through Power BI",
   ],
   outcomes: [
-    "Approximately 40 engineers coordinated across global teams",
+    "Approximately 40+ engineers coordinated across global teams",
     "Approximately 15-20% infrastructure cost optimization",
     "Improved schedule predictability through RAID governance",
   ],
@@ -91,7 +91,7 @@ export const metrics: MetricItem[] = [
   },
   {
     label: "Team Coordination",
-    value: "40 Engineers",
+    value: "40+ Engineers",
     context: "Global cross-functional delivery across infrastructure tracks",
   },
   {

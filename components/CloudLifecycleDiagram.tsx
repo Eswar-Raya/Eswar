@@ -3,6 +3,7 @@
 import { ArrowDown, Cloud, RefreshCw, Search, Server, Share2, ShieldCheck } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
 import ToolBadge from "@/components/ToolBadge";
+import { easeSoft } from "@/lib/motion";
 
 const lifecycleStages = [
   {
@@ -53,6 +54,16 @@ const lifecycleTools = [
   { key: "jira", label: "Jira" },
 ] as const;
 
+const stageVariants = {
+  hidden: { opacity: 0, y: 18, scaleY: 0.6 },
+  show: {
+    opacity: 1,
+    y: 0,
+    scaleY: 1,
+    transition: { duration: 0.55, ease: easeSoft },
+  },
+};
+
 export default function CloudLifecycleDiagram() {
   const reduceMotion = useReducedMotion();
 
@@ -63,10 +74,11 @@ export default function CloudLifecycleDiagram() {
       <motion.div
         className="lifecycle-pipeline"
         initial={reduceMotion ? false : "hidden"}
-        animate="show"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.2 }}
         variants={{
           hidden: {},
-          show: { transition: { staggerChildren: 0.12 } },
+          show: { transition: { staggerChildren: 0.1, delayChildren: 0.05 } },
         }}
       >
         {lifecycleStages.map((stage, index) => {
@@ -77,11 +89,7 @@ export default function CloudLifecycleDiagram() {
             <motion.article
               key={stage.id}
               className={`lifecycle-stage ${isLast ? "is-last" : ""}`}
-              variants={{
-                hidden: { opacity: 0, y: 20 },
-                show: { opacity: 1, y: 0 },
-              }}
-              transition={{ duration: 0.48, ease: "easeOut" }}
+              variants={stageVariants}
             >
               <div className="lifecycle-flow-column" aria-hidden="true">
                 <span className="lifecycle-stage-icon">
@@ -92,9 +100,12 @@ export default function CloudLifecycleDiagram() {
                     className="lifecycle-connector"
                     variants={{
                       hidden: { opacity: 0, scaleY: 0 },
-                      show: { opacity: 1, scaleY: 1 },
+                      show: {
+                        opacity: 1,
+                        scaleY: 1,
+                        transition: { duration: 0.35, ease: easeSoft, delay: 0.08 },
+                      },
                     }}
-                    transition={{ duration: 0.35, ease: "easeOut", delay: 0.08 }}
                   >
                     <i />
                     <ArrowDown />
@@ -124,10 +135,14 @@ export default function CloudLifecycleDiagram() {
           <motion.div
             key={tool.key}
             variants={{
-              hidden: { opacity: 0, y: 8 },
-              show: { opacity: 1, y: 0 },
+              hidden: { opacity: 0, y: 8, scale: 0.9 },
+              show: {
+                opacity: 1,
+                y: 0,
+                scale: 1,
+                transition: { duration: 0.35, ease: easeSoft },
+              },
             }}
-            transition={{ duration: 0.3, ease: "easeOut" }}
           >
             <ToolBadge toolKey={tool.key} label={tool.label} tone="dark" size="sm" />
           </motion.div>

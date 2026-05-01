@@ -92,6 +92,17 @@ const t = {
   chroma: { key: "chroma" as const, label: "ChromaDB" },
   ollama: { key: "ollama" as const, label: "Ollama" },
   ml: { key: "ml" as const, label: "Model Evaluation" },
+  oracleOci: { key: "oracleOci" as const, label: "Oracle OCI" },
+  awsMgn: { key: "awsMgn" as const, label: "AWS MGN" },
+  awsDms: { key: "awsDms" as const, label: "AWS DMS" },
+  awsDataSync: { key: "awsDataSync" as const, label: "DataSync" },
+  bashShell: { key: "shell" as const, label: "Bash / Shell Scripting" },
+  snmp: { key: "snmp" as const, label: "SNMP" },
+  cacti: { key: "cacti" as const, label: "CACTI" },
+  itil: { key: "itil" as const, label: "ITIL Processes" },
+  telecomSdp: { key: "telecomSdp" as const, label: "Telecom SDP" },
+  deviceMgmt: { key: "deviceMgmt" as const, label: "Device Management Platforms" },
+  incidentMgmt: { key: "incidentMgmt" as const, label: "Incident Management Tools" },
 } satisfies Record<string, ToolRef>;
 
 export const experiences: ExperienceItem[] = [
@@ -118,16 +129,19 @@ export const experiences: ExperienceItem[] = [
       "Building reporting frameworks and dashboards to monitor effectiveness and business impact.",
     ],
     detailBullets: [
+      "Lead delivery governance for RenewSight-AI predictive analytics initiative.",
       "Translate stakeholder needs into AI/ML solution requirements, including evaluation metrics and scalability expectations.",
       "Coordinate engineering execution across model integration, data processing, and output validation strategies.",
-      "Maintain delivery governance with milestone tracking, dependency management, and risk visibility.",
-      "Build dashboards and reporting to communicate system performance, adoption, and decision impact.",
+      "Maintain milestone tracking, dependency management, and risk visibility across distributed contributors.",
+      "Build reporting dashboards to communicate system performance, adoption, and decision impact.",
     ],
     tools: [t.jira, t.powerbi, t.confluence, t.agile, t.python, t.ml],
     scopeStakeholders: [
-      "Foundation leadership",
-      "Volunteer contributors",
+      "Foundation leadership and board",
+      "Volunteer engineering contributors",
       "Community program stakeholders",
+      "Grant and funding coordinators",
+      "End beneficiary communities",
     ],
     programsClients: ["RenewSight-AI (predictive analytics & decision support)"],
     outcomes: [
@@ -168,7 +182,17 @@ export const experiences: ExperienceItem[] = [
       "Maintained risk and issue visibility for technical and business stakeholders.",
       "Built structured executive reporting around progress, quality, and blockers.",
     ],
-    tools: [t.python, t.sql, t.powerbi, t.jira, t.agile, t.ml],
+    tools: [
+      t.langchain,
+      t.chroma,
+      t.ollama,
+      t.python,
+      t.sql,
+      t.powerbi,
+      t.jira,
+      t.agile,
+      t.ml,
+    ],
     scopeStakeholders: [
       "Engineering and data teams",
       "Business stakeholders",
@@ -176,9 +200,11 @@ export const experiences: ExperienceItem[] = [
     ],
     programsClients: ["AI Innovation Program"],
     outcomes: [
-      "Improved delivery timelines by approximately 20%.",
-      "Improved cross-functional clarity through lifecycle checkpoints.",
-      "Strengthened executive visibility with dashboard-based reporting.",
+      "Delivered AI Innovation Program milestones on schedule.",
+      "Established LangChain RAG pipeline using ChromaDB and Ollama.",
+      "Aligned cross-functional stakeholders on AI solution scope and evaluation criteria.",
+      "Maintained delivery governance with risk and dependency tracking.",
+      "Improved delivery timelines by approximately 20% through dependency mitigation.",
     ],
     challengesResolutions: [
       "Fast iteration with cross-team dependencies -> restructured sprint and review cadence.",
@@ -255,7 +281,7 @@ export const experiences: ExperienceItem[] = [
     headlineBullets: [
       "Directed enterprise transformation programs involving 1000+ Linux servers.",
       "Led multi-wave data center to AWS and data center to data center migrations.",
-      "Coordinated approximately 40 engineers across global teams and technical tracks.",
+      "Coordinated approximately 40+ engineers across global teams and technical tracks.",
       "Drove approximately 15-20% infrastructure cost optimization through migration sequencing.",
     ],
     detailBullets: [
@@ -294,6 +320,7 @@ export const experiences: ExperienceItem[] = [
       "Directed multi-wave migration execution across 1000+ Linux server environments.",
       "Delivered approximately 15-20% infrastructure cost optimization.",
       "Improved schedule predictability through RAID governance and execution checkpoints.",
+      "Zero critical rollbacks across production cutover windows.",
       "Strengthened leadership visibility via Power BI executive reporting.",
     ],
     challengesResolutions: [
@@ -314,7 +341,7 @@ export const experiences: ExperienceItem[] = [
         "Greenfield and brownfield infrastructure environments",
       ],
       team: [
-        "Coordinated approximately 40 engineers across global teams",
+        "Coordinated approximately 40+ engineers across global teams",
         "Aligned infra, app, network, security, and operations owners",
       ],
       transformationType: [
@@ -356,7 +383,15 @@ export const experiences: ExperienceItem[] = [
       "Maintained rollback plans for high-impact workload transitions.",
       "Drove post-migration testing and stabilization tracking.",
     ],
-    tools: [t.linux, t.vmware, t.carbonite, t.jira, t.serviceNow, t.shell],
+    tools: [
+      t.linux,
+      t.vmware,
+      t.carbonite,
+      t.universalDiscovery,
+      t.jira,
+      t.serviceNow,
+      t.shell,
+    ],
     scopeStakeholders: [
       "Infrastructure platform teams",
       "Application support teams",
@@ -364,8 +399,10 @@ export const experiences: ExperienceItem[] = [
     ],
     programsClients: ["HPI Tattoo Beyond Migration"],
     outcomes: [
+      "Executed HPI Tattoo Beyond Migration server transitions across enterprise Linux estate.",
+      "Validated readiness across Linux environments pre-cutover with structured checklists.",
+      "Reduced migration risk through pre-move dependency checks.",
       "Improved migration reliability for enterprise Linux workload transitions.",
-      "Reduced cutover risk through validation-first execution controls.",
       "Strengthened post-migration confidence through structured testing.",
     ],
     challengesResolutions: [
@@ -400,7 +437,7 @@ export const experiences: ExperienceItem[] = [
       "Tracked deployment risk and stabilization signals during rollouts.",
       "Maintained delivery evidence for controlled production change execution.",
     ],
-    tools: [t.linux, t.jira, t.agile, t.serviceNow],
+    tools: [t.linux, t.shell, t.jira, t.agile, t.serviceNow],
     scopeStakeholders: [
       "Platform engineering teams",
       "UAT and validation stakeholders",
@@ -408,6 +445,9 @@ export const experiences: ExperienceItem[] = [
     ],
     programsClients: ["T-Mobile SDG Platform"],
     outcomes: [
+      "Delivered T-Mobile SDG platform integrations with controlled validation cycles.",
+      "Maintained telecom service continuity across migration windows.",
+      "Supported cross-vendor technical coordination during integration releases.",
       "Improved release discipline across platform upgrade cycles.",
       "Reduced deployment risk through structured validation and rollout controls.",
     ],
@@ -443,7 +483,7 @@ export const experiences: ExperienceItem[] = [
       "Investigated incidents and supported root cause analysis workflows.",
       "Tracked service performance baselines after releases.",
     ],
-    tools: [t.linux, t.jira, t.agile, t.serviceNow],
+    tools: [t.linux, t.shell, t.jira, t.agile, t.serviceNow],
     scopeStakeholders: [
       "Service delivery engineering teams",
       "Operations and support teams",
@@ -451,6 +491,9 @@ export const experiences: ExperienceItem[] = [
     ],
     programsClients: ["MTN SA Service Delivery Platform"],
     outcomes: [
+      "Maintained MTN SA service delivery platform continuity across releases.",
+      "Supported cross-vendor technical coordination during deployment windows.",
+      "Contributed to telecom infrastructure stability through structured incident response.",
       "Improved service onboarding reliability through structured deployment controls.",
       "Strengthened platform performance validation and issue diagnostics.",
     ],
@@ -481,22 +524,32 @@ export const experiences: ExperienceItem[] = [
       "Automated recurring operational activities using shell scripting.",
     ],
     detailBullets: [
-      "Executed Linux platform administration and routine maintenance operations.",
-      "Monitored service health through SNMP and CACTI instrumentation.",
-      "Created shell scripts for repeatable operational tasks and checks.",
-      "Supported incident triage and escalation during production events.",
+      "Administered Linux environments supporting telecom service delivery platforms across SDP, Device Management, and DSTK systems.",
+      "Implemented infrastructure monitoring solutions using SNMP and CACTI improving operational visibility across telecom environments.",
+      "Automated operational and maintenance tasks using Bash shell scripting reducing manual effort and improving efficiency.",
+      "Supported telecom platform stability through proactive system administration, patching, and incident response.",
+      "Maintained service continuity across device management and platform delivery operations.",
     ],
-    tools: [t.linux, t.shell, t.serviceNow],
+    tools: [
+      t.linux,
+      t.bashShell,
+      t.snmp,
+      t.cacti,
+      t.itil,
+      t.telecomSdp,
+      t.deviceMgmt,
+      t.incidentMgmt,
+    ],
     scopeStakeholders: [
-      "Telecom operations teams",
-      "Platform support engineers",
-      "Internal service delivery stakeholders",
+      "Telecom platform operations teams",
+      "Network and infrastructure engineers",
+      "Service delivery management",
     ],
-    programsClients: ["Tata SDP, Device Management & DSTK Platform"],
+    programsClients: ["TATA SDP, Device Management & DSTK Platform"],
     outcomes: [
-      "Improved monitoring visibility through SNMP and CACTI implementation.",
-      "Reduced manual recurring effort by scripting repeat operations.",
-      "Built foundational operational rigor used in later transformation roles.",
+      "Established Linux administration and telecom platform foundation underpinning all subsequent infrastructure roles.",
+      "Improved operational efficiency through shell scripting automation across routine platform tasks.",
+      "Enhanced infrastructure visibility through SNMP and CACTI monitoring implementation.",
     ],
     challengesResolutions: [
       "Manual repetitive operations -> automated routine tasks with shell scripts.",

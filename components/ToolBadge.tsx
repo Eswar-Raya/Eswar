@@ -5,6 +5,7 @@ import { TbBrandAzure } from "react-icons/tb";
 import type { SimpleIcon } from "simple-icons";
 import {
   siAmazonwebservices,
+  siAmazondynamodb,
   siConfluence,
   siDocker,
   siGit,
@@ -42,6 +43,7 @@ const toolLogoMap: Partial<Record<ToolIconKey, ToolLogoConfig>> = {
   linux: { simpleIcon: siLinux },
   vmware: { simpleIcon: siVmware },
   cloudendure: { simpleIcon: siAmazonwebservices, alias: "CE" },
+  dynamoDB: { simpleIcon: siAmazondynamodb },
   powerbi: { customGlyph: "powerbi", color: "#F2C811" },
   jira: { simpleIcon: siJira },
   python: { simpleIcon: siPython },

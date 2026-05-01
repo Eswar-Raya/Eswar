@@ -33,7 +33,7 @@ export default async function ExperienceDetailPage({
     <main className="corp-page">
       <VisualNav />
       <div className="corp-container">
-        <section className={`panel detail-hero ${!isEducationPhase ? "panel-navy" : ""}`}>
+        <section className="panel detail-hero">
           <Link href="/experience" className="detail-back">
             Back to Experience
           </Link>
@@ -137,11 +137,7 @@ export default async function ExperienceDetailPage({
           />
         )}
 
-        <section
-          className={`panel detail-card detail-tools-card ${
-            !isEducationPhase ? "panel-navy detail-tools-card-navy" : ""
-          }`}
-        >
+        <section className="panel detail-card detail-tools-card">
           <h2>{isEducationPhase ? "Skills/Tools Strengthened" : "Tools/Tech"}</h2>
           <div className="chip-list">
             {item.tools.map((tool) => (

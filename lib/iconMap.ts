@@ -74,6 +74,11 @@ export const toolIconMap = {
   sql: Database,
   powerbi: BarChart3,
   azure: Cloud,
+  oracleOci: Cloud,
+  awsMgn: Activity,
+  awsDms: Database,
+  dynamoDB: Database,
+  awsDataSync: Cable,
   pmatt: BriefcaseBusiness,
   adept: FileCode2,
   confluence: FileCode2,
@@ -89,6 +94,12 @@ export const toolIconMap = {
   carbonite: Shield,
   prompting: Brain,
   ml: LineChart,
+  snmp: Activity,
+  cacti: LineChart,
+  itil: KanbanSquare,
+  telecomSdp: RadioTower,
+  deviceMgmt: Boxes,
+  incidentMgmt: ShieldCheck,
 } satisfies Record<string, LucideIcon>;
 
 export type CompanyIconKey = keyof typeof companyIconMap;

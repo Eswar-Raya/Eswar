@@ -123,7 +123,7 @@ export const projects: ProjectItem[] = [
       "Directed multi-wave migration delivery for 1000+ Linux servers across enterprise data center to AWS programs.",
     bullets: [
       "Led dependency discovery and migration wave planning using Universal Discovery outputs.",
-      "Coordinated approximately 40 engineers across global infra, app, network, and operations teams.",
+      "Coordinated approximately 40+ engineers across global infra, app, network, and operations teams.",
       "Governed readiness validation, rollback criteria, and production cutover execution.",
     ],
     tools: [

@@ -9,45 +9,11 @@
   root.id = "profile-chat-root";
   root.innerHTML =
     '<button type="button" id="profile-chat-toggle" aria-label="Ask about my profile">' +
-    '<svg id="profile-chat-mascot" viewBox="0 0 72 72" aria-hidden="true">' +
-    '<defs>' +
-    '<linearGradient id="pc-helmet" x1="0" y1="0" x2="1" y2="1">' +
-    '<stop offset="0" stop-color="#FFFFFF"/>' +
-    '<stop offset="1" stop-color="#DDE7F6"/>' +
-    "</linearGradient>" +
-    '<linearGradient id="pc-hoodie" x1="0" y1="0" x2="0" y2="1">' +
-    '<stop offset="0" stop-color="#2E4F82"/>' +
-    '<stop offset="1" stop-color="#142F54"/>' +
-    "</linearGradient>" +
-    "</defs>" +
-    '<g fill="none" stroke="none">' +
-    '<g id="pc-bot-float">' +
-    '<path d="M14 32c4-16 16-24 22-24h0c6 0 18 8 22 24" fill="url(#pc-hoodie)" opacity="0.95"/>' +
-    '<path d="M18 34c3-11 12-18 18-18s15 7 18 18" fill="rgba(255,255,255,0.08)"/>' +
-    '<circle cx="36" cy="34" r="16" fill="url(#pc-helmet)"/>' +
-    '<circle cx="36" cy="34" r="16" fill="none" stroke="rgba(20,47,84,0.25)" stroke-width="2"/>' +
-    '<rect x="24" y="28" width="24" height="14" rx="7" fill="#0B1D35" opacity="0.95"/>' +
-    '<circle id="pc-eye-left" cx="31" cy="35" r="3.6" fill="#7DD3FC"/>' +
-    '<circle id="pc-eye-right" cx="41" cy="35" r="3.6" fill="#7DD3FC"/>' +
-    '<circle cx="30" cy="33.8" r="1.1" fill="#FFFFFF" opacity="0.9"/>' +
-    '<circle cx="40" cy="33.8" r="1.1" fill="#FFFFFF" opacity="0.9"/>' +
-    '<path d="M33 41c2 2 4 2 6 0" stroke="#CFE0F5" stroke-width="2" stroke-linecap="round"/>' +
-    '<g id="pc-arm-wave" transform="translate(54,42)">' +
-    '<path d="M0 0c5 2 10 6 12 11" stroke="#EAF0F7" stroke-width="3" stroke-linecap="round"/>' +
-    '<path d="M12 11l5-2" stroke="#EAF0F7" stroke-width="3" stroke-linecap="round"/>' +
-    '<path d="M12 11l2 5" stroke="#EAF0F7" stroke-width="3" stroke-linecap="round"/>' +
-    "</g>" +
-    '<path d="M22 54c4-10 24-10 28 0" fill="rgba(255,255,255,0.10)"/>' +
-    '<path d="M16 12h20a10 10 0 0 1 10 10v0" fill="rgba(255,255,255,0.0)"/>' +
-    '<g id="pc-hi-bubble" transform="translate(46,8)">' +
-    '<path d="M0 10c0-5 4-10 10-10h10c6 0 10 5 10 10v4c0 6-4 10-10 10h-6l-6 6v-6H10C4 24 0 20 0 14v-4z" fill="rgba(255,255,255,0.92)"/>' +
-    '<path d="M10 8v8" stroke="#142F54" stroke-width="3" stroke-linecap="round"/>' +
-    '<path d="M10 12h4" stroke="#142F54" stroke-width="3" stroke-linecap="round"/>' +
-    '<path d="M20 8v8" stroke="#142F54" stroke-width="3" stroke-linecap="round"/>' +
-    "</g>" +
-    "</g>" +
-    "</g>" +
-    "</svg>" +
+    '<span id="pc-bot-float">' +
+    '<img id="profile-chat-mascot" src="' +
+    apiUrl +
+    '/chatbot-icon.png?v=20260208" alt="" width="78" height="78" decoding="async" fetchpriority="low" draggable="false" />' +
+    "</span>" +
     "</button>" +
     '<div id="profile-chat-panel">' +
     '<div id="profile-chat-header">Ask about my profile <button type="button" id="profile-chat-close" aria-label="Close">×</button></div>' +

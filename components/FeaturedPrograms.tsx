@@ -6,6 +6,7 @@ import ToolBadge from "@/components/ToolBadge";
 import { serviceIconMap } from "@/lib/iconMap";
 import type { ProjectItem } from "@/data/projects";
 import { motion, useReducedMotion } from "framer-motion";
+import { cardVariant, staggerContainer } from "@/lib/motion";
 
 type FeaturedProgramsProps = {
   items: ProjectItem[];
@@ -26,6 +27,17 @@ export default function FeaturedPrograms({
 }: FeaturedProgramsProps) {
   const reduceMotion = useReducedMotion();
 
+  const cardHover = reduceMotion
+    ? undefined
+    : {
+        y: -6,
+        scale: 1.005,
+        borderColor: "rgba(147, 197, 253, 0.3)",
+        boxShadow:
+          "0 24px 64px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.1)",
+        transition: { duration: 0.3, ease: "easeOut" as const },
+      };
+
   return (
     <section className="visual-section">
       <div className="section-header section-header-row">
@@ -40,24 +52,19 @@ export default function FeaturedPrograms({
       {variant === "primary" ? (
         <motion.div
           className="program-rows"
+          variants={staggerContainer}
           initial={reduceMotion ? false : "hidden"}
-          whileInView="show"
+          whileInView="visible"
           viewport={{ once: true, amount: 0.15 }}
-          variants={{
-            hidden: {},
-            show: { transition: { staggerChildren: 0.15 } },
-          }}
         >
           {items.map((item, index) => (
             <motion.article
               key={item.slug}
-              className={`panel program-row ${index % 2 ? "is-reverse" : ""}`}
-              variants={{
-                hidden: { opacity: 0, y: 22 },
-                show: { opacity: 1, y: 0 },
-              }}
-              transition={{ duration: 0.6, ease: "easeOut" }}
-              whileHover={reduceMotion ? undefined : { y: -4 }}
+              className={`panel program-row ${index % 2 ? "is-reverse" : ""} ${
+                index === 0 ? "is-featured" : ""
+              }`}
+              variants={cardVariant}
+              whileHover={cardHover}
             >
               <div className="program-copy">
                 <span className="featured-category">{item.category}</span>
@@ -123,24 +130,17 @@ export default function FeaturedPrograms({
       ) : (
         <motion.div
           className="featured-grid featured-grid-secondary"
+          variants={staggerContainer}
           initial={reduceMotion ? false : "hidden"}
-          whileInView="show"
+          whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
-          variants={{
-            hidden: {},
-            show: { transition: { staggerChildren: 0.15 } },
-          }}
         >
           {items.map((item) => (
             <motion.article
               key={item.slug}
               className="panel featured-card is-secondary"
-              variants={{
-                hidden: { opacity: 0, y: 20 },
-                show: { opacity: 1, y: 0 },
-              }}
-              transition={{ duration: 0.6, ease: "easeOut" }}
-              whileHover={reduceMotion ? undefined : { y: -4 }}
+              variants={cardVariant}
+              whileHover={cardHover}
             >
               <span className="featured-category">{item.category}</span>
               <h3>{item.title}</h3>

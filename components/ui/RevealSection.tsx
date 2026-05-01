@@ -4,25 +4,23 @@ import { type ReactNode } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { fadeUp, slideInLeft, slideInRight } from "@/lib/motion";
 
-type SectionRevealProps = {
-  id?: string;
-  className?: string;
-  direction?: "up" | "left" | "right";
-  delay?: number;
-  amount?: number;
-  once?: boolean;
+type RevealSectionProps = {
   children: ReactNode;
+  className?: string;
+  delay?: number;
+  direction?: "up" | "left" | "right";
+  amount?: number;
+  id?: string;
 };
 
-export default function SectionReveal({
-  id,
-  className,
-  direction = "up",
-  delay = 0,
-  amount = 0.2,
-  once = true,
+export default function RevealSection({
   children,
-}: SectionRevealProps) {
+  className,
+  delay = 0,
+  direction = "up",
+  amount = 0.2,
+  id,
+}: RevealSectionProps) {
   const reduceMotion = useReducedMotion();
 
   const variants =
@@ -43,7 +41,7 @@ export default function SectionReveal({
       variants={variants}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once, amount }}
+      viewport={{ once: true, amount }}
       transition={{ delay }}
     >
       {children}

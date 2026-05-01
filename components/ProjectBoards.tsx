@@ -8,6 +8,7 @@ import IconBadge from "@/components/IconBadge";
 import ToolBadge from "@/components/ToolBadge";
 import { projectCategories, type ProjectCategory, type ProjectItem } from "@/data/projects";
 import { serviceIconMap } from "@/lib/iconMap";
+import { cardVariant, staggerContainer } from "@/lib/motion";
 
 type ProjectBoardsProps = {
   items: ProjectItem[];
@@ -42,38 +43,52 @@ export default function ProjectBoards({ items }: ProjectBoardsProps) {
     [selectedCategory, items],
   );
 
+  const cardHover = reduceMotion
+    ? undefined
+    : {
+        y: -4,
+        scale: 1.005,
+        borderColor: "rgba(147, 197, 253, 0.3)",
+        transition: { duration: 0.3, ease: "easeOut" as const },
+      };
+
   return (
     <section className="visual-section">
       <div className="section-header">
         <h2>Program Case Studies</h2>
-        <p>
-          Infrastructure and cloud transformation programs are primary. Applied AI projects are
-          shown as a secondary capability.
-        </p>
       </div>
 
       <div className="project-tab-row" role="tablist" aria-label="Project category filters">
         {projectCategories.map((category) => (
-          <button
+          <motion.button
             key={category}
             type="button"
             className={`project-tab ${selectedCategory === category ? "is-active" : ""}`}
             onClick={() => setActiveCategory(category)}
             role="tab"
             aria-selected={selectedCategory === category}
+            whileHover={reduceMotion ? undefined : { scale: 1.04 }}
+            whileTap={reduceMotion ? undefined : { scale: 0.97 }}
+            transition={{ duration: 0.25, ease: "easeOut" }}
           >
             {category}
-          </button>
+          </motion.button>
         ))}
       </div>
 
-      <div className="project-grid project-grid-wide">
+      <motion.div
+        key={selectedCategory}
+        className="project-grid project-grid-wide"
+        variants={staggerContainer}
+        initial={reduceMotion ? false : "hidden"}
+        animate="visible"
+      >
         {filteredProjects.map((project) => (
           <motion.article
             key={project.slug}
             className="panel project-card"
-            whileHover={reduceMotion ? undefined : { y: -2 }}
-            transition={{ duration: 0.18, ease: "easeOut" }}
+            variants={cardVariant}
+            whileHover={cardHover}
           >
             <Link href={`/projects/${project.slug}`} className="project-card-link" prefetch>
               <span className="project-client-row">
@@ -111,7 +126,7 @@ export default function ProjectBoards({ items }: ProjectBoardsProps) {
             </Link>
           </motion.article>
         ))}
-      </div>
+      </motion.div>
     </section>
   );
 }

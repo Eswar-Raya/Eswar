@@ -6,7 +6,6 @@ import { projects } from "@/data/projects";
 export default function ProjectsPage() {
   return (
     <PageContainer
-      eyebrow="Program Portfolio"
       title="Transformation Programs"
       subtitle="Case studies across cloud migration and infrastructure modernization, with Applied AI shown as a secondary capability."
       bannerVariant="compact"

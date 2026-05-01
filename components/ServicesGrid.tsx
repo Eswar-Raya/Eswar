@@ -6,6 +6,7 @@ import ToolBadge from "@/components/ToolBadge";
 import { serviceIconMap } from "@/lib/iconMap";
 import type { ServiceItem } from "@/data/services";
 import { motion, useReducedMotion } from "framer-motion";
+import { cardVariant, staggerContainer } from "@/lib/motion";
 
 type ServicesGridProps = {
   items: ServiceItem[];
@@ -25,7 +26,10 @@ export default function ServicesGrid({
     "Program Governance & Delivery Leadership": ["RAID Governance", "Executive Reporting"],
   };
 
-  const capabilityTools: Record<string, { key: "aws" | "azure" | "linux" | "vmware" | "cloudendure" | "jira" | "powerbi"; label: string }[]> = {
+  const capabilityTools: Record<
+    string,
+    { key: "aws" | "azure" | "linux" | "vmware" | "cloudendure" | "jira" | "powerbi"; label: string }[]
+  > = {
     "Infrastructure Transformation": [
       { key: "linux", label: "Linux" },
       { key: "vmware", label: "VMware" },
@@ -55,24 +59,25 @@ export default function ServicesGrid({
       </div>
       <motion.div
         className="services-grid capability-grid"
+        variants={staggerContainer}
         initial={reduceMotion ? false : "hidden"}
-        whileInView="show"
+        whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
-        variants={{
-          hidden: {},
-          show: { transition: { staggerChildren: 0.08 } },
-        }}
       >
         {items.map((item, index) => (
           <motion.article
             key={item.title}
             className={`panel service-card ${index % 2 ? "is-offset" : ""}`}
-            variants={{
-              hidden: { opacity: 0, y: 18 },
-              show: { opacity: 1, y: 0 },
-            }}
-            transition={{ duration: 0.45, ease: "easeOut" }}
-            whileHover={reduceMotion ? undefined : { y: -4 }}
+            variants={cardVariant}
+            whileHover={
+              reduceMotion
+                ? undefined
+                : {
+                    y: -5,
+                    borderColor: "rgba(147, 197, 253, 0.3)",
+                    transition: { duration: 0.3, ease: "easeOut" },
+                  }
+            }
           >
             <div className="service-card-head">
               <IconBadge

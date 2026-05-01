@@ -4,6 +4,7 @@ import Image from "next/image";
 import { FileText, Linkedin, Mail } from "lucide-react";
 import IconBadge from "@/components/IconBadge";
 import { motion, useReducedMotion } from "framer-motion";
+import { cardVariant, staggerContainer, fadeUp } from "@/lib/motion";
 
 type ContactPanelProps = {
   name: string;
@@ -24,31 +25,62 @@ export default function ContactPanel({
 }: ContactPanelProps) {
   const reduceMotion = useReducedMotion();
 
+  const linkHover = reduceMotion
+    ? undefined
+    : {
+        y: -2,
+        borderColor: "rgba(147, 197, 253, 0.3)",
+        backgroundColor: "rgba(255, 255, 255, 0.07)",
+        transition: { duration: 0.25, ease: "easeOut" as const },
+      };
+
   return (
     <section className="visual-section">
       <motion.article
         className="panel contact-card"
-        initial={reduceMotion ? false : { opacity: 0, y: 40 }}
-        whileInView={reduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
+        variants={cardVariant}
+        initial={reduceMotion ? false : "hidden"}
+        whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
       >
         <div className="contact-card-head">
-          <span className="contact-kicker">Let&apos;s Connect</span>
+          <span className="contact-kicker">
+            <span className="pulse-dot" aria-hidden="true" />
+            Open to Work
+          </span>
           <h2>Open to Infrastructure and Cloud Transformation Roles</h2>
           <blockquote className="contact-quote">
-            “Open to Infrastructure Project Manager, Cloud Migration Program Manager, Technical
-            Project Manager (Infrastructure), and Infrastructure Delivery Manager opportunities.”
+            &ldquo;Open to Infrastructure Project Manager, Cloud Migration Program Manager,
+            Technical Project Manager (Infrastructure), and Infrastructure Delivery Manager
+            opportunities.&rdquo;
           </blockquote>
         </div>
 
         <div className="contact-layout">
           <div className="contact-profile">
-            <div className="contact-photo-frame">
+            <motion.div
+              className="contact-photo-frame"
+              animate={
+                reduceMotion
+                  ? undefined
+                  : {
+                      y: [0, -6, 0],
+                    }
+              }
+              transition={
+                reduceMotion
+                  ? undefined
+                  : {
+                      duration: 4,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                    }
+              }
+            >
               <div className="contact-photo">
                 <Image src={photo} alt={`${name} profile`} fill sizes="300px" />
               </div>
-            </div>
+            </motion.div>
             <div className="contact-profile-meta">
               <span className="contact-profile-name">{name}</span>
               <span className="contact-profile-location">{location}</span>
@@ -59,22 +91,16 @@ export default function ContactPanel({
           <div className="contact-card-main">
             <motion.div
               className="contact-grid"
+              variants={staggerContainer}
               initial={reduceMotion ? false : "hidden"}
-              whileInView="show"
+              whileInView="visible"
               viewport={{ once: true, amount: 0.5 }}
-              variants={{
-                hidden: {},
-                show: { transition: { staggerChildren: 0.15 } },
-              }}
             >
               <motion.a
                 href={`mailto:${email}`}
                 className="contact-link"
-                variants={{
-                  hidden: { opacity: 0, y: 20 },
-                  show: { opacity: 1, y: 0 },
-                }}
-                transition={{ duration: 0.5, ease: "easeOut" }}
+                variants={fadeUp}
+                whileHover={linkHover}
               >
                 <IconBadge icon={Mail} label="Email" tone="service" size="sm" />
                 {email}
@@ -84,11 +110,8 @@ export default function ContactPanel({
                 target="_blank"
                 rel="noreferrer"
                 className="contact-link"
-                variants={{
-                  hidden: { opacity: 0, y: 20 },
-                  show: { opacity: 1, y: 0 },
-                }}
-                transition={{ duration: 0.5, ease: "easeOut" }}
+                variants={fadeUp}
+                whileHover={linkHover}
               >
                 <IconBadge icon={Linkedin} label="LinkedIn" tone="service" size="sm" />
                 LinkedIn
@@ -99,11 +122,8 @@ export default function ContactPanel({
                 rel="noreferrer"
                 download
                 className="contact-link"
-                variants={{
-                  hidden: { opacity: 0, y: 20 },
-                  show: { opacity: 1, y: 0 },
-                }}
-                transition={{ duration: 0.5, ease: "easeOut" }}
+                variants={fadeUp}
+                whileHover={linkHover}
               >
                 <IconBadge icon={FileText} label="Resume PDF" tone="service" size="sm" />
                 Download Resume

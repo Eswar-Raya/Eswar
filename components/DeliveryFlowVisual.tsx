@@ -2,6 +2,7 @@
 
 import { ArrowDown, Search, ShieldCheck, SlidersHorizontal, Workflow } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
+import { easeSoft } from "@/lib/motion";
 
 const steps = [
   {
@@ -44,10 +45,14 @@ export default function DeliveryFlowVisual() {
             <motion.div
               key={step.id}
               className="delivery-flow-row"
-              initial={reduceMotion ? false : { opacity: 0, y: 12 }}
-              whileInView={reduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
+              initial={reduceMotion ? false : { opacity: 0, y: 14, filter: "blur(6px)" }}
+              whileInView={
+                reduceMotion
+                  ? { opacity: 1 }
+                  : { opacity: 1, y: 0, filter: "blur(0px)" }
+              }
               viewport={{ once: true, amount: 0.4 }}
-              transition={{ duration: 0.35, delay: index * 0.06, ease: "easeOut" }}
+              transition={{ duration: 0.5, delay: index * 0.08, ease: easeSoft }}
             >
               <div className="delivery-flow-rail" aria-hidden="true">
                 <span className="delivery-flow-dot">
