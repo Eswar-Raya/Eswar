@@ -50,9 +50,7 @@ export default function ContactPanel({
           </span>
           <h2>Open to Infrastructure and Cloud Transformation Roles</h2>
           <blockquote className="contact-quote">
-            &ldquo;Open to Infrastructure Project Manager, Cloud Migration Program Manager,
-            Technical Project Manager (Infrastructure), and Infrastructure Delivery Manager
-            opportunities.&rdquo;
+            &ldquo;Ready for the next large-scale migration program to own end-to-end.&rdquo;
           </blockquote>
         </div>
 

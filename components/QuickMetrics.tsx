@@ -55,6 +55,21 @@ function parseMetricValue(raw: string): ParsedMetric {
   return { kind: "static", value: raw };
 }
 
+function counterDurationForLabel(label: string): number {
+  switch (label) {
+    case "Experience":
+      return 0.9;
+    case "Linux Server Scope":
+      return 1.1;
+    case "Team Coordination":
+      return 0.9;
+    case "Cost Optimization":
+      return 0.9;
+    default:
+      return 1.2;
+  }
+}
+
 export default function QuickMetrics({ items }: QuickMetricsProps) {
   const reduceMotion = useReducedMotion();
 
@@ -86,6 +101,7 @@ export default function QuickMetrics({ items }: QuickMetricsProps) {
                     target={parsed.target}
                     prefix={parsed.prefix}
                     suffix={parsed.suffix}
+                    duration={counterDurationForLabel(item.label)}
                   />
                 ) : (
                   parsed.value

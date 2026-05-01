@@ -34,7 +34,6 @@
   link.href = apiUrl + "/widget.css";
   document.head.appendChild(link);
 
-  var panel = document.getElementById("profile-chat-panel");
   var toggle = document.getElementById("profile-chat-toggle");
   var closeBtn = document.getElementById("profile-chat-close");
   var messagesEl = document.getElementById("profile-chat-messages");
@@ -44,9 +43,6 @@
 
   var history = [];
 
-  function open() {
-    root.classList.add("open");
-  }
   function close() {
     root.classList.remove("open");
   }

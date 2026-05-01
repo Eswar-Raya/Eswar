@@ -11,18 +11,19 @@ type AnimatedCounterProps = {
   className?: string;
 };
 
+const easeOut = (t: number) => 1 - Math.pow(1 - t, 3);
+
 export default function AnimatedCounter({
   target,
   suffix = "",
   prefix = "",
-  duration = 1.8,
+  duration = 1.2,
   className,
 }: AnimatedCounterProps) {
   const ref = useRef<HTMLSpanElement | null>(null);
   const reduceMotion = useReducedMotion();
   const inView = useInView(ref, { once: true, amount: 0.6 });
   const [value, setValue] = useState(0);
-  const shouldAnimate = inView && !reduceMotion;
 
   useEffect(() => {
     if (!inView) return;
@@ -33,28 +34,26 @@ export default function AnimatedCounter({
   }, [inView, reduceMotion, target]);
 
   useEffect(() => {
-    if (!shouldAnimate) return;
+    if (!inView || reduceMotion) return;
 
-    const totalMs = duration * 1000;
+    const totalFrames = Math.max(1, Math.round(duration * 60));
     const frameMs = 1000 / 60;
-    const totalFrames = Math.max(1, Math.round(totalMs / frameMs));
     let frame = 0;
 
     const interval = window.setInterval(() => {
       frame += 1;
-      const progress = Math.min(1, frame / totalFrames);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      const next = Math.round(eased * target);
+      const elapsed = Math.min(1, frame / totalFrames);
+      const easedValue = Math.round(easeOut(elapsed) * target);
       if (frame >= totalFrames) {
         window.clearInterval(interval);
         setValue(target);
       } else {
-        setValue(next);
+        setValue(easedValue);
       }
     }, frameMs);
 
     return () => window.clearInterval(interval);
-  }, [shouldAnimate, target, duration]);
+  }, [inView, reduceMotion, target, duration]);
 
   const display = reduceMotion ? target : value;
 
