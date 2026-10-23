@@ -37,7 +37,11 @@ export type CapabilityGroup = {
     | "Infrastructure"
     | "Migration & Discovery"
     | "Program Delivery"
-    | "Data / AI";
+    | "Data / AI"
+    | "Business Analysis & Delivery"
+    | "Telecom & Integration"
+    | "Databases"
+    | "Analytics & Tools";
   items: string[];
 };
 
@@ -123,7 +127,7 @@ export const capabilityGroups: CapabilityGroup[] = [
   {
     id: "cap-cloud",
     title: "Cloud Platforms",
-    items: ["AWS", "Azure"],
+    items: ["AWS: EC2, S3, IAM, VPC, CloudWatch", "Azure: VMs, Storage, NSG", "Hybrid Cloud"],
   },
   {
     id: "cap-infra",
@@ -139,7 +143,11 @@ export const capabilityGroups: CapabilityGroup[] = [
     id: "cap-migration",
     title: "Migration & Discovery",
     items: [
-      "CloudEndure",
+      "AWS MGN (CloudEndure)",
+      "AWS DMS",
+      "AWS Migration Hub",
+      "DataSync & Snow Family",
+      "AWS MAP",
       "Universal Discovery",
       "VMware vSphere Replication",
       "Carbonite Double-Take",
@@ -157,19 +165,42 @@ export const capabilityGroups: CapabilityGroup[] = [
       "Cutover Planning",
       "Migration Wave Planning",
       "Global Delivery Coordination",
+      "Financial Tracking & Budgets",
+      "Change Management & Release Control",
     ],
   },
   {
     id: "cap-ai",
     title: "Data / AI",
     items: [
-      "Python",
+      "Python: Pandas, NumPy, Scikit-learn, Streamlit",
       "SQL",
       "LangChain",
+      "RAG Architecture",
       "ChromaDB",
       "Ollama",
       "Model Validation & Evaluation Oversight",
     ],
+  },
+  {
+    id: "cap-business",
+    title: "Business Analysis & Delivery",
+    items: ["Requirements Translation", "Product Roadmap Alignment", "Agile / Scrum", "SAFe Ceremonies", "Waterfall & Hybrid SDLC", "KPI Definition", "Stakeholder Communication"],
+  },
+  {
+    id: "cap-telecom",
+    title: "Telecom & Integration",
+    items: ["OSS/BSS Platforms", "Service Delivery Platforms", "Network Infrastructure Integration", "SNMP & CACTI", "UAT & System Readiness"],
+  },
+  {
+    id: "cap-databases",
+    title: "Databases",
+    items: ["Oracle", "MS SQL Server", "DB2 (familiarity)", "AWS RDS", "Aurora", "DynamoDB"],
+  },
+  {
+    id: "cap-tools",
+    title: "Analytics & Tools",
+    items: ["Power BI", "Advanced Excel", "Jira & Confluence", "ServiceNow", "MS Project", "Visio", "Git", "Bash / Shell Scripting"],
   },
 ];
 

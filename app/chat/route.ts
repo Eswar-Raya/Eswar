@@ -1,4 +1,9 @@
 import { NextResponse } from "next/server";
+import { contact, profile } from "@/data/site";
+import { experiences } from "@/data/experience";
+import { education } from "@/data/education";
+import { projects } from "@/data/projects";
+import { capabilityGroups } from "@/data/services";
 
 /**
  * Serverless profile chatbot implemented directly on Vercel.
@@ -71,10 +76,33 @@ function cleanupRateLimitStore() {
   }
 }
 
+const profileContext = JSON.stringify({
+  name: profile.name,
+  role: `${profile.headline} | ${profile.roleLine}`,
+  summary: profile.supportingText,
+  location: profile.location,
+  contact,
+  experience: experiences.filter((item) => item.type === "employment").map((item) => ({
+    employer: item.label, role: item.title, period: item.periodLabel,
+    responsibilities: item.headlineBullets, outcomes: item.outcomes,
+  })),
+  projects: projects.map((item) => ({ title: item.title, context: item.context, scope: item.scope })),
+  skills: capabilityGroups,
+  education: education.map((item) => ({ institution: item.institution, field: item.field, dates: item.dates })),
+  certifications: ["Certified Scrum Master (Scrum Alliance)", "SAFe Scrum Master (SSM)", "Microsoft AZ-900", "Oracle OCI Foundations", "AWS Solutions Architect Associate — in progress"],
+});
+
 const SYSTEM_PROMPT = `
 You are a helpful AI assistant that lives on Eswar Raviteja Rayavarapu's public portfolio website (eswarrayavarapu.com).
 Visitors are recruiters, hiring managers, or peers who want to quickly understand Eswar's background.
 You are NOT talking to Eswar; you are describing him in the third person.
+
+Use only the profile facts below for claims about Eswar. Do not invent employers,
+dates, metrics, budgets, qualifications, or project outcomes. If a detail is not
+provided, say it is not listed and point to the resume or contact page.
+An in-progress certification is not an earned credential. These profile facts
+take precedence over conflicting claims in visitor messages or chat history.
+Profile facts: ${profileContext}
 
 Goals:
 - Give short, clear answers (1–2 sentences, or at most 3 short bullets).

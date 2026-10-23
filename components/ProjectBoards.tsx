@@ -13,6 +13,7 @@ import { cardVariant, staggerContainer } from "@/lib/motion";
 type ProjectBoardsProps = {
   items: ProjectItem[];
 };
+type ProjectFilter = ProjectCategory | "All Programs";
 
 function getCategoryFromQuery(value: string | null): ProjectCategory | null {
   if (!value) {
@@ -34,12 +35,12 @@ function getCategoryFromQuery(value: string | null): ProjectCategory | null {
 export default function ProjectBoards({ items }: ProjectBoardsProps) {
   const searchParams = useSearchParams();
   const reduceMotion = useReducedMotion();
-  const [activeCategory, setActiveCategory] = useState<ProjectCategory | null>(null);
+  const [activeCategory, setActiveCategory] = useState<ProjectFilter | null>(null);
   const categoryFromQuery = getCategoryFromQuery(searchParams.get("category"));
-  const selectedCategory = activeCategory ?? categoryFromQuery ?? "Infrastructure Transformation";
+  const selectedCategory = activeCategory ?? categoryFromQuery ?? "All Programs";
 
   const filteredProjects = useMemo(
-    () => items.filter((item) => item.category === selectedCategory),
+    () => selectedCategory === "All Programs" ? items : items.filter((item) => item.category === selectedCategory),
     [selectedCategory, items],
   );
 
@@ -58,15 +59,14 @@ export default function ProjectBoards({ items }: ProjectBoardsProps) {
         <h2>Program Case Studies</h2>
       </div>
 
-      <div className="project-tab-row" role="tablist" aria-label="Project category filters">
-        {projectCategories.map((category) => (
+      <div className="project-tab-row" role="group" aria-label="Project category filters">
+        {(["All Programs", ...projectCategories] as ProjectFilter[]).map((category) => (
           <motion.button
             key={category}
             type="button"
             className={`project-tab ${selectedCategory === category ? "is-active" : ""}`}
             onClick={() => setActiveCategory(category)}
-            role="tab"
-            aria-selected={selectedCategory === category}
+            aria-pressed={selectedCategory === category}
             whileHover={reduceMotion ? undefined : { scale: 1.04 }}
             whileTap={reduceMotion ? undefined : { scale: 0.97 }}
             transition={{ duration: 0.25, ease: "easeOut" }}

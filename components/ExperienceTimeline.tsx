@@ -20,7 +20,7 @@ export default function ExperienceTimeline({ items }: ExperienceTimelineProps) {
     [items],
   );
   const defaultActive = useMemo(
-    () => timelineItems.find((item) => item.slug === "dxc")?.slug ?? timelineItems[0]?.slug ?? "",
+    () => timelineItems[0]?.slug ?? "",
     [timelineItems],
   );
   const [activeSlug, setActiveSlug] = useState(defaultActive);
@@ -38,7 +38,7 @@ export default function ExperienceTimeline({ items }: ExperienceTimelineProps) {
 
   return (
     <section className="experience-journey">
-      <aside className="panel experience-rail" role="tablist" aria-label="Employer timeline">
+      <aside className="panel experience-rail" role="group" aria-label="Employer timeline">
         {timelineItems.map((item, index) => {
           const isActive = item.slug === activeItem.slug;
           const isFlagship = item.slug === "dxc";
@@ -48,8 +48,7 @@ export default function ExperienceTimeline({ items }: ExperienceTimelineProps) {
             <motion.button
               key={item.slug}
               type="button"
-              role="tab"
-              aria-selected={isActive}
+              aria-pressed={isActive}
               className={`experience-rail-item ${isActive ? "is-active" : ""}`}
               onClick={() => setActiveSlug(item.slug)}
               initial={reduceMotion ? false : { opacity: 0, y: 16, filter: "blur(6px)" }}
@@ -72,6 +71,7 @@ export default function ExperienceTimeline({ items }: ExperienceTimelineProps) {
                 {item.label}
               </span>
               {isFlagship ? <span className="timeline-badge">Flagship role</span> : null}
+              {item.endDate === "present" ? <span className="timeline-badge">Current role</span> : null}
               <span className="experience-rail-role">{item.title}</span>
             </motion.button>
           );

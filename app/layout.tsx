@@ -21,9 +21,9 @@ const dmSans = DM_Sans({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://eswarrayavarapu.com"),
-  title: "Eswar Rayavarapu",
+  title: "Eswar Rayavarapu | Technical Project Manager & Business Analyst",
   description:
-    "Infrastructure & Cloud Transformation Technical Project Manager with enterprise migration, Linux modernization, and governance-led delivery experience.",
+    "Technical Project Manager and Business Analyst with 11+ years in cloud and infrastructure transformation. AWS migration delivery spanning 250+ applications and 1000+ servers.",
   alternates: {
     canonical: "/",
   },

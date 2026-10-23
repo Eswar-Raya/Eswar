@@ -36,7 +36,7 @@ export default function VisualNav() {
           <div className="brand-copy">
             <span className="brand-title">Eswar Rayavarapu</span>
             <span className="brand-subtitle">
-              Infrastructure & Cloud Transformation TPM
+              Technical Project Manager · Cloud & Infrastructure
             </span>
           </div>
         </motion.div>
@@ -57,6 +57,7 @@ export default function VisualNav() {
               >
                 <Link
                   href={item.href}
+                  aria-current={active ? "page" : undefined}
                   className={active ? "is-active" : undefined}
                 >
                   {item.label}

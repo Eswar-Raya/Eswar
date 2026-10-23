@@ -55,7 +55,9 @@ export default function AnimatedCounter({
     return () => window.clearInterval(interval);
   }, [inView, reduceMotion, target, duration]);
 
-  const display = reduceMotion ? target : value;
+  // The initial client render must match the server, including reduced-motion mode.
+  // The effect above sets the final value immediately after mounting when needed.
+  const display = value;
 
   return (
     <span ref={ref} className={className}>

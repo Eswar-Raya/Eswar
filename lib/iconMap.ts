@@ -26,6 +26,7 @@ import {
 } from "lucide-react";
 
 export const companyIconMap = {
+  aivanta: BriefcaseBusiness,
   tata: Wrench,
   huawei: RadioTower,
   ericsson: Network,
@@ -41,6 +42,7 @@ export const educationIconMap = {
 } satisfies Record<string, LucideIcon>;
 
 export const experienceIconMap = {
+  aivanta: BriefcaseBusiness,
   tata: Wrench,
   huawei: RadioTower,
   ericsson: Network,

@@ -18,6 +18,7 @@ export type FlagshipPanel = {
 export type ExperienceItem = {
   id: string;
   slug:
+  | "aivanta"
   | "community-dreams"
   | "savvy"
   | "stevens"
@@ -36,7 +37,7 @@ export type ExperienceItem = {
   periodLabel: string;
   timelineOrder: number;
   chartOrder: number;
-  growthScore: number; // 1-8
+  growthScore: number;
   growthHighlight: string;
   note?: string;
   headlineBullets: string[];
@@ -107,6 +108,48 @@ const t = {
 
 export const experiences: ExperienceItem[] = [
   {
+    id: "exp-aivanta",
+    slug: "aivanta",
+    label: "Aivanta Tech Inc",
+    iconKey: "aivanta",
+    stageLabel: "Aivanta",
+    type: "employment",
+    title: "Technical Project Manager",
+    startDate: "2026-06",
+    endDate: "present",
+    periodLabel: "Jun 2026 - Present",
+    timelineOrder: 9,
+    chartOrder: 9,
+    growthScore: 8.0,
+    growthHighlight:
+      "Managing concurrent technology initiatives across engineering, business, and infrastructure teams with Agile and SAFe delivery governance.",
+    note: "Remote, United States",
+    headlineBullets: [
+      "Manage concurrent technology initiatives and coordinate delivery milestones.",
+      "Facilitate Agile and SAFe ceremonies and cross-team dependency management.",
+      "Align engineering execution with product roadmaps and business objectives.",
+    ],
+    detailBullets: [
+      "Coordinate engineering, business, and infrastructure teams across multiple technology initiatives.",
+      "Facilitate sprint planning, backlog refinement, and retrospectives while removing delivery impediments.",
+      "Track cross-team dependencies and maintain RAID logs and SDLC documentation.",
+      "Produce executive dashboards and delivery metrics to communicate program health.",
+      "Partner with engineering teams, product managers, and business stakeholders to align milestones with product roadmaps.",
+    ],
+    tools: [t.agile, t.pmatt],
+    scopeStakeholders: ["Engineering and infrastructure teams", "Product managers and business stakeholders", "Executive leadership"],
+    programsClients: ["Concurrent technology initiatives"],
+    outcomes: [
+      "Delivered project milestones on schedule across concurrent initiatives.",
+      "Improved executive visibility through delivery metrics, dashboards, and RAID reporting.",
+      "Aligned project execution with product roadmaps and business objectives.",
+    ],
+    challengesResolutions: [
+      "Cross-team dependencies: coordinate Agile and SAFe ceremonies and remove delivery impediments.",
+      "Concurrent delivery priorities: maintain shared milestones, risk visibility, and stakeholder alignment.",
+    ],
+  },
+  {
     id: "exp-community-dreams",
     slug: "community-dreams",
     label: "Community Dreams Foundation",
@@ -115,25 +158,25 @@ export const experiences: ExperienceItem[] = [
     type: "employment",
     title: "Technical Project Manager",
     startDate: "2025-12",
-    endDate: "present",
-    periodLabel: "Dec 2025 - Present",
+    endDate: "2026-05",
+    periodLabel: "Dec 2025 - May 2026",
     timelineOrder: 8,
     chartOrder: 8,
     growthScore: 7.8,
     growthHighlight:
-      "Current leadership role driving RenewSight-AI delivery with architecture alignment, workflow governance, and stakeholder communication.",
+      "Led RenewSight-AI delivery with architecture alignment, workflow governance, and stakeholder communication.",
     headlineBullets: [
-      "Leading delivery of RenewSight-AI, an AI-powered predictive analytics and decision support platform.",
-      "Defining system architecture across data pipelines, model workflows, and recommendation logic.",
-      "Driving Agile delivery cadence from ideation through deployment readiness with cross-functional teams.",
-      "Building reporting frameworks and dashboards to monitor effectiveness and business impact.",
+      "Led delivery of RenewSight-AI, an AI-powered predictive analytics and decision support platform.",
+      "Defined system architecture across data pipelines, model workflows, and recommendation logic.",
+      "Drove Agile delivery from ideation through deployment readiness with cross-functional teams.",
+      "Built reporting frameworks and dashboards to monitor effectiveness and business impact.",
     ],
     detailBullets: [
-      "Lead delivery governance for RenewSight-AI predictive analytics initiative.",
-      "Translate stakeholder needs into AI/ML solution requirements, including evaluation metrics and scalability expectations.",
-      "Coordinate engineering execution across model integration, data processing, and output validation strategies.",
-      "Maintain milestone tracking, dependency management, and risk visibility across distributed contributors.",
-      "Build reporting dashboards to communicate system performance, adoption, and decision impact.",
+      "Led delivery governance for the RenewSight-AI predictive analytics initiative.",
+      "Translated stakeholder needs into AI/ML requirements, evaluation metrics, and scalability expectations.",
+      "Coordinated engineering execution across model integration, data processing, and output validation.",
+      "Maintained milestone tracking, dependency management, and risk visibility across contributors.",
+      "Built reporting dashboards to communicate system effectiveness and business impact.",
     ],
     tools: [t.jira, t.powerbi, t.confluence, t.agile, t.python, t.ml],
     scopeStakeholders: [
@@ -201,7 +244,7 @@ export const experiences: ExperienceItem[] = [
     programsClients: ["AI Innovation Program"],
     outcomes: [
       "Delivered AI Innovation Program milestones on schedule.",
-      "Established LangChain RAG pipeline using ChromaDB and Ollama.",
+      "Coordinated experimentation tracking, model validation, and deployment readiness.",
       "Aligned cross-functional stakeholders on AI solution scope and evaluation criteria.",
       "Maintained delivery governance with risk and dependency tracking.",
       "Improved delivery timelines by approximately 20% through dependency mitigation.",
@@ -267,7 +310,7 @@ export const experiences: ExperienceItem[] = [
     iconKey: "dxc",
     stageLabel: "DXC",
     type: "employment",
-    title: "Technical Project Manager | Cloud Infrastructure Programs",
+    title: "Technical Project Manager | Cloud Migration Programs",
     startDate: "2020-02",
     endDate: "2023-12",
     periodLabel: "Feb 2020 - Dec 2023",
@@ -275,13 +318,13 @@ export const experiences: ExperienceItem[] = [
     chartOrder: 5,
     growthScore: 5.6,
     growthHighlight:
-      "Flagship role: directed enterprise infrastructure transformation and cloud migration programs across 1000+ Linux servers.",
+      "Led migration of 250+ internally hosted applications across 1000+ servers from on-premises to AWS for global enterprise clients.",
     note:
       "Primary anchor role for infrastructure transformation, cloud migration, and migration lifecycle governance.",
     headlineBullets: [
-      "Directed enterprise transformation programs involving 1000+ Linux servers.",
+      "Migrated 250+ internally hosted applications across 1000+ servers to AWS.",
       "Led multi-wave data center to AWS and data center to data center migrations.",
-      "Coordinated approximately 40+ engineers across global teams and technical tracks.",
+      "Coordinated approximately 40 resources across network, infrastructure, applications, and operations.",
       "Drove approximately 15-20% infrastructure cost optimization through migration sequencing.",
     ],
     detailBullets: [
@@ -314,13 +357,13 @@ export const experiences: ExperienceItem[] = [
       "Program leadership, PMO, and executive stakeholders",
     ],
     programsClients: [
-      "Enterprise cloud and infrastructure transformation portfolio (NDA constrained)",
+      "AT&T", "ISOS (Workforce Resilience)", "DIRECTV", "Downer",
     ],
     outcomes: [
-      "Directed multi-wave migration execution across 1000+ Linux server environments.",
+      "Migrated 250+ applications across 1000+ servers from on-premises to AWS.",
       "Delivered approximately 15-20% infrastructure cost optimization.",
       "Improved schedule predictability through RAID governance and execution checkpoints.",
-      "Zero critical rollbacks across production cutover windows.",
+      "Reduced delivery delays by approximately 30% through blocker escalation and stakeholder decisions.",
       "Strengthened leadership visibility via Power BI executive reporting.",
     ],
     challengesResolutions: [
@@ -330,7 +373,7 @@ export const experiences: ExperienceItem[] = [
     ],
     flagshipPanel: {
       scope: [
-        "1000+ Linux servers in enterprise migration scope",
+        "250+ applications across 1000+ servers in enterprise migration scope",
         "Multi-wave migration portfolio with parallel workstreams",
       ],
       environments: [
@@ -341,7 +384,7 @@ export const experiences: ExperienceItem[] = [
         "Greenfield and brownfield infrastructure environments",
       ],
       team: [
-        "Coordinated approximately 40+ engineers across global teams",
+        "Coordinated approximately 40 resources across global teams",
         "Aligned infra, app, network, security, and operations owners",
       ],
       transformationType: [
@@ -579,12 +622,19 @@ export const growthChartPoints: GrowthChartPoint[] = [...experiences]
 
 export const careerStory: CareerStoryBlock[] = [
   {
+    id: "story-aivanta",
+    phase: "Technology Delivery Leadership",
+    period: "Jun 2026 - Present",
+    headline: "Aligning concurrent technology initiatives with product roadmaps.",
+    narrative: "At Aivanta Tech, I coordinate engineering, business, and infrastructure teams through Agile and SAFe delivery, dependency management, and executive reporting.",
+  },
+  {
     id: "story-community-dreams",
-    phase: "Volunteer Program Leadership",
-    period: "Dec 2025 - Present",
-    headline: "Continued execution leadership through nonprofit program coordination.",
+    phase: "Predictive Analytics Delivery",
+    period: "Dec 2025 - May 2026",
+    headline: "Led RenewSight-AI from ideation to deployment readiness.",
     narrative:
-      "At Community Dreams Foundation, I run planning cadence, milestone tracking, and stakeholder communication for community initiatives.",
+      "At Community Dreams Foundation, I aligned data pipelines, model workflows, and stakeholder requirements for an AI-powered decision support platform.",
   },
   {
     id: "story-savvy",

@@ -70,10 +70,10 @@ export const projects: ProjectItem[] = [
     title: "RenewSight-AI Predictive Analytics Platform",
     category: "Applied AI Projects",
     iconKey: "aiDelivery",
-    context: "Community Dreams Foundation | Dec 2025 - Present",
+    context: "Community Dreams Foundation | Dec 2025 - May 2026",
     role: "Technical Project Manager",
     scope:
-      "Leading delivery of an AI-powered predictive analytics and decision support platform with architecture alignment, validation controls, and stakeholder-ready reporting.",
+      "Led delivery of an AI-powered predictive analytics and decision support platform with architecture alignment, validation controls, and stakeholder-ready reporting.",
     bullets: [
       "Defined system architecture across data pipelines, model workflows, and AI-driven recommendation logic.",
       "Coordinated engineering execution for model integration, data processing, and output validation checkpoints.",
@@ -120,10 +120,10 @@ export const projects: ProjectItem[] = [
     context: "DXC Technology | Feb 2020 - Dec 2023",
     role: "Technical Project Manager",
     scope:
-      "Directed multi-wave migration delivery for 1000+ Linux servers across enterprise data center to AWS programs.",
+      "Led migration of 250+ internally hosted applications across 1000+ servers from on-premises to AWS for global enterprise clients.",
     bullets: [
       "Led dependency discovery and migration wave planning using Universal Discovery outputs.",
-      "Coordinated approximately 40+ engineers across global infra, app, network, and operations teams.",
+      "Coordinated approximately 40 resources across global infrastructure, application, network, and operations teams.",
       "Governed readiness validation, rollback criteria, and production cutover execution.",
     ],
     tools: [
@@ -165,8 +165,9 @@ export const projects: ProjectItem[] = [
         t.serviceNow,
       ],
       outcomes: [
-        "Delivered multi-wave enterprise migration execution across 1000+ Linux servers.",
+        "Migrated 250+ applications across 1000+ servers from on-premises to AWS.",
         "Drove approximately 15-20% infrastructure cost optimization through migration sequencing.",
+        "Reduced delivery delays by approximately 30% through blocker escalation and stakeholder decisions.",
         "Improved schedule predictability through RAID governance and executive reporting.",
       ],
       artifacts: [
@@ -289,7 +290,7 @@ export const projects: ProjectItem[] = [
     title: "Retrieval-Augmented Generation (RAG) Delivery System",
     category: "Applied AI Projects",
     iconKey: "aiDelivery",
-    context: "Applied AI Project | Secondary Capability",
+    context: "Applied AI Project",
     role: "Technical Project Manager",
     scope:
       "Built a locally hosted RAG workflow to support source-grounded responses and governance-minded delivery decisions.",
@@ -335,7 +336,7 @@ export const projects: ProjectItem[] = [
     title: "Hybrid Forecasting & Decision Support Model",
     category: "Applied AI Projects",
     iconKey: "dashboards",
-    context: "Applied AI Project | Secondary Capability",
+    context: "Applied AI Project",
     role: "Technical Project Manager",
     scope:
       "Developed a hybrid forecasting workflow combining time-series baselines with decision-support prioritization logic.",

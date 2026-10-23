@@ -18,18 +18,16 @@ import {
   whatIDeliver,
 } from "@/data/site";
 import { featuredProjectSlugs, projects } from "@/data/projects";
+import { experiences } from "@/data/experience";
 
 const featuredProjects = projects.filter((item) =>
   featuredProjectSlugs.includes(item.slug),
 );
 const transformationPreview = featuredProjects.slice(0, 2);
 const topCompanies = [
-  "DXC Technology(AT&T, ISOS, Astro, Downer)",
-  "Adecco(HPI)",
-  "Ericsson(MTN)",
-  "Huawei(T-Mobile)",
-  "TATA(Docomo)", 
+  "AT&T", "ISOS", "DIRECTV", "Downer", "HPI", "T-Mobile", "MTN SA",
 ];
+const currentRole = experiences.find((item) => item.endDate === "present")!;
 
 const flagshipTools = [
   { key: "aws", label: "AWS" },
@@ -43,19 +41,22 @@ const flagshipTools = [
 export default function HomePage() {
   return (
     <PageContainer
-      title="Infrastructure & Cloud Transformation Technical Project Manager"
-      subtitle="Enterprise cloud migration, data center transformation, Linux platform modernization, and governance-led delivery."
+      title={profile.headline}
+      subtitle={profile.roleLine}
       hideBanner
     >
       <SectionReveal direction="left">
         <HomeHero
           headline={profile.headline}
+          roleLine={profile.roleLine}
+          summary={profile.supportingText}
           resumeUrl={contact.resume}
+          currentRole={currentRole}
         />
       </SectionReveal>
 
       <SectionReveal direction="up" delay={0.04}>
-        <ClientStrip items={topCompanies} />
+        <ClientStrip items={topCompanies} title="Enterprise client experience across DXC, Adecco, Ericsson & Huawei" />
       </SectionReveal>
 
       <SectionReveal direction="up" delay={0.04}>
@@ -71,10 +72,10 @@ export default function HomePage() {
             <div className="deliver-content">
               <div className="deliver-intro">
                 <span className="panel-kicker">What I Deliver</span>
-                <h2>Execution-focused infrastructure transformation delivery.</h2>
+                <h2>Business priorities. Engineering alignment. Reliable delivery.</h2>
                 <p>
-                  I lead migration lifecycle execution from dependency discovery and planning through
-                  validation, rollback readiness, and production cutover governance.
+                  I translate stakeholder needs into delivery plans, coordinate cross-functional teams,
+                  and keep risk, readiness, and business outcomes visible throughout the lifecycle.
                 </p>
               </div>
               <DeliverList items={whatIDeliver} />
@@ -125,16 +126,16 @@ export default function HomePage() {
             </div>
             <div className="flagship-stats">
               <div className="flagship-stat">
-                <span>Linux Server Scope</span>
-                <strong>1000+</strong>
+                <span>Applications Migrated</span>
+                <strong>250+</strong>
               </div>
               <div className="flagship-stat">
-                <span>Engineers Coordinated</span>
-                <strong>40+</strong>
+                <span>Servers in Scope</span>
+                <strong>1,000+</strong>
               </div>
               <div className="flagship-stat">
-                <span>Migration Programs</span>
-                <strong>Multi-Wave</strong>
+                <span>Reduction in Delivery Delays</span>
+                <strong>~30%</strong>
               </div>
               <div className="flagship-stat">
                 <span>Cost Optimization</span>
@@ -170,7 +171,7 @@ export default function HomePage() {
         <FeaturedPrograms
           items={transformationPreview}
           title="Selected Transformation Programs"
-          description="Compact preview of primary transformation case studies. Applied AI remains a secondary capability on the Programs page."
+          description="Migration planning, application modernization, and production readiness across enterprise environments."
           linkHref="/projects"
           linkLabel="View Transformation Programs"
           variant="secondary"

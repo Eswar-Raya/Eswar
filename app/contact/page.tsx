@@ -7,8 +7,8 @@ export default function ContactPage() {
     <PageContainer
       eyebrow="Contact"
       title="Let's Connect"
-      subtitle="Open to technical program leadership roles and enterprise transformation initiatives."
-      hideBanner
+      subtitle="Connect about technical project management, business analysis, and enterprise transformation."
+      bannerVariant="compact"
     >
       <ContactPanel
         name={profile.name}

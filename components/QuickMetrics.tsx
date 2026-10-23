@@ -2,7 +2,7 @@
 
 import type { MetricItem } from "@/data/site";
 import type { LucideIcon } from "lucide-react";
-import { Cloud, Coins, GitMerge, Server, Users } from "lucide-react";
+import { Boxes, Coins, GitMerge, Server, Timer } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
 import AnimatedCounter from "@/components/ui/AnimatedCounter";
 import { cardVariant, staggerContainer } from "@/lib/motion";
@@ -13,9 +13,9 @@ type QuickMetricsProps = {
 
 const iconByLabel: Record<string, LucideIcon> = {
   Experience: GitMerge,
-  "Linux Server Scope": Server,
-  "Team Coordination": Users,
-  "Migration Execution": Cloud,
+  "Applications Migrated": Boxes,
+  "Server Scope": Server,
+  "Reduction in Delivery Delays": Timer,
   "Cost Optimization": Coins,
 };
 
@@ -26,18 +26,8 @@ type ParsedMetric =
 function parseMetricValue(raw: string): ParsedMetric {
   const trimmed = raw.trim();
 
-  const rangeMatch = trimmed.match(/^(\d+)-(\d+)([\s\S]*)$/);
-  if (rangeMatch) {
-    const target = parseInt(rangeMatch[2], 10);
-    if (!Number.isNaN(target)) {
-      return {
-        kind: "counter",
-        target,
-        prefix: `${rangeMatch[1]}-`,
-        suffix: rangeMatch[3] ?? "",
-      };
-    }
-  }
+  // Ranges stay static so animation never displays an invalid range such as 15-0%.
+  if (/^\d+[-–]\d+/.test(trimmed)) return { kind: "static", value: raw };
 
   const match = trimmed.match(/^(\d+)([\s\S]*)$/);
   if (match) {

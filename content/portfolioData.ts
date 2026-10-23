@@ -1,3 +1,5 @@
+import { contact } from "@/data/site";
+
 export type WorkDetail = {
   context: string;
   challenges: string[];
@@ -50,7 +52,7 @@ export const portfolioData = {
       title: "GroundedAI Program Delivery",
       org: "Community Dreams Foundation",
       role: "Project Manager",
-      dates: "Dec 2025 - Present",
+      dates: "Dec 2025 - May 2026",
       stage: "CDF",
       summary:
         "Delivered secure local-AI program execution using grounded RAG architecture and governance-first controls.",
@@ -389,7 +391,7 @@ export const portfolioData = {
     line: "If your systems are changing, precision in delivery is the advantage.",
     email: "eswar.rayavarapu23@gmail.com",
     linkedin: "https://www.linkedin.com/in/eswar-rayavarapu",
-    resume: "/Eswar_Raviteja_Rayavarapu_AI_TPM.pdf",
+    resume: contact.resume,
   },
 };
 

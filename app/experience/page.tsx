@@ -9,8 +9,8 @@ import { experienceIconMap } from "@/lib/iconMap";
 export default function ExperiencePage() {
   return (
     <PageContainer
-      title="Infrastructure and Cloud Transformation Experience"
-      subtitle="Reverse-chronological experience with DXC as the flagship enterprise transformation role."
+      title="Experience across technology, cloud & infrastructure"
+      subtitle="11+ years from telecom engineering to enterprise migration and technical project leadership."
       bannerVariant="compact"
     >
       <SectionReveal direction="left">

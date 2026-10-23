@@ -2,6 +2,8 @@
 
 import { motion, useReducedMotion } from "framer-motion";
 import { easeSoft } from "@/lib/motion";
+import { timelineExperiences } from "@/data/experience";
+import type { CSSProperties } from "react";
 
 type TimelineNode = {
   id: string;
@@ -12,58 +14,25 @@ type TimelineNode = {
   flagship?: boolean;
 };
 
-const timeline: TimelineNode[] = [
-  {
-    id: "tata",
-    period: "2013\u20132016",
-    company: "Tata Teleservices",
-    label: "Linux & Telecom Foundation",
-    sublabel: "Technical Engineer",
-  },
-  {
-    id: "huawei",
-    period: "2016\u20132017",
-    company: "Huawei Technologies",
-    label: "Telecom Foundation",
-    sublabel: "Sr. Technical Engineer",
-  },
-  {
-    id: "ericsson",
-    period: "2017\u20132018",
-    company: "Ericsson India",
-    label: "Platform Engineering",
-    sublabel: "Solution Integrator",
-  },
-  {
-    id: "adecco",
-    period: "2019\u20132020",
-    company: "Adecco / HP",
-    label: "Linux Migration",
-    sublabel: "Sr. Linux Migration Engineer",
-  },
-  {
-    id: "dxc",
-    period: "2020\u20132023",
-    company: "DXC Technology",
-    label: "Enterprise Cloud Transformation",
-    sublabel: "Technical Project Manager",
-    flagship: true,
-  },
-  {
-    id: "savvy",
-    period: "2025",
-    company: "Savvy Global",
-    label: "AI Innovation",
-    sublabel: "Technical Project Manager",
-  },
-  {
-    id: "cdf",
-    period: "2025\u2013Present",
-    company: "Community Dreams Foundation",
-    label: "Civic Tech",
-    sublabel: "Volunteer TPM",
-  },
-];
+const phaseLabels: Record<string, string> = {
+  tata: "Linux & Telecom Foundation",
+  huawei: "Telecom Integration",
+  ericsson: "Platform Engineering",
+  adecco: "Linux Migration",
+  dxc: "Enterprise Cloud Transformation",
+  savvy: "AI Innovation",
+  "community-dreams": "Predictive Analytics",
+  aivanta: "Technology Delivery",
+};
+
+const timeline: TimelineNode[] = [...timelineExperiences].reverse().map((item) => ({
+  id: item.slug,
+  period: `${item.startDate.slice(0, 4)}–${item.endDate === "present" ? "Present" : item.endDate.slice(0, 4)}`,
+  company: item.label,
+  label: phaseLabels[item.slug] ?? "Technical Delivery",
+  sublabel: item.title.split(" | ")[0],
+  flagship: item.slug === "dxc",
+}));
 
 const nodeVariant = {
   hidden: { opacity: 0, scale: 0 },
@@ -104,12 +73,12 @@ export default function CareerStory() {
 
       <motion.ol
         className="career-timeline"
+        style={{ "--career-stages": timeline.length } as CSSProperties}
         variants={containerVariant}
         initial={reduceMotion ? false : "hidden"}
         whileInView={reduceMotion ? undefined : "visible"}
         viewport={{ once: true, amount: 0.2 }}
       >
-        <span className="career-timeline-connector" aria-hidden="true" />
         {timeline.map((node) => (
           <motion.li
             key={node.id}

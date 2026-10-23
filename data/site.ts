@@ -19,42 +19,43 @@ export type FlagshipHighlight = {
 
 export const profile = {
   name: "Eswar Raviteja Rayavarapu",
-  headline: "Infrastructure & Cloud Transformation Technical Project Manager",
+  headline: "Technical Project Manager",
+  roleLine: "Business Analyst | Cloud & Infrastructure Transformation",
   subheadline:
-    "Enterprise cloud migration, data center transformation, and Linux platform modernization delivery.",
+    "From complex infrastructure to coordinated delivery.",
   supportingText:
-    "10+ years across telecom and enterprise environments with dependency discovery, migration wave planning, rollback strategy, and production cutover execution.",
-  location: "New Jersey, United States",
+    "11+ years leading cloud migration and infrastructure transformation across telecom and enterprise environments. I connect business requirements with engineering execution, from discovery and wave planning to production cutover and operational readiness.",
+  location: "Jersey City, New Jersey",
   photo: "/Eswar.png",
   introTags: [
-    "10+ Years Experience",
-    "1000+ Linux Servers",
-    "40+ Engineers Coordinated",
+    "11+ Years Experience",
+    "250+ Applications Migrated",
+    "1000+ Servers",
     "AWS / Azure / Linux / VMware",
   ],
   proofPoints: [
-    "Led multi-wave data center to AWS migration delivery using CloudEndure.",
-    "Coordinated approximately 40+ engineers across global migration workstreams.",
+    "Led migration of 250+ applications across 1000+ servers from on-premises to AWS.",
+    "Coordinated approximately 40 cross-functional resources across global delivery teams.",
   ],
 };
 
 export const whatIDeliver: string[] = [
-  "Enterprise cloud migration execution",
-  "Multi-wave infrastructure transformation",
-  "Linux platform modernization",
-  "Cross-functional delivery governance",
-  "Executive-ready reporting",
+  "AWS and hybrid cloud migration programs",
+  "Business requirements and roadmap alignment",
+  "Infrastructure and application modernization",
+  "Agile, Waterfall, and hybrid delivery governance",
+  "Operational readiness and executive reporting",
 ];
 
 export const flagshipDxc: FlagshipHighlight = {
   title: "DXC Technology (Feb 2020 - Dec 2023)",
   summary:
-    "As Technical Project Manager, I directed enterprise cloud and infrastructure transformation programs across large Linux estates.",
+    "Led cloud migration programs for AT&T, ISOS (Workforce Resilience), DIRECTV, and Downer, connecting business priorities with global engineering delivery.",
   scope: [
-    "1000+ Linux servers in migration scope",
-    "Data Center to AWS migration using CloudEndure",
-    "Data Center to Data Center migration execution",
-    "Greenfield and brownfield infrastructure environments",
+    "250+ internally hosted applications across 1000+ servers",
+    "On-premises to AWS migration using MGN (CloudEndure)",
+    "Hybrid AWS, Azure, and on-premises infrastructure",
+    "Approximately 40 resources across network, infrastructure, applications, and operations",
   ],
   execution: [
     "Dependency discovery and migration planning using Universal Discovery",
@@ -63,8 +64,8 @@ export const flagshipDxc: FlagshipHighlight = {
     "RAID management and executive reporting through Power BI",
   ],
   outcomes: [
-    "Approximately 40+ engineers coordinated across global teams",
-    "Approximately 15-20% infrastructure cost optimization",
+    "15–20% infrastructure cost optimization",
+    "Approximately 30% reduction in delivery delays through proactive blocker escalation and stakeholder decisions",
     "Improved schedule predictability through RAID governance",
   ],
 };
@@ -81,23 +82,23 @@ export const navItems: NavItem[] = [
 export const metrics: MetricItem[] = [
   {
     label: "Experience",
-    value: "10+ Years",
+    value: "11+ Years",
     context: "Enterprise infrastructure and cloud transformation delivery",
   },
   {
-    label: "Linux Server Scope",
+    label: "Applications Migrated",
+    value: "250+",
+    context: "Internally hosted applications moved to AWS at DXC",
+  },
+  {
+    label: "Server Scope",
     value: "1000+",
-    context: "Enterprise server environments managed in migration programs",
+    context: "Servers across enterprise migration programs at DXC",
   },
   {
-    label: "Team Coordination",
-    value: "40+ Engineers",
-    context: "Global cross-functional delivery across infrastructure tracks",
-  },
-  {
-    label: "Migration Execution",
-    value: "Multi-Wave",
-    context: "Data center to AWS and data center to data center transitions",
+    label: "Reduction in Delivery Delays",
+    value: "~30%",
+    context: "Proactively escalated blockers and drove stakeholder decisions to improve delivery timelines.",
   },
   {
     label: "Cost Optimization",
@@ -109,5 +110,5 @@ export const metrics: MetricItem[] = [
 export const contact = {
   email: "eswar.rayavarapu23@gmail.com",
   linkedin: "https://www.linkedin.com/in/eswar-rayavarapu",
-  resume: "/Eswar_Raviteja_Rayavarapu_Infrastructure_Cloud_Transformation_PM.pdf?v=2026-04-22",
+  resume: "/Eswar_Raviteja_Rayavarapu_Infrastructure_Cloud_Transformation_TPM.pdf",
 };

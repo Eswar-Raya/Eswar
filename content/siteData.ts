@@ -1,6 +1,7 @@
+import { contact, profile } from "@/data/site";
 // /content/siteData.ts
 // Single source of truth for site content.
-// Replace placeholders (~XX%, X/Y) with real numbers when ready.
+// Legacy section content; shared identity and resume come from data/site.ts.
 
 export type Transition = {
   id: string;
@@ -103,8 +104,8 @@ export type SiteData = {
     locationLine?: string;
   };
   hero: {
-    headline: string; // LOCKED copy
-    subline: string; // LOCKED copy
+    headline: string;
+    subline: string;
   };
   labels: SiteLabels;
   transitions: Transition[];
@@ -137,13 +138,12 @@ export type SiteData = {
 export const siteData: SiteData = {
   identity: {
     name: "Eswar Rayavarapu",
-    roleLine: "Infrastructure & Cloud Transformation Technical Project Manager",
+    roleLine: `${profile.headline} | ${profile.roleLine}`,
     locationLine: "New Jersey, US",
   },
 
   hero: {
-    // LOCK THESE EXACTLY (per your decision)
-    headline: "Infrastructure & Cloud Transformation Technical Project Manager",
+    headline: profile.headline,
     subline:
       "Enterprise cloud migration | Linux platform modernization | program governance and production cutover delivery",
   },
@@ -522,7 +522,7 @@ export const siteData: SiteData = {
     lead: "If your systems are changing, clarity matters.",
     email: "eswar.rayavarapu23@gmail.com",
     linkedinUrl: "https://www.linkedin.com/in/eswar-rayavarapu",
-    resumeUrl: "/Eswar_Raviteja_Rayavarapu_Infrastructure_Cloud_Transformation_PM.pdf?v=2026-04-22",
+    resumeUrl: contact.resume,
   },
 };
 

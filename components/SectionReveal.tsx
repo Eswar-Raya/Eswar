@@ -28,20 +28,13 @@ export default function SectionReveal({
   const variants =
     direction === "left" ? slideInLeft : direction === "right" ? slideInRight : fadeUp;
 
-  if (reduceMotion) {
-    return (
-      <div id={id} className={className}>
-        {children}
-      </div>
-    );
-  }
-
   return (
     <motion.div
       id={id}
-      className={className}
+      className={["section-reveal", className].filter(Boolean).join(" ")}
       variants={variants}
       initial="hidden"
+      animate={reduceMotion ? "visible" : undefined}
       whileInView="visible"
       viewport={{ once, amount }}
       transition={{ delay }}

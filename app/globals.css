@@ -220,6 +220,7 @@ h4 {
 }
 
 .corp-container {
+  grid-template-columns: minmax(0, 1fr);
   width: min(1120px, 92vw);
   margin: 0 auto;
   padding: 80px 0 var(--space-8);
@@ -480,6 +481,9 @@ h4 {
 .section-link,
 .detail-link,
 .detail-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   color: var(--accent-blue);
   font-size: 13px;
   letter-spacing: 0.03em;
@@ -561,6 +565,7 @@ h4 {
 
 .hero-cta-btn {
   display: inline-flex;
+  gap: 8px;
   width: fit-content;
   justify-content: flex-start;
   min-height: 46px;
@@ -735,8 +740,8 @@ h4 {
 
 .home-hero-copy {
   display: grid;
-  align-content: start;
-  gap: var(--space-3);
+  align-content: center;
+  gap: var(--space-5);
 }
 
 .home-hero-badge {
@@ -802,13 +807,41 @@ h4 {
 
 .home-hero-summary {
   margin: 0;
-  font-size: 15px;
-  font-style: italic;
-  font-weight: 300;
+  font-size: 16px;
+  font-weight: 400;
   line-height: 1.75;
-  color: rgba(232, 237, 248, 0.55);
+  color: var(--text-1);
   max-width: 600px;
 }
+
+.corp-container > * { min-width: 0; }
+.contact-link { overflow-wrap: anywhere; }
+
+.hero-current-role {
+  position: relative;
+  display: grid;
+  gap: 6px;
+  padding: 20px 44px 20px 20px;
+  border: 1px solid rgba(147, 197, 253, 0.22);
+  border-radius: var(--radius-sm);
+  background: rgba(147, 197, 253, 0.04);
+  transition: background 200ms ease;
+}
+
+.hero-current-role:hover { background: rgba(147, 197, 253, 0.09); }
+.hero-current-role > svg { position: absolute; right: 18px; top: 22px; color: var(--accent-blue); }
+.hero-current-role > strong { font-family: var(--font-display); font-size: 20px; }
+.hero-current-role > span:last-of-type { color: var(--text-1); font-size: 13px; }
+.hero-current-label { display: flex; align-items: center; gap: 8px; color: var(--accent-blue); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; }
+.about-profile-intro { display: grid; gap: 16px; padding: clamp(22px, 4vw, 44px); }
+.about-profile-intro h2, .about-profile-intro p { margin: 0; max-width: 850px; }
+.about-profile-intro p { color: var(--text-1); line-height: 1.8; }
+.resume-skills-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.resume-skill-card { padding: 24px; min-width: 0; }
+.resume-skill-card h3 { margin: 0 0 18px; font-size: 18px; }
+.resume-skill-card .tech-pill { white-space: normal; }
+.achievement-icon { color: var(--accent-blue); }
+.proud-card .detail-link { margin-top: auto; padding-top: 16px; }
 
 /* ==========================================================================
    Client strip (sibling section after the hero, full-width row)
@@ -850,7 +883,7 @@ h4 {
   font-weight: 500;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: rgba(232, 237, 248, 0.4);
+  color: rgba(232, 237, 248, 0.7);
   white-space: nowrap;
   cursor: default;
   transition: color 0.2s ease;
@@ -1108,7 +1141,7 @@ h4 {
 .metric-card h3 span {
   margin: 0;
   font-family: var(--font-display);
-  font-size: clamp(0.82rem, 1.05vw, 1.05rem);
+  font-size: clamp(1.45rem, 2.2vw, 2rem);
   font-weight: 700;
   line-height: 1.15;
   letter-spacing: -0.02em;
@@ -2561,17 +2594,18 @@ h4 {
   margin: 0;
   padding: 16px 0 8px;
   display: grid;
-  grid-template-columns: repeat(7, minmax(0, 1fr));
+  grid-template-columns: repeat(var(--career-stages, 8), minmax(0, 1fr));
   gap: 8px;
   position: relative;
 }
 
 /* Single gradient connector spanning the full row, peaking near DXC center */
-.career-timeline-connector {
+.career-timeline::before {
+  content: "";
   position: absolute;
   top: 49px;
-  left: calc(100% / 14);
-  right: calc(100% / 14);
+  left: calc(50% / var(--career-stages, 8));
+  right: calc(50% / var(--career-stages, 8));
   height: 2px;
   background: linear-gradient(
     90deg,
@@ -2685,7 +2719,7 @@ h4 {
     row-gap: 28px;
   }
 
-  .career-timeline-connector {
+  .career-timeline::before {
     display: none;
   }
 }
@@ -2699,7 +2733,7 @@ h4 {
     border-left: 2px solid rgba(59, 130, 246, 0.3);
   }
 
-  .career-timeline-connector {
+  .career-timeline::before {
     display: none;
   }
 
@@ -3607,11 +3641,25 @@ h4 {
   }
 
   .metric-strip {
-    grid-auto-flow: column;
-    grid-auto-columns: minmax(230px, 1fr);
-    grid-template-columns: none;
-    overflow-x: auto;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
+  .metric-card:last-child { grid-column: 1 / -1; }
+  .resume-skills-grid { grid-template-columns: 1fr; }
+
+  .hero-cta-row > div, .hero-cta-row .hero-cta-btn {
+    width: 100%;
+  }
+
+  .home-hero-badge {
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    padding-inline: 10px;
+  }
+
+  .section-header-row { flex-direction: column; }
+  .metric-card { padding: 12px 8px; }
+  .metric-card h3, .metric-card h3 span { font-size: 20px; }
 
   .flagship-stats {
     grid-template-columns: 1fr;
@@ -3684,5 +3732,31 @@ h4 {
   .pulse-dot {
     animation: none !important;
     opacity: 1;
+  }
+
+  /* Keep server-rendered reveal content readable before and after hydration. */
+  .section-reveal,
+  .tech-pill,
+  .client-strip-name,
+  .career-node,
+  .home-hero-copy > *,
+  .home-hero-aside,
+  .metric-card,
+  .delivery-flow-row,
+  .deliver-list > li,
+  .lifecycle-stage,
+  .lifecycle-tool-strip,
+  .program-row,
+  .featured-card,
+  .project-card,
+  .contact-card,
+  .contact-link,
+  .experience-rail-item,
+  .experience-focus,
+  .education-card,
+  .service-card {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
   }
 }

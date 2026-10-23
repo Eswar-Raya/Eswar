@@ -17,8 +17,8 @@ export default function ServicesPage() {
   return (
     <PageContainer
       eyebrow="Capabilities"
-      title="Infrastructure and Cloud Delivery Capabilities"
-      subtitle="Recruiter-ready capability map aligned to infrastructure transformation, migration governance, and technical program delivery."
+      title="Cloud, infrastructure & delivery capabilities"
+      subtitle="Technical project management, business analysis, and engineering coordination from requirements through operational readiness."
     >
       <ServicesGrid items={services} title="Core Capability Areas" />
 

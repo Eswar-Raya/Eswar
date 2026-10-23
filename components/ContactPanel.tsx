@@ -5,6 +5,7 @@ import { FileText, Linkedin, Mail } from "lucide-react";
 import IconBadge from "@/components/IconBadge";
 import { motion, useReducedMotion } from "framer-motion";
 import { cardVariant, staggerContainer, fadeUp } from "@/lib/motion";
+import { profile } from "@/data/site";
 
 type ContactPanelProps = {
   name: string;
@@ -48,9 +49,9 @@ export default function ContactPanel({
             <span className="pulse-dot" aria-hidden="true" />
             Open to Work
           </span>
-          <h2>Open to Infrastructure and Cloud Transformation Roles</h2>
+          <h2>Let’s talk about your next transformation program.</h2>
           <blockquote className="contact-quote">
-            &ldquo;Ready for the next large-scale migration program to own end-to-end.&rdquo;
+            Technical project management, business analysis, and cloud infrastructure delivery.
           </blockquote>
         </div>
 
@@ -82,7 +83,7 @@ export default function ContactPanel({
             <div className="contact-profile-meta">
               <span className="contact-profile-name">{name}</span>
               <span className="contact-profile-location">{location}</span>
-              <p>Infrastructure & Cloud Transformation Technical Project Manager</p>
+              <p>{profile.headline} · {profile.roleLine}</p>
             </div>
           </div>
 
